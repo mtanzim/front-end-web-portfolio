@@ -1,0 +1,145 @@
+body {
+	position: relative;
+	margin-bottom: 70px;
+}
+
+h1, h2, h3 {
+	
+	font-family: Oswald, sans-serif;
+	
+}
+
+p {
+	font-family:"Open Sans";
+}
+
+#aboutdiv  p { 
+	font-size: 220%;
+}
+
+#contdiv  p { 
+	font-size: 150%;
+}
+
+#portdiv p{
+	font-size: 130%;
+}
+
+.blackBorder {
+	border: 2px solid black;
+	
+}
+
+.redBG {
+	background-color: red;
+}
+
+.padMore {
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+
+.hidden {
+	visibility:hidden;
+}
+
+.navbar-right {
+	padding-right:50px;
+}
+
+.navbar-left {
+	padding-left:50px;
+}
+
+.socialbtn a:link {
+	opacity:0.8;
+	text-decoration: none;
+	color: red;
+}
+
+.socialbtn a:hover{
+	opacity:1.0;
+	text-decoration: none;
+	/*color: green;*/
+}
+
+
+.socialbtn a:visited {
+	opacity:0.6;
+	text-decoration: none;
+	color: black;
+}
+
+.socialbtn a:active {
+		text-decoration: none;
+}
+
+.fa {
+    //padding: 20px;
+    font-size: 50px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.whitebg {
+	background-color:rgba(255,255,255,0.4);
+
+}
+
+
+#frankthumb, #nikolathumb, #aboutdiv {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center; 
+}
+
+
+
+.aboutBG {
+	background-image: url("http://i67.tinypic.com/s1ngh0.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center; 
+	
+}
+
+.whiteText {
+	
+	color: white;
+	/*
+	background-color:rgba(255,255,255,0.3);
+	border: 5px solid;
+	border-color: rgba(255,255,255,0.3);
+	margin-top: 5%;
+	margin-bottom: 5%
+	*/
+}
+
+/*
+#bgabout {
+	position: absolute;
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: auto;
+	object-fit:contain;
+	opacity: 0.6;
+}
+*/
+
+
+#frankthumb {
+	background-image: url("https://goo.gl/pfDxll");
+}
+#nikolathumb {
+	background-image: url("https://goo.gl/s1qzP8");
+}
+
+
+
+
