@@ -1,31 +1,31 @@
 
 
-.socialbtn a:link {
+ a:link {
 	opacity:0.8;
 	text-decoration: none;
-	color: black;
+	color: blue;
 }
 
-.socialbtn a:hover{
+ a:hover{
 	opacity:1.0;
 	text-decoration: none;
 }
 
 
-.socialbtn a:visited {
+ a:visited {
 	opacity:0.6;
 	text-decoration: none;
-	color: black;
+	//color: black;
 }
 
-.socialbtn a:active {
+ a:active {
 		text-decoration: none;
 }
 
-.fa {
+#weatherIcon {
 
-    font-size: 50px;
-    width: 50px;
+    font-size: 500px;
+    width: auto;
     text-align: center;
     text-decoration: none;
 }
