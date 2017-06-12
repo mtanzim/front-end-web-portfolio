@@ -2,12 +2,16 @@
 
 var tempUnit = ["metric", "imperial","C","F"];
 var isCel = 0;
-var lat=0;
-var longt=0;
+var lat;
+var longt;
 var owmAPI ="b0c19d689944d2473d76de9f1cc4339f";
+var debugID = document.getElementById("debug");
 
 
 
+window.onload = loadLocation();
+
+/*
 function loadLocation (){
 	//var location=[];
 	if (navigator.geolocation) {
@@ -16,6 +20,32 @@ function loadLocation (){
 		  		 longt = position.coords.longitude;
 			});
 	} 
+}
+*/
+
+
+function loadLocation () {
+	if (navigator.geolocation) {
+		//var coord = navigator.geolocation.getCurrentPosition (getPosition);
+		navigator.geolocation.getCurrentPosition (getPosition);
+	} else {
+		debugID.html("Location not supported on this browser.");
+	}
+	//return coord;
+}
+
+function getPosition (position) {
+	lat = position.coords.latitude;
+	longt = position.coords.longitude;
+	/*
+	var lat = position.coords.latitude;
+	var longt = position.coords.longitude;
+
+	var coordLoc = [];
+	coordLoc.push(lat);
+	coordLoc.push(longt);
+	return coordLoc;
+	*/
 }
 
 function toggleUnit (divInfo) {
@@ -29,6 +59,10 @@ function toggleUnit (divInfo) {
 }
 
 function getWeather (location) {
+	//var coord = loadLocation();
+	//var lat = coord[0];
+	//var longt = coord[1];
+	loadLocation();
 	$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+longt+"&APPID="+owmAPI+"&units="+tempUnit[isCel], function(json) {
   		var html = '';
   		//html += lat+","+longt+"<br>";
@@ -51,8 +85,10 @@ function getWeather (location) {
 
 $(document).ready(function(){
 
-	loadLocation();
-	//getWeather();
+	//loadLocation();
+	getWeather();
+
+	//document.getElementById("togBtn").click();
 
 	$("#togBtn").on("click", function(){
 		toggleUnit ((this));
