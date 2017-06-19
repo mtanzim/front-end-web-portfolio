@@ -86,6 +86,7 @@ function searchWikiJSON (searchVal) {
 
 
 		//$("#debug").html(debugHtml);
+		$("#debug").html("<br><br>");
 		$("#wikiResults").html(resultsContent);
 	});
 }
