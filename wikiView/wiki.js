@@ -26,12 +26,14 @@ function searchWikiAJAX () {
 }
 
 
-function searchWikiJSON () {
+function searchWikiJSON (searchVal) {
 	//$("#debug").html("Now searching");
-	$.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1", function(json) {
+	$.getJSON("https://en.wikipedia.org/w/api.php?action=opensearch&search="+searchVal+"&limit=10&format=json&callback=?", function(json) {
 		//$("#debug").html("Now searching");
 		var html='';
 		html+=JSON.stringify(json);
+		//html += searchVal;
+		//html += $("#searchInput").serialize(); 
 		$("#debug").html(html);
 	});
 }
@@ -42,7 +44,8 @@ function searchWikiJSON () {
 $(document).ready(function(){
 	$("#wikSearch").on("click", function(){
 		$("#debug").html("Searching...");
-		searchWikiJSON();
+		var searchVal = document.getElementById("searchInput").value;
+		searchWikiJSON(searchVal);
 		//$("#debug").html("Searched");
     });
 	
