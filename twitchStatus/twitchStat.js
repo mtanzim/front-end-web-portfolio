@@ -10,23 +10,18 @@ function userClass (icon, name, status, link) {
 }
 
 
+function checkUserGetStat (userList, twitchDefautIcon) {
 
-
-//main function
-$(document).ready(function(){
-	//alert("Hi!");
-	var userList=["comster404","ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
-	var tableHtml='';
+	//traverse hardcoded JSON to emulate twitch
 	var userArray=[];
 
-	var tempIcon='';
+	var tempIcon=twitchDefautIcon;
 	var tempUserName='';
 	var tempStatus='';
 	var tempLink='';
+	//var userFound=false;
 	
-
-	//traverse hardcoded JSON to emulate twitch
-	for (var key in twitchJSON){
+	for (var key in twitchJSON) {
 		if (twitchJSON[key].hasOwnProperty("stream")) {
 			if (twitchJSON[key].stream !== null) {
 				if (twitchJSON[key].stream.hasOwnProperty("display_name")) {
@@ -47,10 +42,8 @@ $(document).ready(function(){
 			}
 			else {
 				if (twitchJSON[key].hasOwnProperty("display_name")) {
-					if (twitchJSON[key].hasOwnProperty("display_name")) {
-						//$('#debug').append(twitchJSON[key].display_name+": ");
-						tempUserName = twitchJSON[key].display_name;
-					}
+					//$('#debug').append(twitchJSON[key].display_name+": ");
+					tempUserName = twitchJSON[key].display_name;
 					//$('#debug').append("Offline <br>");
 					tempStatus = "Offline";
 					if (twitchJSON[key].hasOwnProperty("_links")) {
@@ -64,21 +57,43 @@ $(document).ready(function(){
 			}
 		}
 		else {
-			tempIcon='';
-			tempUserName='user';
+			tempIcon=twitchDefautIcon;
+			tempUserName='';
 			tempStatus="Does not exist yet!";
 			tempLink='';
 		}
 
-		var tempUser = new userClass(tempIcon,tempUserName, tempStatus, tempLink); 
-		userArray.push(tempUser);
-		tempIcon='';
+
+		for (var userKey in userList){
+			if (userList[userKey].toLowerCase()==tempUserName.toLowerCase()){
+				var tempUser = new userClass(tempIcon,tempUserName, tempStatus, tempLink); 
+				userArray.push(tempUser);
+				break;
+			}
+		}
+		
+
+		tempIcon=twitchDefautIcon;
 		tempUserName='';
 		tempStatus="";
 		tempLink='';
 
 	}
 		
+
+	return userArray;
+
+
+}
+
+
+
+//main function
+$(document).ready(function(){
+	//alert("Hi!");
+	var userList=["comster404","ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
+	var twitchDefautIcon ='https://cdn1.iconfinder.com/data/icons/simple-icons/2048/twitch-2048-black.png'
+	//var tableHtml='';
 
 	//traverse array of users we're interested in
 	/*
@@ -96,8 +111,20 @@ $(document).ready(function(){
 
 	//$('#debug').append(JSON.stringify(twitchJSON[1]));
 	//display the results
-	for (var k in userArray){
-		$('#statusTable').append('<tr><td><a target="_blank" href="'+userArray[k].userLink+'""><img width="75" height="auto" src="'+ userArray[k].userIcon +'"</img></a></td><td>'+userArray[k].userName+'</td><td>'+ userArray[k].userStatus +'</td></tr>');
+	var userArray = checkUserGetStat (userList, twitchDefautIcon);
+	var isFound=false;
+	for (var l in userList){
+		for (var k in userArray){
+			if (userArray[k].userName.toLowerCase()==userList[l].toLowerCase()) {
+				$('#statusTable').append('<tr><td><a target="_blank" href="'+userArray[k].userLink+'""><img width="75" height="auto" src="'+ userArray[k].userIcon +'"</img></a></td><td>'+userArray[k].userName+'</td><td>'+ userArray[k].userStatus +'</td></tr>');
+				isFound=true;
+				//break;
+			}
+		}
+		if(!isFound) {
+			$('#statusTable').append('<tr><td><a href="#"'+'""><img width="75" height="auto" src="'+twitchDefautIcon+'"</img></a></td><td>'+userList[l]+'</td><td>'+'User does not exist' +'</td></tr>');
+		}
+		isFound=false;
 	}
 	
 });
