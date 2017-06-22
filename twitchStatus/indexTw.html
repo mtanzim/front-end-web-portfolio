@@ -17,7 +17,7 @@
 		<div class = "container-fluid">
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<h1 class="" style="display:inline">Twitch Status<h3 style="display:inline"> keep up with freecodecamp!</h3></h1>
+					<h1 class="" style="display:inline">Twitch Status<h3 style="display:inline"> keep up with your favourite streamers!</h3></h1>
 				</div>
 			</div>
 		</div>
@@ -26,9 +26,9 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3 text-center">
 				<div class="btn-group">
-				 	<button type="button" class="btn btn-primary">All</button>
-				 	<button type="button" class="btn btn-success">Online</button>
-				 	<button type="button" class="btn btn-danger">Offline</button>
+				 	<button type="button" id="all" class="btn btn-primary">All</button>
+				 	<button type="button" id="online" class="btn btn-success">Online</button>
+				 	<button type="button" id="offline" class="btn btn-danger">Offline</button>
 		 		</div>
 	 		</div>
 	 	</div>
@@ -37,9 +37,10 @@
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-default">
 			  <!-- Default panel contents -->
-				  <div class="panel-heading">Twitch</div>
+				  <div class="panel-heading">Streamers</div>
 				  	<!-- Table -->
 					  <table id="statusTable" class="table table-condensed">
+					  	<!--
 					  	<tr class="active">
 					  		<th>Icon</th>
 					  		<th>User</th>
@@ -55,6 +56,9 @@
 					  </table>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-right"><p>by <strong>MokaTek</strong></p></div>
 		</div>
  	</div>
 
