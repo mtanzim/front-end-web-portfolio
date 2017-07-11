@@ -1,0 +1,31 @@
+
+
+ a:link {
+	opacity:0.8;
+	text-decoration: none;
+	color: blue;
+}
+
+ a:hover{
+	opacity:1.0;
+	text-decoration: none;
+}
+
+
+ a:visited {
+	opacity:0.6;
+	text-decoration: none;
+	//color: black;
+}
+
+ a:active {
+		text-decoration: none;
+}
+
+#weatherIcon {
+
+    font-size: 500px;
+    width: auto;
+    text-align: center;
+    text-decoration: none;
+}
