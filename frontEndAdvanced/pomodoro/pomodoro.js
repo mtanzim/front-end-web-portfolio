@@ -18,17 +18,32 @@ $(document).ready(function(){
 		else {breakTime--;useTime=breakTime;timeLabel='Break'}
 
 		//console.log('came here');
-		console.log('time:'+workTime);
+		console.log(timeLabel+':'+useTime);
 
 		$('#timeLabel').html(timeLabel);
 		$('#timeH').html('');
 		$('#timeH').append(Math.floor(useTime/60)+' minutes '+useTime%60+' seconds');
+		$('#titleTime').html('');
+		$('#titleTime').append(Math.floor(useTime/60)+':'+useTime%60);
 
-		if (useTime===0){
+		if (useTime===-1){
 			clearInterval(intervalID);
-			alert("Expired");
-			$('#timeH').html('Time Expired');
-			//var intervalIDBreak= setInterval(function() {pomCount(false, intervalIDBreak)},delayVal);
+			if (breakTime===-1){$('#timeH').html('Time Expired');}
+			else{$('#timeH').html('');}
+			alert("Time Expired");
+			if (isWork){
+				var intervalIDBreak= setInterval(function() {pomCount(false, intervalIDBreak)},delayVal);
+				//isWork=false;
+				/*
+				if (breakTime===-1){
+					clearInterval(intervalID);
+					$('#timeH').html('Time Expired');
+					alert("Time Expired");
+					isWork=false;
+				}
+				*/
+				
+			}
 
 		}
 
@@ -36,9 +51,9 @@ $(document).ready(function(){
 
 	//alert("HI!");
 	//harcode times for now
-	var delayVal=100;
-	var workTime=1*60;
-	var breakTime=2*60;
+	var delayVal=1000;
+	var workTime=25*60;
+	var breakTime=5*60;
 
 
 	var intervalID= setInterval(function() {pomCount(true, intervalID)},delayVal);
