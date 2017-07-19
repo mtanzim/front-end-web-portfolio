@@ -26,7 +26,7 @@ $(document).ready(function(){
 		var minDisp=pad(Math.floor(useTime/60),2);
 		var secDisp=pad(useTime%60,2);
 
-		console.log(timeLabel+':'+useTime);
+		//console.log(timeLabel+':'+useTime);
 
 		$('#timeLabel').html(timeLabel);
 		$('#timeH').html('');
@@ -36,10 +36,15 @@ $(document).ready(function(){
 
 
 		$("#stopBtn").on("click", function(){
+			$("#startBtn").removeClass("disabled");
+			isDisabled=false;
 			prevInterval=intervalID;
 			clearInterval(intervalID);
     	});
 		$("#resetBtn").on("click", function(){
+			delayVal=10;
+			$("#startBtn").removeClass("disabled");
+			isDisabled=false;
 			clearInterval(intervalID);
 			clearInterval(prevInterval);
 			//reset clocks
@@ -64,18 +69,30 @@ $(document).ready(function(){
 	}
 
 	//harcode times for now
-	var delayVal=100;
-	var workTime=1*60;
-	var breakTime=1*60;
+	var delayVal=1000;
+	var workTime=25*60;
+	var breakTime=5*60;
 	var intervalID=0;
 	var prevInterval=0;
 	var isItWork=true;
 
 
+	var isDisabled = document.getElementById("startBtn").disabled;
+	
+
+
 	$("#startBtn").on("click", function(){
-		intervalID=prevInterval;
-		intervalID= setInterval(function() {pomCount(isItWork, intervalID)},delayVal);
+		delayVal=1000;
+		console.log(isDisabled)
+		if (isDisabled===false){
+			$("#startBtn").addClass("disabled");
+			isDisabled=true;
+			intervalID=prevInterval;
+			intervalID= setInterval(function() {pomCount(isItWork, intervalID)},delayVal);
+		}
+		
     });
+    
 
 	$("#addWork").on("click", function(){
 		alert("added work")
