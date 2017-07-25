@@ -13,11 +13,12 @@ function pad (num, size){
 function toggleButtons(state){
 
 	if (state==='running'){
-		
 		$("#startBtn").fadeOut("slow");
+		$("#resetBtn").fadeOut("slow");
 		$("#stopBtn").fadeIn("slow");
 		$("#workCtrlDiv").fadeTo("slow",0);
 		$("#breakCtrlDiv").fadeTo("slow",0);
+		$("#infoDiv").fadeTo("fast",1);
 	}
 	else if (state==='stopped'){
 		$("#startBtn").fadeIn("slow");
@@ -27,16 +28,20 @@ function toggleButtons(state){
 		$("#breakCtrlDiv").fadeTo("fast",0);
 	}
 	else if (state==='init'){
-		//$("#startBtn").show();
+		$("#infoDiv").hide();
 		$("#stopBtn").hide();
 		$("#resetBtn").hide();
 	}
 	else if (state==='reset'){
+		$('#timeLabel').html('');
+		$('#timeH').html('');
+		$("#infoDiv").fadeTo("fast",0);
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
 		$("#workCtrlDiv").fadeTo("fast",1);
 		$("#breakCtrlDiv").fadeTo("fast",1);
+
 	}
 }
 
@@ -44,16 +49,42 @@ function toggleButtons(state){
 //main function
 $(document).ready(function(){
 
+	function resetTimes(){
+		workMin=parseInt($("#workLength").text());
+		workTime=workMin*60;
+		breakMin=parseInt($("#breakLength").text());
+		breakTime=breakMin*60;
+	}
+	function setTimes(isBreak, isAdd){
+		if(isBreak) {
+			if (isAdd){
+				breakMin++;
+				console.log('added break');
+			} else {breakMin--;console.log('less break');}
+			breakTime=breakMin*60;
+			$('#breakLength').html(breakMin);
+
+		}
+		else {
+			if (isAdd){
+				workMin++;
+				console.log('added work');
+			} else {workMin--;console.log('less work');}
+			workTime=workMin*60;
+			$('#workLength').html(workMin);
+			$('#timeLabel').html('');
+			$('#timeH').html('');
+		}
+	}
+
 	function reset () {
-		isItWork=true;
-		workTime=10*60;
-		breakTime=10*60;
-		toggleButtons('reset');
-		$("#startBtn").removeClass("disabled");
-		isDisabled=false;
 		pomCount(intervalID,'reset');
+		toggleButtons('reset');
 		$('#titleTime').html('Complete');
-		//this is fucking up operations
+		$("#startBtn").removeClass("disabled");
+		isItWork=true;
+		isDisabled=false;
+		resetTimes();
 	}
 
 
@@ -100,18 +131,17 @@ $(document).ready(function(){
 		}
 	}
 
-	//harcode times for now
-	var delayVal=10;
-	var workTime=100*60;
-	var breakTime=150*60;
+	var delayVal=1000;
+	var workMin=parseInt($("#workLength").text());
+	var workTime=workMin*60;
+	var breakMin=parseInt($("#breakLength").text());
+	var breakTime=breakMin*60;
 	var intervalID=0;
 	var prevInterval=0;
 	var isItWork=true;
 
 
 	var isDisabled = document.getElementById("startBtn").disabled;
-	console.log($("#workLength").text());
-	//console.log($("#workLength").text());
 	toggleButtons('init');
 
 
@@ -128,25 +158,47 @@ $(document).ready(function(){
 		
     });
 	$("#stopBtn").on("click", function(){
-		toggleButtons('stopped');
 		pomCount(intervalID,'stop');
+		toggleButtons('stopped');
 		$("#startBtn").removeClass("disabled");
 		isDisabled=false;
-
 	});
 
 	$("#resetBtn").on("click", function(){
-		//delayVal=10; //speed things up
 		reset();
-
-
-
 	});
     
+	//time buttons
+	if (isDisabled===false){
+		//work lengths
+		$("#addWork").on("click", function(){
+			setTimes(false,true);
+	    });
 
-	$("#addWork").on("click", function(){
-		alert("added work")
-    });
+		$("#lessWork").on("click", function(){
+			if (workMin>1){
+				setTimes(false,false);
+			} else {
+				alert ("Please select a valid time!");
+			}
+			workTime=workMin*60;
+	    });
+
+		//break lengths
+		$("#addBreak").on("click", function(){
+			setTimes(true,true);
+				
+	    });
+		$("#lessBreak").on("click", function(){
+			if (breakMin>1){
+				setTimes(true,false);
+			} else {
+				alert ("Please select a valid time!");
+			}
+	    });
+	}
+		
+		
 	
 	
 	
