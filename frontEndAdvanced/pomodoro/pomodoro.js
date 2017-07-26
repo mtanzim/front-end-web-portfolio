@@ -16,21 +16,20 @@ function toggleButtons(state){
 		$("#startBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
 		$("#stopBtn").fadeIn("slow");
-		$("#workCtrlDiv").fadeTo("slow",0);
-		$("#breakCtrlDiv").fadeTo("slow",0);
+		$("#ctrlDiv").fadeTo("slow",0);
 		$("#infoDiv").fadeTo("fast",1);
 	}
 	else if (state==='stopped'){
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeIn("slow");
-		$("#workCtrlDiv").fadeTo("fast",0);
-		$("#breakCtrlDiv").fadeTo("fast",0);
+		$("#ctrlDiv").fadeTo("slow",0);
 	}
 	else if (state==='init'){
 		$("#infoDiv").hide();
 		$("#stopBtn").hide();
 		$("#resetBtn").hide();
+		document.getElementById("pomProg").style.width = '100%';
 	}
 	else if (state==='reset'){
 		$('#timeLabel').html('');
@@ -39,8 +38,8 @@ function toggleButtons(state){
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
-		$("#workCtrlDiv").fadeTo("fast",1);
-		$("#breakCtrlDiv").fadeTo("fast",1);
+		$("#ctrlDiv").fadeTo("slow",1);
+		document.getElementById("pomProg").style.width = '100%';
 
 	}
 }
@@ -52,8 +51,11 @@ $(document).ready(function(){
 	function resetTimes(){
 		workMin=parseInt($("#workLength").text());
 		workTime=workMin*60;
+		startWorkTime=workTime;
 		breakMin=parseInt($("#breakLength").text());
 		breakTime=breakMin*60;
+		startBreakTime=breakTime;
+		progBar='100%';
 	}
 	function setTimes(isBreak, isAdd){
 		if(isBreak) {
@@ -62,6 +64,8 @@ $(document).ready(function(){
 				console.log('added break');
 			} else {breakMin--;console.log('less break');}
 			breakTime=breakMin*60;
+			startBreakTime=breakTime;
+			startWorkTime=workTime;
 			$('#breakLength').html(breakMin);
 
 		}
@@ -71,6 +75,7 @@ $(document).ready(function(){
 				console.log('added work');
 			} else {workMin--;console.log('less work');}
 			workTime=workMin*60;
+			startWorkTime=workTime;
 			$('#workLength').html(workMin);
 			$('#timeLabel').html('');
 			$('#timeH').html('');
@@ -90,15 +95,21 @@ $(document).ready(function(){
 
 	function pomCount(intervalIDfunc, pomState){
 
+		
+
 		if (pomState==='reset'){
 			clearInterval(intervalID);
 			clearInterval(prevInterval);
 			$('#timeH').html(timeLabel + ' session reset.');
+			//progBar='100%';
+			return 0;
 		} else if (pomState==='stop') {
 			prevInterval=intervalIDfunc;
 			clearInterval(intervalIDfunc);
+			return 0;
     	}
 
+		
 		var useTime=workTime;
 		var timeLabel='Work'
 		if (isItWork){workTime --;}
@@ -116,11 +127,20 @@ $(document).ready(function(){
 		$('#titleTime').html(timeLabel+" ");
 		$('#titleTime').append(minDisp+':'+secDisp);
 
+		if (isItWork){
+			progBar=Math.floor((useTime/startWorkTime)*100).toString()+'%';
+		} else {
+			progBar=Math.floor((useTime/startBreakTime)*100).toString()+'%';
+		}
+		//console.log(progBar);
+		document.getElementById("pomProg").style.width = progBar;
+
 		if (useTime<0){
-			clearInterval(intervalID);
+			//clearInterval(intervalID);
 			$('#timeH').html(timeLabel + ' session complete.');
 			$('#titleTime').html('Complete');
 			alert(timeLabel+ " Complete!");
+			//document.getElementById("pomProg").style.width = '100%';
 			if (isItWork){
 				isItWork=false;
 				clearInterval(intervalIDfunc);
@@ -134,11 +154,14 @@ $(document).ready(function(){
 	var delayVal=1000;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
+	var startWorkTime=workTime;
 	var breakMin=parseInt($("#breakLength").text());
 	var breakTime=breakMin*60;
+	var startBreakTime=breakTime;
 	var intervalID=0;
 	var prevInterval=0;
 	var isItWork=true;
+	var progBar='100%';
 
 
 	var isDisabled = document.getElementById("startBtn").disabled;
