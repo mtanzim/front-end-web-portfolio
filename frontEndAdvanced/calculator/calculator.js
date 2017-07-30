@@ -30,15 +30,78 @@ function prepareButtons () {
 
 }
 
+function resolveEqn(equationResolve, state){
+
+	//splits up by operators, but remembers operators
+	var equationParts=equationResolve.split(/(\+|\-|\*|\/)/g);
+	//console.log('provided:'+equationParts);
+	//console.log(state);
+
+	if (state==='DM'){
+		for (var i=0; i < equationParts.length; i++){
+			if (equationParts[i]==='/'){
+				//console.log('first:'+equationParts[i-1]);
+				//console.log('operator:'+equationParts[i]);
+				//console.log('second:'+equationParts[i+1]);
+				var newMember=parseFloat(equationParts[i-1])/parseFloat(equationParts[i+1]);
+				//insert resolved equation into the array
+				equationParts.splice(i-1,3,newMember);
+				break;
+			}
+			else if (equationParts[i]==='*'){
+				//console.log('first:'+equationParts[i-1]);
+				//console.log('operator:'+equationParts[i]);
+				//console.log('second:'+equationParts[i+1]);
+				var newMember=parseFloat(equationParts[i-1])*parseFloat(equationParts[i+1]);
+				//insert resolved equation into the array
+				equationParts.splice(i-1,3,newMember);
+				break;
+			}
+		}	
+	}
+	else if (state==='AS'){
+		for (var i=0; i < equationParts.length; i++){
+			if (equationParts[i]==='+'){
+				//console.log('first:'+equationParts[i-1]);
+				//console.log('operator:'+equationParts[i]);
+				//console.log('second:'+equationParts[i+1]);
+				var newMember=parseFloat(equationParts[i-1])+parseFloat(equationParts[i+1]);
+				//insert resolved equation into the array
+				equationParts.splice(i-1,3,newMember);
+				break;
+			}
+			else if (equationParts[i]==='-'){
+				//console.log('first:'+equationParts[i-1]);
+				//console.log('operator:'+equationParts[i]);
+				//console.log('second:'+equationParts[i+1]);
+				var newMember=parseFloat(equationParts[i-1])-parseFloat(equationParts[i+1]);
+				//insert resolved equation into the array
+				equationParts.splice(i-1,3,newMember);
+				break;
+			}
+		}	
+	}
+
+	//console.log('resolved:'+equationParts);	
+	return equationParts.join('');
+}
+
 function useButton (btnID, equationFunc){
 	//alert (btnID);
-	var numButtons=['0','1','2','3','4','5','6','7','8','9','.'];
-	var opButtons=['/', 'x','-','+'];
+	var numButtons=['0','1','2','3','4','5','6','7','8','9'];
+	var opButtons=['/', '*','-','+'];
+	var divMulButtons=['/','*'];
+	var addSubButtons=['+','-'];
 	var ctrlButtons=['AC','CE','='];
 	var equationToken=btnID.split('_');
-	var lastChar=equationFunc[equationFunc.length-1]
+	var lastChar=equationFunc[equationFunc.length-1];
+	//use these for UI division
+	var mainText='';
+	var subText='';
 	equationToken=equationToken[equationToken.length-1];
 
+	
+	//mainText+=equationToken;
 
 	if (numButtons.includes(equationToken)){
 		equationFunc+=equationToken;
@@ -47,12 +110,39 @@ function useButton (btnID, equationFunc){
 		if (lastChar!==equationToken){
 			equationFunc+=equationToken;
 		}
+		//subText+=mainText;
+		//mainText='';
 	}
 	else if (equationToken==='AC'){
+		//reset everything
 		equationFunc='';
+	}
+	//usage of decimal button
+	else if (equationToken==='.'){
+		if (lastChar!==equationToken && numButtons.includes(lastChar)){
+			equationFunc+=equationToken;
+		}
+	}
+	else if (equationToken==='='){
+		//resolve divisions and multiplications first
+		var i=0;
+		while (equationFunc.indexOf('/') >=0 || equationFunc.indexOf('*') >=0 || i===10){
+			equationFunc=resolveEqn(equationFunc,'DM');
+			i++;
+			console.log("after resolve="+equationFunc);
+		}
+		i=0;
+		while (equationFunc.indexOf('+') >=0 || equationFunc.indexOf('-') >=0 || i===10){
+			equationFunc=resolveEqn(equationFunc,'AS');
+			i++;
+			console.log("after resolve="+equationFunc);
+		}
 	}
 	
 	console.log(equationFunc);
+	subText=equationFunc;
+	$('#mainText').val(mainText);
+	$('#subText').val(subText);
 	return equationFunc;
 
 }
