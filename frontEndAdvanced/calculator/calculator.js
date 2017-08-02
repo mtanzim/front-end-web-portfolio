@@ -30,20 +30,49 @@ function prepareButtons () {
 
 }
 
-function resolveEqn(equationResolve, state){	
+
+function splitEquation (equationToSplit){
 
 	//splits up by operators, but remembers operators
+	var equationParts=equationToSplit.split(/(\+|-|\*|\/)/g);
 	
-	//console.log('provided:'+equationParts);
+	console.log('provided:'+equationParts);
 	//console.log(state);
+	
+	//handle negative number results; this works due to the way regEx is generating the array
+	for (var j=0; j<equationParts.length-1;j++){
+		if (equationParts[j]===''){
+			equationParts.splice(j,3,equationParts[j+1]+equationParts[j+2]);
+			console.log('found negative integer values');
+			console.log('adjusted array: '+equationParts);
+		}
+	}
+
+	return equationParts;
+
+}
+
+function resolveEqn(equationResolve, state){	
+
+
 	/*
-	if (equationResolve[0]==='-'){
-		equationResolve='0'+equationResolve;
-		console.log("had to insert 0");
-		console.log(equationResolve);
+	//splits up by operators, but remembers operators
+	var equationParts=equationResolve.split(/(\+|-|\*|\/)/g);
+	
+	console.log('provided:'+equationParts);
+	//console.log(state);
+	
+	//handle negative number results; this works due to the way regEx is generating the array
+	for (var j=0; j<equationParts.length-1;j++){
+		if (equationParts[j]===''){
+			equationParts.splice(j,3,equationParts[j+1]+equationParts[j+2]);
+			console.log('found negative integer values');
+			console.log('adjusted array: '+equationParts);
+		}
 	}
 	*/
-	var equationParts=equationResolve.split(/(\+|-|\*|\/)/g);
+
+	var equationParts=splitEquation(equationResolve);
 
 	if (state==='DM'){
 		for (var i=0; i < equationParts.length; i++){
@@ -79,9 +108,9 @@ function resolveEqn(equationResolve, state){
 				break;
 			}
 			else if (equationParts[i]==='-'){
-				console.log('first:'+equationParts[i-1]);
-				console.log('operator:'+equationParts[i]);
-				console.log('second:'+equationParts[i+1]);
+				//console.log('first:'+equationParts[i-1]);
+				//console.log('operator:'+equationParts[i]);
+				//console.log('second:'+equationParts[i+1]);
 				var subFrom = equationParts[i-1];
 				//if (isNaN(subFrom)){subFrom=0.0;}
 				var newMember=parseFloat(subFrom-parseFloat(equationParts[i+1]));
@@ -99,10 +128,11 @@ function resolveEqn(equationResolve, state){
 function useButton (btnID, equationFunc){
 	//alert (btnID);
 	var numButtons=['0','1','2','3','4','5','6','7','8','9'];
-	var opButtons=['/', '*','-','+'];
-	var divMulButtons=['/','*'];
-	var addSubButtons=['+','-'];
+	var opButtons=['/', '*','+'];
+	var divMulButtons=['/','*']; //not being used
+	var addSubButtons=['+','-']; //not being used
 	var ctrlButtons=['AC','CE','='];
+
 	var equationToken=btnID.split('_');
 	var lastChar=equationFunc[equationFunc.length-1];
 	//use these for UI division
@@ -111,7 +141,19 @@ function useButton (btnID, equationFunc){
 	equationToken=equationToken[equationToken.length-1];
 
 	//for main text, need to get all the characters before the last operation, and then add it
+	//this is reduntant in 2 functions; merge usage
+	var equationParts=splitEquation(equationFunc);
+
+	/*
 	var equationParts=equationFunc.split(/(\+|\-|\*|\/)/g);
+	for (var j=0; j<equationParts.length-1;j++){
+		if (equationParts[j]===''){
+			equationParts.splice(j,3,equationParts[j+1]+equationParts[j+2]);
+			console.log('found negative integer values in useButton');
+			console.log('adjusted array: '+equationParts);
+		}
+	}
+	*/
 	//get the last part of the equation for additional manipulation
 	mainText=equationParts[equationParts.length-1];
 	mainText+=equationToken;
@@ -123,14 +165,12 @@ function useButton (btnID, equationFunc){
 		
 	}
 	else if (opButtons.includes(equationToken)){
-		if (opButtons.includes(lastChar)===false){
+		mainText='';
+		if (opButtons.includes(lastChar)===false && equationFunc!=='' && lastChar!=='-'){
 			equationFunc+=equationToken;
-			mainText='';
 			subText=equationFunc;
 			$('#subText').val(subText);
 		}
-		//subText+=mainText;
-		//mainText='';
 	}
 	else if (equationToken==='AC'){
 		//reset everything
@@ -139,10 +179,30 @@ function useButton (btnID, equationFunc){
 		subText='';
 		$('#subText').val(subText);
 	}
+	else if (equationToken==='CE'){
+		//reset everything
+		var reconst=splitEquation(equationFunc);
+		reconst.pop();
+		equationFunc=reconst.join('');
+		mainText='';
+
+	}
 	//usage of decimal button
 	else if (equationToken==='.'){
 		if (lastChar!==equationToken && numButtons.includes(lastChar)){
 			equationFunc+=equationToken;
+		}
+	}
+	else if (equationToken==='-'){
+		if (lastChar!==equationToken){
+			equationFunc+=equationToken;
+		} else {mainText='';}
+		//treat as operation button
+		if ($('#mainText').val()!==''){
+			//console.log('mainText not empty')
+			mainText='';
+			subText=equationFunc;
+			$('#subText').val(subText);
 		}
 	}
 	else if (equationToken==='='){
@@ -189,6 +249,6 @@ $(document).ready(function(){
 		
 	$(".calcBtns").on("click", function(){
 		equation=useButton(this.id,equation);
-		console.log(equation);
+		//console.log(equation);
 	});
 });
