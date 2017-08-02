@@ -16,14 +16,19 @@ function toggleButtons(state){
 		$("#startBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
 		$("#stopBtn").fadeIn("slow");
+		$("#ctrlDiv").fadeOut("slow");
+		$("#infoDiv").fadeIn("fast");
+		/*
 		$("#ctrlDiv").fadeTo("slow",0);
 		$("#infoDiv").fadeTo("fast",1);
+		*/
 	}
 	else if (state==='stopped'){
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeIn("slow");
-		$("#ctrlDiv").fadeTo("slow",0);
+		$("#ctrlDiv").fadeOut("slow");
+		//$("#ctrlDiv").fadeTo("slow",0);
 	}
 	else if (state==='init'){
 		$("#infoDiv").hide();
@@ -34,11 +39,13 @@ function toggleButtons(state){
 	else if (state==='reset'){
 		$('#timeLabel').html('');
 		$('#timeH').html('');
-		$("#infoDiv").fadeTo("fast",0);
+		//$("#infoDiv").fadeTo("fast",0);
+		$("#infoDiv").fadeOut("fast");
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
-		$("#ctrlDiv").fadeTo("slow",1);
+		//$("#ctrlDiv").fadeTo("slow",1);
+		$("#ctrlDiv").fadeIn("slow");
 		document.getElementById("pomProg").style.width = '100%';
 
 	}
