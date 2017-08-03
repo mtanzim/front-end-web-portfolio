@@ -1,9 +1,21 @@
-#btn_g {
-	color:green;
+.simonBigBtn {
+	width: 80px;
+	height: 100px;
 }
 
 
-
+#btn_g {
+  background-color:green;
+}
+#btn_r {
+  background-color:red;
+}
+#btn_b {
+  background-color:blue;
+}
+#btn_y {
+  background-color:yellow;
+}
 
 /*
  a:link {
