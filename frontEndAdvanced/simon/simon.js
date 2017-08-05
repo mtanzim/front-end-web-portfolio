@@ -34,12 +34,64 @@ function prepareSimonButtons () {
 }
 
 
+function togglePower (isOn, btnID, startID){
+	//console.log(btnID	);
+
+	if (isOn){
+		isOn=false;
+		$('#'+btnID).removeClass("btn-success");
+		$('#'+btnID).addClass("btn-danger");
+		$('#'+btnID).html("OFF");
+		$('#'+startID).prop("disabled",true);
+	}
+	else {
+		isOn=true;	
+		$('#'+btnID).removeClass("btn-danger");
+		$('#'+btnID).addClass("btn-success");
+		$('#'+btnID).html("ON");
+		$('#'+startID).prop("disabled",false);
+	}
+	return isOn;
+
+}
+
+function generateSeries(count, textID, limit){
+	//alert ("Game Started");
+	$('#'+textID).val(count);
+	//play random sequence
+	for (var i=0; i < count; i++){	
+		alert (i);//this will be a random number leading to random button presses
+	}
+	//await input from user
+	alert("awaiting input");
+	//repeat game x number of times
+	if (count < limit){
+		generateSeries(count+1,textID, limit);
+	}
+}
+
 //main function
 $(document).ready(function(){
+
+	var isOn=togglePower(true, 'pwrBtn','startBtn');
+	var COUNT_LIMIT=7;
 
 	// /alert ("Hi, I'm the Simon game!");
 
 	var buttons=prepareSimonButtons();
 	console.log(buttons);
+
+	$("#pwrBtn").on("click", function(){
+		isOn=togglePower(isOn, this.id, 'startBtn');
+		//console.log(isOn);
+	});
+
+	$("#startBtn").on("click", function(){
+		$('#stageCount').val('--');
+		$('#'+this.id).prop("disabled",true);
+		generateSeries(1,'stageCount', COUNT_LIMIT);
+		//generateSeries(1,'stageCount');
+		
+	});
 
 });
