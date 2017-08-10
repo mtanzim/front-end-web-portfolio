@@ -57,53 +57,41 @@ function togglePower (isOn, btnID, startID){
 
 }
 
-function getUserInput (count){
-	alert("awaiting input on count: "+count);
-	return true;
+function getUserInput (count, sequence, callback){
+	console.log ("Need to match the following sequence: "+sequence);
+	alert("awaiting input on count: "+count+ " for the following keys: "+ sequence);
+	callback(true);
 }
 
-function playAsound (sequence, seqKeys, intervalID){
+function playAsound (sequence, intervalID,callback){
+	$('.simonBigBtn').css("opacity",'1.0');
+	console.log();
 	if (sequence.length>0){
+		var btn_name=seqKeys[sequence[0]];
+
 		console.log ('start '+sequence);
-		console.log ('playing sound:'+seqKeys[sequence[0]]);
-		new Audio(simonButtons[seqKeys[sequence[0]]]).play();
+		console.log ('playing sound:'+btn_name);
+		new Audio(simonButtons[btn_name]).play();
+		$('#btn_'+btn_name).css("opacity",'0.5');
+
+
 		sequence.shift();
 		console.log ('end' + sequence);
-		playAsound(sequence, seqKeys, intervalID);
 	} else {
 		clearInterval(intervalID);
+		callback();
 	}
 
 }
 
-function playSounds (sequence){
-
-	var seqKeys = Object.keys(simonButtons);
-	var delayVal=2000;
-	//console.log(sequence);
-	//console.log(seqKeys);
-
-	var intervalID=setInterval(function() {playAsound(sequence, seqKeys, intervalID)},delayVal);
-
-	if (intervalID===0){
-		return 0;
-	} else {
-		console.log('waiting, intervalID: '+intervalID)
-	}
-
-	/*
-	for (var i in sequence){
-		alert ('playing sound:'+seqKeys[sequence[i]])	
-		new Audio(simonButtons[seqKeys[sequence[i]]]).play()
-	}
-	*/
-
-}
 
 function generateSeries(count, textID, limit){
 	//alert ("Game Started");
 	$('#'+textID).val(count);
 	var randSequence=[];
+	
+	//var delayVal=750;
+
 	//play random sequence
 	for (var i=0; i < count; i++){	
 		//alert (i);//this will be a random number leading to random button presses
@@ -111,17 +99,30 @@ function generateSeries(count, textID, limit){
 		
 	}
 
-	console.log(randSequence);
-	playSounds(randSequence);
-	//await input from user
-	var isCorrect=getUserInput(count);
+	storeRand = randSequence.slice();
 
-	//repeat game x number of times
-	if (count < limit && isCorrect){
-		generateSeries(count+1,textID, limit);
-	} else if (isCorrect===false) {
-		generateSeries(count,textID, limit);
-	}
+	var intervalID=setInterval(function() {playAsound(randSequence, intervalID, function () {
+		//await input from user
+		console.log ("now getting input!");
+		console.log (storeRand);
+		getUserInput(count, storeRand, function(isCorrect){
+			//repeat game x number of times
+			//need this in a callback as well
+			if (count < limit && isCorrect){
+				generateSeries(count+1,textID, limit);
+			} else if (isCorrect===false) {
+				generateSeries(count,textID, limit);
+			}
+		});
+
+
+
+
+
+	})},DELAY_VAL);
+
+	console.log(randSequence);
+
 }
 
 //global buttons list
@@ -130,13 +131,15 @@ var simonButtons={'g':'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3',
 				  'b':'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3',
 				  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
 
-
+var seqKeys = Object.keys(simonButtons);
+var DELAY_VAL=1000;
+var COUNT_LIMIT=10;
 
 //main function
 $(document).ready(function(){
 
 	var isOn=togglePower(true, 'pwrBtn','startBtn');
-	var COUNT_LIMIT=5;
+	
 
 	// /alert ("Hi, I'm the Simon game!");
 	console.log(simonButtons);
