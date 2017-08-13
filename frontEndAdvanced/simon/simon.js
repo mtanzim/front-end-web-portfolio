@@ -107,6 +107,7 @@ function generateSeries(count, textID, limit, callbackForInput){
 		//await input from user
 		console.log ("now getting input? "+globalSimonVars.isInputReq);
 		console.log (globalSimonVars.globalSeq);
+		//clearInterval(intervalID);
 		callbackForInput();
 
 	})},globalSimonVars.DELAY_VAL);
@@ -120,21 +121,7 @@ function generateSeries(count, textID, limit, callbackForInput){
 //global buttons list
 //need to place in global class
 
-var globalSimonVars = new function(){
 
-
-	this.simonButtons={'g':'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3',
-					  'r':'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3',
-					  'b':'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3',
-					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
-
-	this.DELAY_VAL=1000;
-	this.COUNT_LIMIT=20;
-	this.isInputReq=false;
-	this.lastBtn='';
-	this.currentStage=5;
-	this.globalSeq=[];
-}
 
 
 //old global variables
@@ -153,6 +140,65 @@ var globalSimonVars = new function(){
 */
 
 
+function getUserInput () {
+	//this is callback for input
+	console.log("came to callback for input");
+	var buttons = globalSimonVars.getButtons();
+	if (globalSimonVars.isInputReq){
+		for (button in buttons){
+			console.log(buttons[button]);
+			$('#'+buttons[button]).on("click", function(){
+				globalSimonVars.lastBtn='#'+this.id;
+				alert(globalSimonVars.lastBtn);
+
+				if (globalSimonVars.globalSeq.length>1){
+					globalSimonVars.globalSeq.shift();
+					console.log(globalSimonVars.globalSeq);	
+				} else {
+					alert ("Stage Complete!");
+					globalSimonVars.isInputReq=false;
+					globalSimonVars.currentStage ++;
+					generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT,getUserInput);
+				}
+
+
+			});
+		}
+
+
+
+	}
+
+
+}
+
+var globalSimonVars = new function(){
+
+
+	this.simonButtons={'g':'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3',
+					  'r':'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3',
+					  'b':'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3',
+					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
+
+	this.DELAY_VAL=700;
+	this.COUNT_LIMIT=20;
+	this.isInputReq=false;
+	this.lastBtn='';
+	this.currentStage=1;
+	this.globalSeq=[];
+	this.globalButtons=[];
+
+	 this.setButtons = function () {
+		this.globalButtons=prepareSimonButtons();
+		return this.globalButtons;
+	};
+
+	this.getButtons = function (){
+		return this.globalButtons;
+	};
+
+}
+
 //main function
 $(document).ready(function(){
 
@@ -162,7 +208,8 @@ $(document).ready(function(){
 	// /alert ("Hi, I'm the Simon game!");
 	console.log(globalSimonVars.simonButtons);
 
-	var buttons=prepareSimonButtons();
+	//var buttons=prepareSimonButtons();
+	var buttons = globalSimonVars.setButtons();
 	console.log(buttons);
 
 	$("#pwrBtn").on("click", function(){
@@ -178,22 +225,7 @@ $(document).ready(function(){
 		$('#stageCount').val('--');
 		$('#'+this.id).prop("disabled",true);
 		$('#isStrict').prop("disabled", true);
-		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT, function(){
-
-			//this is callback for input
-			console.log("came to callback for input");
-			if (globalSimonVars.isInputReq){
-				for (button in buttons){
-					console.log(buttons[button]);
-					$('#'+buttons[button]).on("click", function(){
-						globalSimonVars.lastBtn='#'+this.id;
-						alert(globalSimonVars.lastBtn);
-					});
-				}
-
-			}
-
-		});
+		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT,getUserInput);
 		//generateSeries(1,'stageCount');
 		
 	});
