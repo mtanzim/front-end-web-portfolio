@@ -41,6 +41,7 @@ function togglePower (isOn, btnID, startID, strictID){
 
 	if (isOn){
 		isOn=false;
+		globalSimonVars.isInputReq=false;
 		$('#'+btnID).removeClass("btn-success");
 		$('#'+btnID).addClass("btn-danger");
 		$('#'+btnID).html("OFF");
@@ -59,36 +60,9 @@ function togglePower (isOn, btnID, startID, strictID){
 
 }
 
-/*
-function getUserInput (count, sequence, callback){
-
-
-	var isChecked = $('#isStrict').is(':checked');
-	var isCorrect=true;
-	console.log ("Checkbox is checked? "+ isChecked);
-	console.log ("Need to match the following sequence: "+sequence);
-	//alert("awaiting input on count: "+count+ " for the following keys: "+ sequence);
-	//site needs to go to a state where it accepts input
-	isInputReq=true;
-	var btn_name=seqKeys[sequence[0]];
-
-	//site needs to be in this state until sequence is complete, or an incorrect value is pressred 
-	if (sequence.length > 0){
-		if (lastBtn===btn_name){
-			sequence.shift();
-			callback(true);
-		} else {
-			 getUserInput (count, sequence, callback);
-		}
-	} else {
-		isInputReq=true;
-		callback();
-	}
-	
-}
-*/
 
 function playAsound (sequence, intervalID,callback){
+	globalSimonVars.isInputReq=false;
 	$('.simonBigBtn').css("opacity",'1.0');
 	console.log();
 	if (sequence.length>0){
@@ -112,7 +86,7 @@ function playAsound (sequence, intervalID,callback){
 }
 
 
-function generateSeries(count, textID, limit){
+function generateSeries(count, textID, limit, callbackForInput){
 	//alert ("Game Started");
 	$('#'+textID).val(count);
 	var randSequence=[];
@@ -126,31 +100,19 @@ function generateSeries(count, textID, limit){
 		
 	}
 
-	storeRand = randSequence.slice();
+	//storeRand = randSequence.slice();
+	globalSimonVars.globalSeq = randSequence.slice();
 
 	var intervalID=setInterval(function() {playAsound(randSequence, intervalID, function () {
 		//await input from user
 		console.log ("now getting input? "+globalSimonVars.isInputReq);
-		console.log (storeRand);	
-		/*
-		getUserInput(count, storeRand, function(isCorrect){
-			//repeat game x number of times
-			//need this in a callback as well
-			if (count < limit && isCorrect){
-				generateSeries(count+1,textID, limit);
-			} else if (isCorrect===false) {
-				generateSeries(count,textID, limit);
-			}
-		});
-		*/
-
-
-
-
+		console.log (globalSimonVars.globalSeq);
+		callbackForInput();
 
 	})},globalSimonVars.DELAY_VAL);
 
 	console.log(randSequence);
+	
 
 }
 
@@ -171,6 +133,7 @@ var globalSimonVars = new function(){
 	this.isInputReq=false;
 	this.lastBtn='';
 	this.currentStage=5;
+	this.globalSeq=[];
 }
 
 
@@ -207,20 +170,35 @@ $(document).ready(function(){
 		//console.log(isOn);
 	});
 
+
+
 	$("#startBtn").on("click", function(){
+		//reset input Req
+		globalSimonVars.isInputReq=false;
 		$('#stageCount').val('--');
 		$('#'+this.id).prop("disabled",true);
 		$('#isStrict').prop("disabled", true);
-		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT);
+		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT, function(){
+
+			//this is callback for input
+			console.log("came to callback for input");
+			if (globalSimonVars.isInputReq){
+				for (button in buttons){
+					console.log(buttons[button]);
+					$('#'+buttons[button]).on("click", function(){
+						globalSimonVars.lastBtn='#'+this.id;
+						alert(globalSimonVars.lastBtn);
+					});
+				}
+
+			}
+
+		});
 		//generateSeries(1,'stageCount');
 		
 	});
 
-	for (button in buttons){
-		$(buttons).on("click", function(){
-			globalSimonVars.lastBtn='#'+this.id;
-			alert(globalSimonVars.lastBtn);
-		});
-	}
+
+
 
 });
