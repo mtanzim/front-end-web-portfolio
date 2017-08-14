@@ -42,6 +42,11 @@ function togglePower (isOn, btnID, startID, strictID){
 	if (isOn){
 		isOn=false;
 		globalSimonVars.isInputReq=false;
+		
+		if (globalSimonVars.currentStage>1){
+			alert("Game Over!");
+		}
+		globalSimonVars.currentStage=1;
 		$('#'+btnID).removeClass("btn-success");
 		$('#'+btnID).addClass("btn-danger");
 		$('#'+btnID).html("OFF");
@@ -61,7 +66,7 @@ function togglePower (isOn, btnID, startID, strictID){
 }
 
 
-function playAsound (sequence, intervalID,callback){
+function playAsound (sequence, intervalID){
 	globalSimonVars.isInputReq=false;
 	$('.simonBigBtn').css("opacity",'1.0');
 	console.log();
@@ -78,23 +83,18 @@ function playAsound (sequence, intervalID,callback){
 		sequence.shift();
 		console.log ('end' + sequence);
 	} else {
-		clearInterval(intervalID);
 		globalSimonVars.isInputReq=true;
-		callback();
+		clearInterval(intervalID);
 	}
-
 }
 
 
-function generateSeries(count, textID, limit, callbackForInput){
+function generateSeries(){
 	//alert ("Game Started");
-	$('#'+textID).val(count);
+	$('#stageCount').val(globalSimonVars.currentStage);
 	var randSequence=[];
-	
-	//var delayVal=750;
-
 	//play random sequence
-	for (var i=0; i < count; i++){	
+	for (var i=0; i < globalSimonVars.currentStage; i++){	
 		//alert (i);//this will be a random number leading to random button presses
 		randSequence.push(Math.floor(Math.random() * 4));
 		
@@ -103,14 +103,7 @@ function generateSeries(count, textID, limit, callbackForInput){
 	//storeRand = randSequence.slice();
 	globalSimonVars.globalSeq = randSequence.slice();
 
-	var intervalID=setInterval(function() {playAsound(randSequence, intervalID, function () {
-		//await input from user
-		console.log ("now getting input? "+globalSimonVars.isInputReq);
-		console.log (globalSimonVars.globalSeq);
-		//clearInterval(intervalID);
-		callbackForInput();
-
-	})},globalSimonVars.DELAY_VAL);
+	var intervalID=setInterval(function() {playAsound(randSequence, intervalID)},globalSimonVars.DELAY_VAL);
 
 	console.log(randSequence);
 	
@@ -118,59 +111,35 @@ function generateSeries(count, textID, limit, callbackForInput){
 }
 
 
-//global buttons list
-//need to place in global class
+function checkInput(btnID) {
+	//alert ('pressed '+btnID );
+	if (globalSimonVars.isInputReq===true){
+		if (globalSimonVars.globalSeq.length>1){
+			globalSimonVars.globalSeq.shift();
+			console.log(globalSimonVars.globalSeq);	
+		} else {
+			//clearInterval(intervalID);
+			alert ("Stage Complete!");
+			//globalSimonVars.isCorrect=true;
+			//alert ("Stage Complete! It was "+globalSimonVars.isCorrect);
+			//globalSimonVars.isInputReq=false;
+			globalSimonVars.currentStage ++;
+			globalSimonVars.isInputReq=false;
+			if (globalSimonVars.currentStage < globalSimonVars.COUNT_LIMIT){
+				generateSeries();
+			} else {
+				globalSimonVars.currentStage=1;
+				alert("Game Over!");
 
-
-
-
-//old global variables
-/*
-	var simonButtons={'g':'https://s3.amazonaws.com/freecodecamp/simonSound1.mp3',
-					  'r':'https://s3.amazonaws.com/freecodecamp/simonSound2.mp3',
-					  'b':'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3',
-					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
-
-	var seqKeys = Object.keys(simonButtons);
-	var DELAY_VAL=1000;
-	var COUNT_LIMIT=3;
-	var isInputReq=false;
-	var lastBtn='';
-	var currentStage=10;
-*/
-
-
-function getUserInput () {
-	//this is callback for input
-	console.log("came to callback for input");
-	var buttons = globalSimonVars.getButtons();
-	if (globalSimonVars.isInputReq){
-		for (button in buttons){
-			console.log(buttons[button]);
-			$('#'+buttons[button]).on("click", function(){
-				globalSimonVars.lastBtn='#'+this.id;
-				alert(globalSimonVars.lastBtn);
-
-				if (globalSimonVars.globalSeq.length>1){
-					globalSimonVars.globalSeq.shift();
-					console.log(globalSimonVars.globalSeq);	
-				} else {
-					alert ("Stage Complete!");
-					globalSimonVars.isInputReq=false;
-					globalSimonVars.currentStage ++;
-					generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT,getUserInput);
-				}
-
-
-			});
+			}
+			
 		}
-
-
 
 	}
 
-
 }
+
+
 
 var globalSimonVars = new function(){
 
@@ -181,12 +150,13 @@ var globalSimonVars = new function(){
 					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
 
 	this.DELAY_VAL=700;
-	this.COUNT_LIMIT=20;
+	this.COUNT_LIMIT=6;
 	this.isInputReq=false;
 	this.lastBtn='';
 	this.currentStage=1;
 	this.globalSeq=[];
 	this.globalButtons=[];
+	this.isCorrect=false;
 
 	 this.setButtons = function () {
 		this.globalButtons=prepareSimonButtons();
@@ -225,10 +195,15 @@ $(document).ready(function(){
 		$('#stageCount').val('--');
 		$('#'+this.id).prop("disabled",true);
 		$('#isStrict').prop("disabled", true);
-		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT,getUserInput);
+		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT);
 		//generateSeries(1,'stageCount');
 		
 	});
+
+	$('#btn_g').on("click", function(){checkInput(this.id);});
+	$('#btn_r').on("click", function(){checkInput(this.id);});
+	$('#btn_b').on("click", function(){checkInput(this.id);});
+	$('#btn_y').on("click", function(){checkInput(this.id);});
 
 
 
