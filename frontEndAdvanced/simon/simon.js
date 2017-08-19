@@ -61,6 +61,7 @@ function togglePower (isOn, btnID, startID, strictID){
 		$('#'+startID).prop("disabled",false);
 		$('#'+strictID).prop("disabled",false);
 	}
+	$('#stageCount').val(globalSimonVars.currentStage);
 	return isOn;
 
 }
@@ -113,27 +114,48 @@ function generateSeries(){
 
 function checkInput(btnID) {
 	//alert ('pressed '+btnID );
-	if (globalSimonVars.isInputReq===true){
-		if (globalSimonVars.globalSeq.length>1){
-			globalSimonVars.globalSeq.shift();
-			console.log(globalSimonVars.globalSeq);	
-		} else {
-			//clearInterval(intervalID);
-			alert ("Stage Complete!");
-			//globalSimonVars.isCorrect=true;
-			//alert ("Stage Complete! It was "+globalSimonVars.isCorrect);
-			//globalSimonVars.isInputReq=false;
-			globalSimonVars.currentStage ++;
-			globalSimonVars.isInputReq=false;
-			if (globalSimonVars.currentStage < globalSimonVars.COUNT_LIMIT){
-				generateSeries();
-			} else {
-				globalSimonVars.currentStage=1;
-				alert("Game Over!");
 
+	if (globalSimonVars.isInputReq===true && globalSimonVars.globalSeq.length>0){
+
+		var curSeqVal=globalSimonVars.globalSeq[0];
+		var curSeqBtn=globalSimonVars.getButtons()[curSeqVal];
+		console.log("Checking input!");
+		console.log(curSeqBtn);
+		console.log(btnID);
+		if (btnID===curSeqBtn) {
+			//alert ("correct!");
+			globalSimonVars.globalSeq.shift();
+			if (globalSimonVars.globalSeq.length===0){
+				alert ("Stage Complete!");
+				globalSimonVars.currentStage ++;
+				globalSimonVars.isInputReq=false;
+				if (globalSimonVars.currentStage <= globalSimonVars.COUNT_LIMIT){
+					generateSeries();
+				} else {
+					globalSimonVars.currentStage=1;
+					alert("Game Over!");
+					globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
+
+				}
 			}
-			
+
+		} else {
+
+			if ($("#isStrict").prop('checked')){
+				alert ("Incorrect! Game Over.");
+				globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
+				
+				//enable below to auto restart
+				//globalSimonVars.currentStage=1;
+				//globalSimonVars.isInputReq=false;
+				//generateSeries();
+			} else {
+				alert ("Incorrect! Restarting Stage.");
+				//restart the same stage based on strict or not strict
+				generateSeries();
+			}
 		}
+		console.log(globalSimonVars.globalSeq);
 
 	}
 
@@ -157,6 +179,7 @@ var globalSimonVars = new function(){
 	this.globalSeq=[];
 	this.globalButtons=[];
 	this.isCorrect=false;
+	this.isGlobalOn=false;
 
 	 this.setButtons = function () {
 		this.globalButtons=prepareSimonButtons();
@@ -172,7 +195,7 @@ var globalSimonVars = new function(){
 //main function
 $(document).ready(function(){
 
-	var isOn=togglePower(true, 'pwrBtn','startBtn');
+	globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn','startBtn');
 	
 
 	// /alert ("Hi, I'm the Simon game!");
@@ -183,7 +206,7 @@ $(document).ready(function(){
 	console.log(buttons);
 
 	$("#pwrBtn").on("click", function(){
-		isOn=togglePower(isOn, this.id, 'startBtn','isStrict');
+		globalSimonVars.isGlobalOn=togglePower(globalSimonVars.isGlobalOn, this.id, 'startBtn','isStrict');
 		//console.log(isOn);
 	});
 
@@ -195,8 +218,9 @@ $(document).ready(function(){
 		$('#stageCount').val('--');
 		$('#'+this.id).prop("disabled",true);
 		$('#isStrict').prop("disabled", true);
-		generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT);
+		//generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT);
 		//generateSeries(1,'stageCount');
+		generateSeries();
 		
 	});
 
