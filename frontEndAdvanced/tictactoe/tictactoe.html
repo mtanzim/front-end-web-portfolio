@@ -26,7 +26,45 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-offset-4 col-md-4  col-sm-offset-2 col-sm-8 col-xs-12">
+					<div id="GameSelect">
+						<div class="row text-center">
+							<p>Please select the number of players:</p>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 text-right" ><button id="1player" class="btn btn-primary">1</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6" id="2player"><button id="player" class="btn btn-primary">2</button></div>
+						</div>
+					</div>
+					<div id="CharSelectP1">
+						<div class="row text-center">
+							<p>Please select the character for Player 1:</p>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 text-right"><button id="1playerX" class="btn btn-primary">X</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6"><button id="1playerO" class="btn btn-primary">O</button></div>
+						</div>
+					</div>
+					<!--
+					<div id="CharSelectP2">
+						<div class="row text-center">
+							<p>Please select the character for Player 2:</p>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6 text-right" id="2playerX"><button class="btn btn-primary">X</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6" id="2playerO"><button class="btn btn-primary">O</button></div>
+						</div>
+					</div>
+					-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-4 col-md-5  col-sm-offset-4 col-sm-5 col-xs-12">
 					<div id="gameArea"></div>
+				</div>
+			</div>
+			<div id="resetDiv" class="row">
+				<div class="col-md-12 text-right">
+					<button id="resetBtn" class="btn btn-danger">Reset</button>
 				</div>
 			</div>
 	 	</div>
