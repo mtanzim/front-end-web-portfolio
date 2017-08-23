@@ -17,10 +17,10 @@ function prepareGameBoard (divName) {
 	var buttonList=[];
 	var bootstrapColWidth="col-md-4 col-sm-4 col-xs-4"
 	var gridOrder=[0,1,2,3,4,5,6,7,8];
-	var btnClass="";
+	var btnClass="btn btn-block btn-default ticBtns well";
 	for (var i in gridOrder){
 		var curButton='btn_'+gridOrder[i];
-		$(divName).append('<div class="'+bootstrapColWidth+'"><button type="button" id="'+curButton+'"class="'+btnClass+'well btn btn-default">'+''+'</button></div>');
+		$(divName).append('<div class="'+bootstrapColWidth+'"><button type="button" id="'+curButton+'"class="'+btnClass+'">'+'<br>'+'</button></div>');
 		buttonList.push(curButton);
 	}
 	return buttonList;
@@ -33,10 +33,16 @@ function startGame(gameDiv) {
 	var buttonList=globalTicTacVars.setButtons(gameDiv);
 	console.log(buttonList);
 
+	globalTicTacVars.setCurChar();
+
 	for (btnID in buttonList){
 		console.log(buttonList[btnID]);
 		$('#'+buttonList[btnID]).on("click", function(){
-			alert(this.id);
+			//alert(this.id +' ' + globalTicTacVars.getCurChar());
+			$('#'+this.id).html(globalTicTacVars.getCurChar());
+			$("#"+this.id).prop("disabled",true);
+			globalTicTacVars.toggleCurChar();
+			console.log (globalTicTacVars.getCurChar());
 		});
 
 	}
@@ -56,6 +62,7 @@ var globalTicTacVars = new function(){
 	this.numPlayers=0;
 	this.P1Char='';
 	this.P2Char='';
+	this.curChar='';
 
 	this.resetGlobal = function(){
 		this.globalButtons=[];
@@ -63,6 +70,23 @@ var globalTicTacVars = new function(){
 		this.numPlayers=0;
 		this.P1Char='';
 		this.P2Char='';
+		this.curChar='';
+	}
+
+	this.toggleCurChar = function () {
+		console.log ("Toggling from: "+this.curChar)
+		if (this.curChar===this.P1Char){
+			this.curChar=this.P2Char;
+		} else {
+			this.curChar=this.P1Char;
+		}
+	}
+
+	this.setCurChar = function() {
+		this.curChar=this.P1Char;
+	}
+	this.getCurChar = function() {
+		return this.curChar;
 	}
 
 	this.setButtons = function (gameDiv) {
