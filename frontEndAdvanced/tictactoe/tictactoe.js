@@ -24,12 +24,40 @@ function prepareGameBoard (divName) {
 		buttonList.push(curButton);
 	}
 	return buttonList;
+}
+
+
+//this function will scan the game board and make decisions
+//start off assuming 2 player game
+function checkGame () {
+	console.log('Last Player: '+globalTicTacVars.getCurChar());
+	console.log('X has: '+globalTicTacVars.getGameStatus()['X']);
+	console.log('O has: '+globalTicTacVars.getGameStatus()['O']);
+	var turnsPlayed = globalTicTacVars.getGameStatus()['O'].length + globalTicTacVars.getGameStatus()['X'].length;
+	console.log('Turns played: '+turnsPlayed);
+
+	var winCases = [
+					[0,4,8], //diag1
+					[2,4,6], //diag2
+					[0,1,2], //hor1
+					[3,4,5], //hor2
+					[6,7,8], //hor3
+					[0,3,6], //vert1
+					[1,4,7], //vert2
+					[2,5,8], //vert3
+					];
+	//algothim to check game end/tie
+	if (globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()].length > 2 && turnsPlayed < 10) {
+		console.log ('Checking if '+globalTicTacVars.getCurChar()+' won');
+	}
+
+	//console.log(winCases);
 
 }
 
+
 function startGame(gameDiv) {
 
-	
 	var buttonList=globalTicTacVars.setButtons(gameDiv);
 	console.log(buttonList);
 
@@ -41,23 +69,23 @@ function startGame(gameDiv) {
 			//alert(this.id +' ' + globalTicTacVars.getCurChar());
 			$('#'+this.id).html(globalTicTacVars.getCurChar());
 			$("#"+this.id).prop("disabled",true);
+			globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),parseInt(this.id.split('_')[1]));
+			//check game state
+			checkGame();
 			globalTicTacVars.toggleCurChar();
-			console.log (globalTicTacVars.getCurChar());
-		});
+			//console.log (globalTicTacVars.getCurChar());
+			
 
+		});
 	}
 	$(gameDiv).show();
 	$(resetDiv).show();
-
 }
-
-
-
 
 var globalTicTacVars = new function(){
 
-
 	this.globalButtons=[];
+	this.gameStatus ={'X':[],'O':[]};
 	this.isGlobalOn=false;
 	this.numPlayers=0;
 	this.P1Char='';
@@ -66,6 +94,7 @@ var globalTicTacVars = new function(){
 
 	this.resetGlobal = function(){
 		this.globalButtons=[];
+		this.gameStatus ={'X':[],'O':[]};
 		this.isGlobalOn=false;
 		this.numPlayers=0;
 		this.P1Char='';
@@ -73,8 +102,15 @@ var globalTicTacVars = new function(){
 		this.curChar='';
 	}
 
+	this.updateGame = function (char,pos) {
+		this.gameStatus[char].push(pos);
+	}
+	this.getGameStatus = function(){
+		return this.gameStatus;
+	}
+
 	this.toggleCurChar = function () {
-		console.log ("Toggling from: "+this.curChar)
+		//console.log ("Toggling from: "+this.curChar)
 		if (this.curChar===this.P1Char){
 			this.curChar=this.P2Char;
 		} else {
@@ -116,10 +152,6 @@ var globalTicTacVars = new function(){
 		charList.push(this.P2Char);
 		return charList;
 	}
-
-
-
-
 }
 
 
@@ -129,12 +161,9 @@ var globalTicTacVars = new function(){
 //main function
 $(document).ready(function(){
 
-	//alert ("Hi, I'm Tic Tac Toe!");
 	var gameDiv="#gameArea";
 	var pSelectDiv="#GameSelect";
 	var P1SelectDiv="#CharSelectP1";
-	
-	//var P2SelectDiv="#CharSelectP2";
 
 	var p1Button="#1player";
 	var p1X="#1playerX";
@@ -150,6 +179,7 @@ $(document).ready(function(){
 	$(resetDiv).hide();
 
 
+	//game type selection
 	$(p1Button).on("click", function(){
 		//alert("1 Player Selected");
 		globalTicTacVars.setPlayers(1);
@@ -165,7 +195,7 @@ $(document).ready(function(){
 		$(pSelectDiv).hide();
 	});
 
-
+	//P1 char selection
 	$(p1X).on("click", function(){
 		//alert("2 Players Selected");
 		globalTicTacVars.setChar('X');
@@ -189,12 +219,4 @@ $(document).ready(function(){
 		$(gameDiv).html('');
 		$(pSelectDiv).show();
 	});	
-
-
-
-
-	//$(gameDiv).append('<div class="row text-center"><div class="col-md-4 col-md-offset-4"><p>Hello');
-
-
-
 });
