@@ -17,7 +17,7 @@ function prepareGameBoard (divName) {
 	var buttonList=[];
 	var bootstrapColWidth="col-md-4 col-sm-4 col-xs-4"
 	var gridOrder=[0,1,2,3,4,5,6,7,8];
-	var btnClass="btn btn-block btn-default ticBtns well";
+	var btnClass="btn btn-default ticBtns well";
 	for (var i in gridOrder){
 		var curButton='btn_'+gridOrder[i];
 		$(divName).append('<div class="'+bootstrapColWidth+'"><button type="button" id="'+curButton+'"class="'+btnClass+'">'+'<br>'+'</button></div>');
@@ -26,6 +26,35 @@ function prepareGameBoard (divName) {
 	return buttonList;
 }
 
+function alternateColors(btns){
+	console.log('aternating colors for: '+btns);
+	for (var i in btns){
+		console.log(btns[i]);
+		if($("#btn_"+btns[i]).hasClass('winBtn')){
+			$("#btn_"+btns[i]).removeClass('winBtn');
+			$("#btn_"+btns[i]).addClass('winBtnAlt');
+		} else {
+			$("#btn_"+btns[i]).addClass('winBtn');
+			$("#btn_"+btns[i]).removeClass('winBtnAlt');
+		}
+	}
+	//$(winBtn).addClass('winBtn');
+	//$(winBtn).removeClass('winBtnAlt');
+}
+
+
+function rewardWin() {
+	var winArr=globalTicTacVars.getWinner();
+	for (var i in globalTicTacVars.getButtons()){
+		$("#"+globalTicTacVars.getButtons()[i]).prop("disabled",true);
+	}
+
+	for (var j in winArr){
+		$("#btn_"+winArr[j]).addClass('winBtn');
+	}
+
+	globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
+}
 
 //this function will scan the game board and make decisions
 //start off assuming 2 player game
@@ -36,6 +65,12 @@ function checkGame () {
 	var turnsPlayed = globalTicTacVars.getGameStatus()['O'].length + globalTicTacVars.getGameStatus()['X'].length;
 	console.log('Turns played: '+turnsPlayed);
 
+	//var xList=globalTicTacVars.getGameStatus()['X'];
+	//var oList=globalTicTacVars.getGameStatus()['O'];
+	//console.log('X has: '+xList);
+	//console.log('O has: '+oList);
+
+	var isWon=false;
 	var winCases = [
 					[0,4,8], //diag1
 					[2,4,6], //diag2
@@ -48,7 +83,33 @@ function checkGame () {
 					];
 	//algothim to check game end/tie
 	if (globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()].length > 2 && turnsPlayed < 10) {
-		console.log ('Checking if '+globalTicTacVars.getCurChar()+' won');
+		
+		var curCheckArr=globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()];
+		console.log ('Checking if '+globalTicTacVars.getCurChar()+' won with: '+curCheckArr);
+		
+		for (var i in winCases){
+			if (isWon){break;}
+			var matchCount=0;
+			console.log(winCases[i]);
+			for (var j in curCheckArr){
+				for (var k in winCases[i]){
+					if (curCheckArr[j]===winCases[i][k]){
+						matchCount++;
+						if (matchCount===3){
+							console.log(globalTicTacVars.getCurChar()+' won with: '+ winCases[i]);
+							globalTicTacVars.setWinner(winCases[i]);
+							isWon=true;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	if (isWon){
+		rewardWin();
 	}
 
 	//console.log(winCases);
@@ -69,6 +130,7 @@ function startGame(gameDiv) {
 			//alert(this.id +' ' + globalTicTacVars.getCurChar());
 			$('#'+this.id).html(globalTicTacVars.getCurChar());
 			$("#"+this.id).prop("disabled",true);
+			//maintain a list of X and O positions on the game board
 			globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),parseInt(this.id.split('_')[1]));
 			//check game state
 			checkGame();
@@ -91,6 +153,9 @@ var globalTicTacVars = new function(){
 	this.P1Char='';
 	this.P2Char='';
 	this.curChar='';
+	this.winningArr=[];
+	this.DELAY_VAL=1000;
+	this.intervalID=0;
 
 	this.resetGlobal = function(){
 		this.globalButtons=[];
@@ -100,6 +165,22 @@ var globalTicTacVars = new function(){
 		this.P1Char='';
 		this.P2Char='';
 		this.curChar='';
+		this.winningArr=[];
+
+		clearInterval(this.intervalID);
+		console.log('stopping intervalID');
+
+	}
+
+	this.setIntervalID=function(intervalID){
+		this.intervalID=intervalID;
+	}
+
+	this.setWinner=function (winArr){
+		this.winningArr=winArr.slice();
+	}
+	this.getWinner=function (){
+		return this.winningArr.slice();
 	}
 
 	this.updateGame = function (char,pos) {
@@ -177,6 +258,9 @@ $(document).ready(function(){
 
 	$(P1SelectDiv).hide();
 	$(resetDiv).hide();
+
+	//disable 1 player game for now
+	$(p1Button).prop("disabled",true);
 
 
 	//game type selection
