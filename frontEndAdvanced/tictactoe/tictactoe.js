@@ -53,24 +53,22 @@ function rewardWin() {
 		$("#btn_"+winArr[j]).addClass('winBtn');
 	}
 
+
 	globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
 }
 
 //this function will scan the game board and make decisions
 //start off assuming 2 player game
 function checkGame () {
+
+	var turnsPlayed = globalTicTacVars.getGameStatus()['O'].length + globalTicTacVars.getGameStatus()['X'].length;
+
 	console.log('Last Player: '+globalTicTacVars.getCurChar());
 	console.log('X has: '+globalTicTacVars.getGameStatus()['X']);
 	console.log('O has: '+globalTicTacVars.getGameStatus()['O']);
-	var turnsPlayed = globalTicTacVars.getGameStatus()['O'].length + globalTicTacVars.getGameStatus()['X'].length;
 	console.log('Turns played: '+turnsPlayed);
 
-	//var xList=globalTicTacVars.getGameStatus()['X'];
-	//var oList=globalTicTacVars.getGameStatus()['O'];
-	//console.log('X has: '+xList);
-	//console.log('O has: '+oList);
-
-	var isWon=false;
+	//var isWon=false;
 	var winCases = [
 					[0,4,8], //diag1
 					[2,4,6], //diag2
@@ -81,6 +79,10 @@ function checkGame () {
 					[1,4,7], //vert2
 					[2,5,8], //vert3
 					];
+
+	if (globalTicTacVars.numPlayers===1){
+		alert ('AI Required');
+	}
 	//algothim to check game end/tie
 	if (globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()].length > 2 && turnsPlayed < 10) {
 		
@@ -88,7 +90,7 @@ function checkGame () {
 		console.log ('Checking if '+globalTicTacVars.getCurChar()+' won with: '+curCheckArr);
 		
 		for (var i in winCases){
-			if (isWon){break;}
+			if (globalTicTacVars.getIsWin()){break;}
 			var matchCount=0;
 			console.log(winCases[i]);
 			for (var j in curCheckArr){
@@ -98,7 +100,7 @@ function checkGame () {
 						if (matchCount===3){
 							console.log(globalTicTacVars.getCurChar()+' won with: '+ winCases[i]);
 							globalTicTacVars.setWinner(winCases[i]);
-							isWon=true;
+							$(globalTicTacVars.getStatDiv()).html(globalTicTacVars.getCurChar()+' Won!');
 							break;
 						}
 					}
@@ -108,11 +110,9 @@ function checkGame () {
 
 	}
 
-	if (isWon){
+	if (globalTicTacVars.getIsWin()){
 		rewardWin();
 	}
-
-	//console.log(winCases);
 
 }
 
@@ -123,32 +123,37 @@ function startGame(gameDiv) {
 	console.log(buttonList);
 
 	globalTicTacVars.setCurChar();
+	$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
 
 	for (btnID in buttonList){
 		console.log(buttonList[btnID]);
 		$('#'+buttonList[btnID]).on("click", function(){
-			//alert(this.id +' ' + globalTicTacVars.getCurChar());
+			//visually update game board with chars, disable the board that's already played
 			$('#'+this.id).html(globalTicTacVars.getCurChar());
 			$("#"+this.id).prop("disabled",true);
 			//maintain a list of X and O positions on the game board
 			globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),parseInt(this.id.split('_')[1]));
 			//check game state
 			checkGame();
-			globalTicTacVars.toggleCurChar();
-			//console.log (globalTicTacVars.getCurChar());
-			
+
+			if (globalTicTacVars.isWon===false){
+				globalTicTacVars.toggleCurChar();
+				$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+			}
 
 		});
 	}
 	$(gameDiv).show();
 	$(resetDiv).show();
+	$(globalTicTacVars.getStatDiv()).show();
+
 }
 
 var globalTicTacVars = new function(){
 
 	this.globalButtons=[];
 	this.gameStatus ={'X':[],'O':[]};
-	this.isGlobalOn=false;
+	this.isWon=false;
 	this.numPlayers=0;
 	this.P1Char='';
 	this.P2Char='';
@@ -156,6 +161,7 @@ var globalTicTacVars = new function(){
 	this.winningArr=[];
 	this.DELAY_VAL=1000;
 	this.intervalID=0;
+	this.statDiv="#statusArea";
 
 	this.resetGlobal = function(){
 		this.globalButtons=[];
@@ -166,10 +172,15 @@ var globalTicTacVars = new function(){
 		this.P2Char='';
 		this.curChar='';
 		this.winningArr=[];
+		this.isWon=false;
 
 		clearInterval(this.intervalID);
 		console.log('stopping intervalID');
 
+	}
+
+	this.getStatDiv = function() {
+		return this.statDiv;
 	}
 
 	this.setIntervalID=function(intervalID){
@@ -178,9 +189,13 @@ var globalTicTacVars = new function(){
 
 	this.setWinner=function (winArr){
 		this.winningArr=winArr.slice();
+		this.isWon=true;
 	}
 	this.getWinner=function (){
 		return this.winningArr.slice();
+	}
+	this.getIsWin = function () {
+		return this.isWon;
 	}
 
 	this.updateGame = function (char,pos) {
@@ -258,6 +273,7 @@ $(document).ready(function(){
 
 	$(P1SelectDiv).hide();
 	$(resetDiv).hide();
+	$(globalTicTacVars.getStatDiv()).hide();
 
 	//disable 1 player game for now
 	$(p1Button).prop("disabled",true);
@@ -301,6 +317,7 @@ $(document).ready(function(){
 		$(P1SelectDiv).hide();
 		$(resetDiv).hide();
 		$(gameDiv).html('');
+		$(globalTicTacVars.getStatDiv()).html('');
 		$(pSelectDiv).show();
 	});	
 });
