@@ -57,16 +57,156 @@ function rewardWin() {
 	globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
 }
 
+
+//AI code
+//this is possibly changing the original winCases arr!!!!
+function engageAI(AIchar,playerChar) {
+
+	var AIstat=globalTicTacVars.getGameStatus()[AIchar];
+	var playerStat=globalTicTacVars.getGameStatus()[playerChar];
+	//var playerChar='';
+
+	console.log ('AI ' + AIchar + ' Stat: '+AIstat);
+	console.log ('Player ' + playerChar + ' Stat: '+playerStat);
+
+	var AIcompleted=false;
+	var playerBlocked=false;
+
+	//check if AI can complete
+	if (AIstat.length>1){
+		console.log('AI can possibly complete. Checking...');
+		var winCases = [
+						[0,4,8], //diag1
+						[2,4,6], //diag2
+						[0,1,2], //hor1
+						[3,4,5], //hor2
+						[6,7,8], //hor3
+						[0,3,6], //vert1
+						[1,4,7], //vert2
+						[2,5,8], //vert3
+						];
+
+		for (var i in winCases){
+			if (AIcompleted){break;}
+			var matchCount=0;
+			//console.log(winCases[i]);
+			for (var j in AIstat){
+				for (var k in winCases[i]){
+					if (AIstat[j]===winCases[i][k]){
+						//console.log('matched ' + winCases[i][k] + ' at ' + k);
+						matchCount++;
+						winCases[i].splice(k,1);
+						//console.log ('spliced, new arr: '+ winCases[i]);
+						if (matchCount===2){
+							console.log(AIchar+' can win with: '+ winCases[i]);
+							//check if location is blocked
+							if (playerStat.includes(winCases[i][0]) || AIstat.includes(winCases[i][0])){
+								console.log('location blocked');
+							} else {
+								AIcompleted=true;
+								//actually play the location
+								console.log("AI Playing Now");
+								//visual update
+								$('#btn_'+winCases[i][0]).html(globalTicTacVars.getCurChar());
+								$("#btn_"+winCases[i][0]).prop("disabled",true);
+								//maintain a list of X and O positions on the game board
+								globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),winCases[i][0]);
+								//check game state
+								checkGame();
+								//set correct states
+								break;
+							}
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	//AI can't complete, try to block
+	if (AIcompleted===false && playerStat.length>1){
+		console.log('AI cannot complete, try blocking player');
+		var winCases = [
+						[0,4,8], //diag1
+						[2,4,6], //diag2
+						[0,1,2], //hor1
+						[3,4,5], //hor2
+						[6,7,8], //hor3
+						[0,3,6], //vert1
+						[1,4,7], //vert2
+						[2,5,8], //vert3
+						];
+		for (var i in winCases){
+			if (playerBlocked){break;}
+			var matchCount=0;
+			//console.log(winCases[i]);
+			for (var j in playerStat){
+				for (var k in winCases[i]){
+					if (playerStat[j]===winCases[i][k]){
+						//console.log('matched ' + winCases[i][k] + ' at ' + k);
+						matchCount++;
+						winCases[i].splice(k,1);
+						//console.log ('spliced, new arr: '+ winCases[i]);
+						if (matchCount===2){
+							console.log(playerChar+' can win with: '+ winCases[i]);
+							//check if location is blocked
+							if (playerStat.includes(winCases[i][0]) || AIstat.includes(winCases[i][0])){
+								console.log('location blocked');
+							} else {
+								//actually play the location
+								playerBlocked=true;
+								//actually play the location
+								console.log("AI Playing Now");
+								//visual update
+								$('#btn_'+winCases[i][0]).html(globalTicTacVars.getCurChar());
+								$("#btn_"+winCases[i][0]).prop("disabled",true);
+								//maintain a list of X and O positions on the game board
+								globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),winCases[i][0]);
+								//check game state
+								checkGame();
+								//set correct states	
+								break;
+							}
+							
+						}
+					}
+				}
+			}
+		}
+		
+	}
+	//AI can't complete or block, play a random game location
+	if (AIcompleted===false && playerBlocked===false){
+		var gaps=[];
+		var allPos=[0,1,2,3,4,5,6,7,8];
+		for (var m in allPos){
+			if (AIstat.includes(allPos[m])===false && playerStat.includes(allPos[m])==false){
+				gaps.push(allPos[m]);
+			}
+		}
+		console.log('Gaps: ' + gaps);
+		var toPlay = gaps[Math.floor(Math.random()*gaps.length)];
+		console.log("AI Playing Now");
+		//visual update
+		$('#btn_'+toPlay).html(globalTicTacVars.getCurChar());
+		$("#btn_"+toPlay).prop("disabled",true);
+		//maintain a list of X and O positions on the game board
+		globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),toPlay);
+		//check game state
+		checkGame();
+	}
+}
+
 //this function will scan the game board and make decisions
 //start off assuming 2 player game
 function checkGame () {
 
 	var turnsPlayed = globalTicTacVars.getGameStatus()['O'].length + globalTicTacVars.getGameStatus()['X'].length;
 
-	console.log('Last Player: '+globalTicTacVars.getCurChar());
+	//console.log('Last Player: '+globalTicTacVars.getCurChar());
 	console.log('X has: '+globalTicTacVars.getGameStatus()['X']);
 	console.log('O has: '+globalTicTacVars.getGameStatus()['O']);
-	console.log('Turns played: '+turnsPlayed);
+	//console.log('Turns played: '+turnsPlayed);
 
 	//var isWon=false;
 	var winCases = [
@@ -80,23 +220,22 @@ function checkGame () {
 					[2,5,8], //vert3
 					];
 
-	if (globalTicTacVars.numPlayers===1){
-		alert ('AI Required');
-	}
 	//algothim to check game end/tie
 	if (globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()].length > 2 && turnsPlayed < 10) {
 		
 		var curCheckArr=globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()];
 		console.log ('Checking if '+globalTicTacVars.getCurChar()+' won with: '+curCheckArr);
+		console.log(winCases);
 		
 		for (var i in winCases){
 			if (globalTicTacVars.getIsWin()){break;}
 			var matchCount=0;
-			console.log(winCases[i]);
+			console.log('Now checking' + winCases[i]);
 			for (var j in curCheckArr){
 				for (var k in winCases[i]){
 					if (curCheckArr[j]===winCases[i][k]){
 						matchCount++;
+						console.log('Matches found: '+ matchCount);
 						if (matchCount===3){
 							console.log(globalTicTacVars.getCurChar()+' won with: '+ winCases[i]);
 							globalTicTacVars.setWinner(winCases[i]);
@@ -112,6 +251,14 @@ function checkGame () {
 
 	if (globalTicTacVars.getIsWin()){
 		rewardWin();
+	} else {
+		globalTicTacVars.toggleCurChar();
+		$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+		//assume P1 is always human
+		if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
+			console.log('AI Engaged');
+			engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
+		}
 	}
 
 }
@@ -135,11 +282,17 @@ function startGame(gameDiv) {
 			globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),parseInt(this.id.split('_')[1]));
 			//check game state
 			checkGame();
-
+			/*
 			if (globalTicTacVars.isWon===false){
 				globalTicTacVars.toggleCurChar();
 				$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+				//assume P1 is always human
+				if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
+					console.log('AI Engaged');
+					engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
+				}
 			}
+			*/
 
 		});
 	}
@@ -162,6 +315,7 @@ var globalTicTacVars = new function(){
 	this.DELAY_VAL=1000;
 	this.intervalID=0;
 	this.statDiv="#statusArea";
+
 
 	this.resetGlobal = function(){
 		this.globalButtons=[];
@@ -276,7 +430,7 @@ $(document).ready(function(){
 	$(globalTicTacVars.getStatDiv()).hide();
 
 	//disable 1 player game for now
-	$(p1Button).prop("disabled",true);
+	//$(p1Button).prop("disabled",true);
 
 
 	//game type selection
