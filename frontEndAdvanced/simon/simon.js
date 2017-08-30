@@ -1,16 +1,6 @@
-
-
-
-//found on stackoverflow
-function pad (num, size){
-	var s=num+""; //convert to string
-	while (s.length <size) {
-		s= "0"+s;
-	}
-	return s;
-}
-
-
+//script for simon game
+//Tanzim Mokammel
+//mtanzim@gmail.com
 
 function prepareSimonButtons () {
 	//var simonButtons=['g','r','b','y'];
@@ -42,6 +32,7 @@ function togglePower (isOn, btnID, startID, strictID){
 	if (isOn){
 		isOn=false;
 		globalSimonVars.isInputReq=false;
+		globalSimonVars.reset();
 		
 		if (globalSimonVars.currentStage>1){
 			alert("Game Over!");
@@ -67,10 +58,12 @@ function togglePower (isOn, btnID, startID, strictID){
 }
 
 
-function playAsound (sequence, intervalID){
+function playAsound (intervalID){
+	var sequence=globalSimonVars.globalSeq;
+
 	globalSimonVars.isInputReq=false;
 	$('.simonBigBtn').css("opacity",'1.0');
-	console.log();
+	console.log('passed sequence is: '+sequence);
 	if (sequence.length>0){
 		var seqKeys = Object.keys(globalSimonVars.simonButtons);
 		var btn_name=seqKeys[sequence[0]];
@@ -79,42 +72,51 @@ function playAsound (sequence, intervalID){
 		console.log ('playing sound:'+btn_name);
 		new Audio(globalSimonVars.simonButtons[btn_name]).play();
 		$('#btn_'+btn_name).css("opacity",'0.5');
-
-
 		sequence.shift();
-		console.log ('end' + sequence);
+		console.log ('end: ' + sequence);
 	} else {
 		globalSimonVars.isInputReq=true;
+		//restore the sequence
+		globalSimonVars.globalSeq=globalSimonVars.globalStoreSeq.slice();
 		clearInterval(intervalID);
 	}
 }
 
 
-function generateSeries(){
+function generateSeries(isIncr){
 	//alert ("Game Started");
 	$('#stageCount').val(globalSimonVars.currentStage);
-	var randSequence=[];
+	//var randSequence=[];
+	//modify this to add only one to the sequence every time
 	//play random sequence
+
+	/*
 	for (var i=0; i < globalSimonVars.currentStage; i++){	
 		//alert (i);//this will be a random number leading to random button presses
 		randSequence.push(Math.floor(Math.random() * 4));
 		
 	}
+	*/
 
 	//storeRand = randSequence.slice();
-	globalSimonVars.globalSeq = randSequence.slice();
+	//globalSimonVars.globalSeq = randSequence.slice();
+	if (isIncr){
+		globalSimonVars.globalSeq.push(Math.floor(Math.random() * 4));
+	}
+	console.log(globalSimonVars.globalSeq);
 
-	var intervalID=setInterval(function() {playAsound(randSequence, intervalID)},globalSimonVars.DELAY_VAL);
+	//store the original sequence
+	globalSimonVars.globalStoreSeq=globalSimonVars.globalSeq.slice();
+	var intervalID=setInterval(function() {playAsound(intervalID);},globalSimonVars.DELAY_VAL);
 
-	console.log(randSequence);
+	
 	
 
 }
 
 
 function checkInput(btnID) {
-	//alert ('pressed '+btnID );
-
+	console.log ('pressed '+btnID );
 	if (globalSimonVars.isInputReq===true && globalSimonVars.globalSeq.length>0){
 
 		var curSeqVal=globalSimonVars.globalSeq[0];
@@ -122,37 +124,51 @@ function checkInput(btnID) {
 		console.log("Checking input!");
 		console.log(curSeqBtn);
 		console.log(btnID);
+
+		new Audio(globalSimonVars.simonButtons[btnID.split('_')[1]]).play();
+
 		if (btnID===curSeqBtn) {
 			//alert ("correct!");
 			globalSimonVars.globalSeq.shift();
 			if (globalSimonVars.globalSeq.length===0){
-				alert ("Stage Complete!");
+				
 				globalSimonVars.currentStage ++;
 				globalSimonVars.isInputReq=false;
-				if (globalSimonVars.currentStage <= globalSimonVars.COUNT_LIMIT){
-					generateSeries();
-				} else {
-					globalSimonVars.currentStage=1;
-					alert("Game Over!");
-					globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
+				$('#stageCount').val('Stage Complete!');
+				setTimeout(function(){
+					//alert ("Stage Complete!");
+					
+					if (globalSimonVars.currentStage <= globalSimonVars.COUNT_LIMIT){
+						//restore the sequence
+						globalSimonVars.globalSeq=globalSimonVars.globalStoreSeq.slice();
+						generateSeries(true);
+					} else {
+						globalSimonVars.currentStage=1;
+						alert("Game Over!");
+						globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
 
-				}
+					}
+				},globalSimonVars.DELAY_VAL_RST);
 			}
 
 		} else {
-
+			//restart the same stage based on strict or not strict
+			globalSimonVars.isInputReq=false;
 			if ($("#isStrict").prop('checked')){
-				alert ("Incorrect! Game Over.");
-				globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
-				
+				$('#stageCount').val("Incorrect! Game Over.");
+				//alert("Game Over!");
+				setTimeout( function() {
+					globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
+				}, globalSimonVars.DELAY_VAL_RST);
 				//enable below to auto restart
 				//globalSimonVars.currentStage=1;
 				//globalSimonVars.isInputReq=false;
 				//generateSeries();
 			} else {
-				alert ("Incorrect! Restarting Stage.");
-				//restart the same stage based on strict or not strict
-				generateSeries();
+				//restore the sequence
+				globalSimonVars.globalSeq=globalSimonVars.globalStoreSeq.slice();
+				$('#stageCount').val("Incorrect! Restarting Stage.");
+				setTimeout( function() {generateSeries(false);},globalSimonVars.DELAY_VAL_RST);
 			}
 		}
 		console.log(globalSimonVars.globalSeq);
@@ -172,11 +188,13 @@ var globalSimonVars = new function(){
 					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
 
 	this.DELAY_VAL=700;
-	this.COUNT_LIMIT=6;
+	this.DELAY_VAL_RST=1400;
+	this.COUNT_LIMIT=20; //max number of stages
 	this.isInputReq=false;
 	this.lastBtn='';
 	this.currentStage=1;
 	this.globalSeq=[];
+	this.globalStoreSeq=[];
 	this.globalButtons=[];
 	this.isCorrect=false;
 	this.isGlobalOn=false;
@@ -189,6 +207,11 @@ var globalSimonVars = new function(){
 	this.getButtons = function (){
 		return this.globalButtons;
 	};
+
+	this.reset = function () {
+		this.globalSeq=[];
+		this.globalStoreSeq=[];
+	}
 
 }
 
@@ -205,11 +228,11 @@ $(document).ready(function(){
 	var buttons = globalSimonVars.setButtons();
 	console.log(buttons);
 
+	$('#stageCount').prop('disabled',true);
+
 	$("#pwrBtn").on("click", function(){
 		globalSimonVars.isGlobalOn=togglePower(globalSimonVars.isGlobalOn, this.id, 'startBtn','isStrict');
-		//console.log(isOn);
 	});
-
 
 
 	$("#startBtn").on("click", function(){
@@ -220,16 +243,14 @@ $(document).ready(function(){
 		$('#isStrict').prop("disabled", true);
 		//generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT);
 		//generateSeries(1,'stageCount');
-		generateSeries();
+		generateSeries(true);
 		
 	});
+
 
 	$('#btn_g').on("click", function(){checkInput(this.id);});
 	$('#btn_r').on("click", function(){checkInput(this.id);});
 	$('#btn_b').on("click", function(){checkInput(this.id);});
 	$('#btn_y').on("click", function(){checkInput(this.id);});
-
-
-
 
 });
