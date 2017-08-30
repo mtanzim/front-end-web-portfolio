@@ -1,14 +1,6 @@
-
-
-
-//found on stackoverflow
-function pad (num, size){
-	var s=num+""; //convert to string
-	while (s.length <size) {
-		s= "0"+s;
-	}
-	return s;
-}
+//script for tic tac toe game
+//Tanzim Mokammel
+//mtanzim@gmail.com
 
 
 //creates a grid of buttons
@@ -59,7 +51,10 @@ function rewardWin() {
 
 
 //AI code
-//this is possibly changing the original winCases arr!!!!
+//assumes P1 is always human
+//has redundant code, consider refactoring
+//redundant winCase arrays are used to avoid altering the deFacto winCase array
+//alternate, and less bloated code would be to make copies and restore, similar to simon game
 function engageAI(AIchar,playerChar) {
 
 	var AIstat=globalTicTacVars.getGameStatus()[AIchar];
@@ -192,9 +187,11 @@ function engageAI(AIchar,playerChar) {
 		$("#btn_"+toPlay).prop("disabled",true);
 		//maintain a list of X and O positions on the game board
 		globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),toPlay);
+		//renable gaps as AI has played
 		//check game state
 		checkGame();
 	}
+
 }
 
 //this function will scan the game board and make decisions
@@ -219,6 +216,7 @@ function checkGame () {
 					[1,4,7], //vert2
 					[2,5,8], //vert3
 					];
+	var AI_DELAY=750;
 
 	//algothim to check game end/tie
 	if (globalTicTacVars.getGameStatus()[globalTicTacVars.getCurChar()].length > 2 && turnsPlayed < 10) {
@@ -252,16 +250,31 @@ function checkGame () {
 	if (globalTicTacVars.getIsWin()){
 		rewardWin();
 	} else {
-		globalTicTacVars.toggleCurChar();
-		$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
-		//assume P1 is always human
-		if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
-			console.log('AI Engaged');
-			engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
+		if (turnsPlayed===9 && globalTicTacVars.getIsWin()===false){
+			$(globalTicTacVars.getStatDiv()).html('Tie!');
+		} else {
+			globalTicTacVars.toggleCurChar();
+			$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+			//assume P1 is always human
+			if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
+				//need to disable all buttons during this phase
+				globalTicTacVars.disableAll();
+				console.log('AI Engaged');
+				$(globalTicTacVars.getStatDiv()).html('CPU Playing...');
+				setTimeout(function(){
+					engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]);
+					globalTicTacVars.EnableGaps(); 
+				},AI_DELAY);
+				//need to enable buttons not played after this phase
+				
+			}
+
 		}
 	}
 
 }
+
+
 
 
 function startGame(gameDiv) {
@@ -282,18 +295,6 @@ function startGame(gameDiv) {
 			globalTicTacVars.updateGame(globalTicTacVars.getCurChar(),parseInt(this.id.split('_')[1]));
 			//check game state
 			checkGame();
-			/*
-			if (globalTicTacVars.isWon===false){
-				globalTicTacVars.toggleCurChar();
-				$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
-				//assume P1 is always human
-				if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
-					console.log('AI Engaged');
-					engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
-				}
-			}
-			*/
-
 		});
 	}
 	$(gameDiv).show();
@@ -331,6 +332,31 @@ var globalTicTacVars = new function(){
 		clearInterval(this.intervalID);
 		console.log('stopping intervalID');
 
+	}
+
+	this.disableAll = function () {
+		for (var btnTracker in this.globalButtons){
+
+			$('#'+this.globalButtons[btnTracker]).prop("disabled",true);
+		}
+	}
+
+	//assumes P1 is always human
+	//has redundant code, consider refactoring
+	this.EnableGaps = function () {
+		var AIstat=globalTicTacVars.getGameStatus()[this.getChar()[1]];
+		var playerStat=globalTicTacVars.getGameStatus()[this.getChar()[0]];
+		var gaps=[];
+		var allPos=[0,1,2,3,4,5,6,7,8];
+		for (var m in allPos){
+			if (AIstat.includes(allPos[m])===false && playerStat.includes(allPos[m])==false){
+				//gaps.push(allPos[m]);
+				console.log(allPos[m] + ' is a gap');
+				$('#btn_'+allPos[m]).prop("disabled",false);
+			} else {
+				$('#btn_'+allPos[m]).prop("disabled",true);
+			}
+		}
 	}
 
 	this.getStatDiv = function() {
