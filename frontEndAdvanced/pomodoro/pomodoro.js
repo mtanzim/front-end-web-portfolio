@@ -87,14 +87,19 @@ $(document).ready(function(){
 		}
 	}
 
-	function reset () {
+	function reset (timeLabelres) {
 		pomCount(intervalID,'reset');
-		toggleButtons('reset');
-		$('#titleTime').html('Complete');
-		$("#startBtn").removeClass("disabled");
-		isItWork=true;
-		isDisabled=false;
-		resetTimes();
+		setTimeout(function() {
+			alert(timeLabelres + " Complete!");
+			toggleButtons('reset');
+			$('#titleTime').html('Complete');
+			$("#startBtn").removeClass("disabled");
+			isItWork=true;
+			isDisabled=false;
+			resetTimes();
+		},500)
+
+
 	}
 
 
@@ -105,7 +110,7 @@ $(document).ready(function(){
 		if (pomState==='reset'){
 			clearInterval(intervalID);
 			clearInterval(prevInterval);
-			$('#timeH').html(timeLabel + ' session reset.');
+			//$('#timeH').html(timeLabel + ' session reset.');
 			//progBar='100%';
 			return 0;
 		} else if (pomState==='stop') {
@@ -141,22 +146,33 @@ $(document).ready(function(){
 		document.getElementById("pomProg").style.width = progBar;
 
 		if (useTime<0){
-			//clearInterval(intervalID);
+			new Audio('audio/clock-tick8.mp3').play();
 			$('#timeH').html(timeLabel + ' session complete.');
 			$('#titleTime').html('Complete');
-			alert(timeLabel+ " Complete!");
-			//document.getElementById("pomProg").style.width = '100%';
+			//play a sound
+			
+		  	
+			
 			if (isItWork){
 				isItWork=false;
 				clearInterval(intervalIDfunc);
-				intervalID=setInterval(function() {pomCount(intervalIDfunc,'default')},delayVal);
+				setTimeout(function() {
+		  			alert(timeLabel+ " Complete!");
+		  			intervalID=setInterval(function() {pomCount(intervalIDfunc,'default')},delayVal);
+				},500)
+				
 			} else {
-				reset();
+				reset(timeLabel);
+				
 			}
+
+
 		}
 	}
 
-	var delayVal=1000;
+
+	//page variables
+	var delayVal=1;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
 	var startWorkTime=workTime;
