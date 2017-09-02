@@ -23,59 +23,57 @@
 			</div>
 		</div>
 		<div class="container-fluid">
-			<div id="ctrlDiv">
-				<div class="row">
-					<div id="workCtrlDiv" class="col-md-offset-2 col-md-4 text-center">
-						<div class="row">
-							<div class="btn-group">
-							 	<button type="button" id="lessWork" class="btn btn-danger">-</button>
-						 	</div>
-						 	<h4 class="well well-sm" id="workLength" style="display:inline">25</h4>
-					 		<div class="btn-group">
-							 	<button type="button" id="addWork" class="btn btn-success">+</button>
-						 	</div>
-					 	</div>
-					 	<div class="row"><h4>Session Length</h4></div>
+			<div class="row" id="">
+				<div id="workCtrl" class="col-md-6 col-sm-6 col-xs-6 text-right ctrlDiv">
+					<div class="btn-group">
+					 	<button type="button" id="lessWork" class="btn btn-danger">-</button>
 				 	</div>
-					<div id="breakCtrlDiv" class="col-md-4 text-center">
-						<div class="row">
-							<div class="btn-group">
-							 	<button type="button" id="lessBreak" class="btn btn-danger">-</button>
-						 	</div>
-						 	<h4 class="well well-sm" id="breakLength" style="display:inline">5</h4>
-					 		<div class="btn-group">
-							 	<button type="button" id="addBreak" class="btn btn-success">+</button>
-						 	</div>
-					 	</div>
-					 	<div class="row"><h4>Break Length</h4></div>
+				 	<h4 class="well well-sm" id="workLength" style="display:inline">25</h4>
+			 		<div class="btn-group">
+					 	<button type="button" id="addWork" class="btn btn-success">+</button>
 				 	</div>
 			 	</div>
+			 	<div id="breakCtrl" class="col-md-6 col-sm-6 col-xs-6 text-left ctrlDiv">
+					<div class="btn-group">
+					 	<button type="button" id="lessBreak" class="btn btn-danger">-</button>
+				 	</div>
+				 	<h4 class="well well-sm" id="breakLength" style="display:inline">5</h4>
+			 		<div class="btn-group">
+					 	<button type="button" id="addBreak" class="btn btn-success">+</button>
+				 	</div>
+		 		</div>
 		 	</div>
-		 	<div class="row" ><br><br><br></div> 
-		 	<div class=row>
-				<div class="col-md-12 text-center">
-				 	<button type="button" id="startBtn" class="btn btn-success disbled">Start</button>
-				 	<button type="button" id="stopBtn" class="btn btn-danger">Stop</button>
-				 	<button type="button" id="resetBtn" class="btn btn-default">Reset</button>
+		 	<div id="ctrlLabel" class="row ctrlDiv">
+		 		<div class="col-md-6 col-sm-6 col-xs-6 text-right">
+		 			<h4>Session Length</h4>
+	 			</div>
+	 			<div class="col-md-6 col-sm-6 col-xs-6 text-left">
+		 			<h4>Break Length</h4>
+	 			</div>
+ 			</div>
+ 			<div class="row">
+			 	<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				 	<button type="button" id="startBtn" class="btn btn-lg btn-success disbled">Start</button>
+				 	<button type="button" id="stopBtn" class="btn btn-lg btn-danger">Stop</button>
+				 	<button type="button" id="resetBtn" class="btn btn-lg btn-default">Reset</button>
 			 	</div>
 		 	</div>
-		 	<div class="row" ><br><br><br></div>
-		 		<div id="infoDiv">
-					<div class="progress">
-		  			<div id="pomProg" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-		    			<span class="sr-only">60% Complete</span>
-		  			</div>
-					</div>
-					<div id="" class="row" > 
-						<div class="col-md-offset-2 col-md-8">
-							<h1 id="timeLabel" class="text-center"></h1>
-						</div>
-						<div class="col-md-offset-2 col-md-8">
-							<h1 id="timeH" class="text-center"></h1>
-						</div>
-					</div>
-
+		 	<div class="row" ><br><</div>
+	 		<div id="infoDiv">
+				<div class="progress">
+	  			<div id="pomProg" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+	    			<span class="sr-only">60% Complete</span>
+	  			</div>
 				</div>
+				<div id="" class="row" > 
+					<div class="col-md-offset-2 col-md-8">
+						<h1 id="timeLabel" class="text-center"></h1>
+					</div>
+					<div class="col-md-offset-2 col-md-8">
+						<h1 id="timeH" class="text-center"></h1>
+					</div>
+				</div>
+			</div>
 	 	</div>
 
 

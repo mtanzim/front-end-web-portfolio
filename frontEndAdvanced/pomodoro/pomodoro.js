@@ -16,18 +16,16 @@ function toggleButtons(state){
 		$("#startBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
 		$("#stopBtn").fadeIn("slow");
-		$("#ctrlDiv").fadeOut("slow");
+		$(".ctrlDiv").fadeOut("slow");
+		//$(".ctrlDiv").hide();
 		$("#infoDiv").fadeIn("fast");
-		/*
-		$("#ctrlDiv").fadeTo("slow",0);
-		$("#infoDiv").fadeTo("fast",1);
-		*/
 	}
 	else if (state==='stopped'){
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeIn("slow");
-		$("#ctrlDiv").fadeOut("slow");
+		$(".ctrlDiv").fadeOut("slow");
+		//$(".ctrlDiv").hide();
 		//$("#ctrlDiv").fadeTo("slow",0);
 	}
 	else if (state==='init'){
@@ -44,8 +42,8 @@ function toggleButtons(state){
 		$("#startBtn").fadeIn("slow");
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
-		//$("#ctrlDiv").fadeTo("slow",1);
-		$("#ctrlDiv").fadeIn("slow");
+		$(".ctrlDiv").fadeIn("slow");
+		//$(".ctrlDiv").show();
 		document.getElementById("pomProg").style.width = '100%';
 
 	}
