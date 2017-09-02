@@ -87,17 +87,24 @@ $(document).ready(function(){
 		}
 	}
 
-	function reset (timeLabelres) {
+	function reset (timeLabelres, isNatural) {
+
+		var delayReset=0;
+
+		if (isNatural){
+			delayReset=500;
+		}
+
 		pomCount(intervalID,'reset');
 		setTimeout(function() {
-			alert(timeLabelres + " Complete!");
+			if (isNatural){alert(timeLabelres + " Complete!");}
 			toggleButtons('reset');
 			$('#titleTime').html('Complete');
 			$("#startBtn").removeClass("disabled");
 			isItWork=true;
 			isDisabled=false;
 			resetTimes();
-		},500)
+		},delayReset)
 
 
 	}
@@ -162,7 +169,7 @@ $(document).ready(function(){
 				},500)
 				
 			} else {
-				reset(timeLabel);
+				reset(timeLabel, true);
 				
 			}
 
@@ -209,7 +216,7 @@ $(document).ready(function(){
 	});
 
 	$("#resetBtn").on("click", function(){
-		reset();
+		reset('',false);
 	});
     
 	//time buttons
