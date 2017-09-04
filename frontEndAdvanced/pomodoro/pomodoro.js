@@ -149,7 +149,9 @@ $(document).ready(function(){
 		} else {
 			progBar=Math.floor((useTime/startBreakTime)*100).toString()+'%';
 		}
-		//console.log(progBar);
+
+
+
 		document.getElementById("pomProg").style.width = progBar;
 
 		if (useTime<0){
@@ -179,7 +181,7 @@ $(document).ready(function(){
 
 
 	//page variables
-	var delayVal=1;
+	var delayVal=1000;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
 	var startWorkTime=workTime;
