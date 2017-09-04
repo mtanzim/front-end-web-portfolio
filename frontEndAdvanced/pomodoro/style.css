@@ -1,5 +1,31 @@
 
 /*
+.progressCir {
+    height: 20px;
+}
+
+.progressCir > svg {
+    height: 55%;
+    display: block;
+}
+*/
+
+/*overwrite progressbar.js API styles*/
+.progressbar-text{
+	font-size:250%;
+
+}
+
+#progressCir {
+  margin: auto;	
+  width: 250px;
+  height: 250px;
+  position: block;
+}
+
+
+
+/*
  a:link {
 	opacity:0.8;
 	text-decoration: none;

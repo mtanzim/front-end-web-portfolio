@@ -58,19 +58,29 @@
 				 	<button type="button" id="resetBtn" class="btn btn-lg btn-default">Reset</button>
 			 	</div>
 		 	</div>
+			
+		 	<div class="row"><br></div>
 		 	<div class="row"><br></div>
 	 		<div id="infoDiv">
-				<div class="progress">
+
+				<div class="" id="progressCir"></div>
+				
+				<!--
+				<div class="progress row">
 	  			<div id="pomProg" class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
 	    			<span class="sr-only">60% Complete</span>
 	  			</div>
 				</div>
-				<div id="" class="row"> 
+				-->
+
+				<div id="" class="row">
+					<!-- 
 					<div class="col-md-offset-2 col-md-8">
 						<h1 id="timeLabel" class="text-center"></h1>
 					</div>
+					-->
 					<div class="col-md-offset-2 col-md-8">
-						<h1 id="timeH" class="text-center"></h1>
+						<h3 id="timeH" class="text-center"></h3>
 					</div>
 				</div>
 			</div>
@@ -79,6 +89,9 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<!--progress bar from http://progressbarjs.readthedocs.io/en/latest/-->
+		<script src="https://rawgit.com/kimmobrunfeldt/progressbar.js/1.0.0/dist/progressbar.js"></script>
 		<script type="text/javascript" src="pomodoro.js"></script>
 		
 	</body>

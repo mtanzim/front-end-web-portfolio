@@ -32,7 +32,7 @@ function toggleButtons(state){
 		$("#infoDiv").hide();
 		$("#stopBtn").hide();
 		$("#resetBtn").hide();
-		document.getElementById("pomProg").style.width = '100%';
+		//document.getElementById("pomProg").style.width = '100%';
 	}
 	else if (state==='reset'){
 		$('#timeLabel').html('');
@@ -44,7 +44,7 @@ function toggleButtons(state){
 		$("#resetBtn").fadeOut("slow");
 		$(".ctrlDiv").fadeIn("slow");
 		//$(".ctrlDiv").show();
-		document.getElementById("pomProg").style.width = '100%';
+		//document.getElementById("pomProg").style.width = '100%';
 
 	}
 }
@@ -52,6 +52,18 @@ function toggleButtons(state){
 
 //main function
 $(document).ready(function(){
+
+	
+	//$("#pomProg").hide();
+	/*
+    var circle = new ProgressBar.Circle('#progressCir', {
+        color: '#FF0000',
+        duration: 3000,
+        easing: 'easeInOut'
+    });
+
+    circle.animate(1);
+	*/
 
 	function resetTimes(){
 		workMin=parseInt($("#workLength").text());
@@ -92,7 +104,7 @@ $(document).ready(function(){
 		var delayReset=0;
 
 		if (isNatural){
-			delayReset=500;
+			delayReset=1500;
 		}
 
 		pomCount(intervalID,'reset');
@@ -138,29 +150,36 @@ $(document).ready(function(){
 		//console.log(timeLabel+':'+useTime);
 
 
-		$('#timeLabel').html(timeLabel);
+		//$('#timeLabel').html(timeLabel);
+		circleProg.setText(timeLabel);
 		$('#timeH').html('');
 		$('#timeH').append(minDisp+' minutes '+secDisp+' seconds');
 		$('#titleTime').html(timeLabel+" ");
 		$('#titleTime').append(minDisp+':'+secDisp);
 
+		//circle.animate(useTime/startWorkTime);
+
 		if (isItWork){
 			progBar=Math.floor((useTime/startWorkTime)*100).toString()+'%';
+			circleProg.set(useTime/startWorkTime);
+			console.log(useTime/startWorkTime);
 		} else {
 			progBar=Math.floor((useTime/startBreakTime)*100).toString()+'%';
+			circleProg.set(useTime/startBreakTime);
+			console.log(useTime/startWorkTime);
 		}
 
 
 
-		document.getElementById("pomProg").style.width = progBar;
+		//document.getElementById("pomProg").style.width = progBar;
+	    
+
 
 		if (useTime<0){
 			new Audio('audio/clock-tick8.mp3').play();
 			$('#timeH').html(timeLabel + ' session complete.');
 			$('#titleTime').html('Complete');
 			//play a sound
-			
-		  	
 			
 			if (isItWork){
 				isItWork=false;
@@ -193,9 +212,21 @@ $(document).ready(function(){
 	var isItWork=true;
 	var progBar='100%';
 
+	//Circle Prog bar from below
+	//http://progressbarjs.readthedocs.io/en/latest/api/shape/
+
+    var circleProg = new ProgressBar.Circle('#progressCir', {
+        color: 'black',
+        strokeWidth: 16.0,
+        duration: workTime,
+        easing: 'easeInOut'
+    });
+
 
 	var isDisabled = document.getElementById("startBtn").disabled;
 	toggleButtons('init');
+
+
 
 
 	$("#startBtn").on("click", function(){
@@ -206,7 +237,9 @@ $(document).ready(function(){
 			$("#startBtn").addClass("disabled");
 			isDisabled=true;
 			intervalID=prevInterval;
+			//circleWorkProg.animate(1);
 			intervalID= setInterval(function() {pomCount(intervalID, false)},delayVal);
+
 		}
 		
     });
