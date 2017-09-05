@@ -43,8 +43,6 @@ function toggleButtons(state){
 		$("#stopBtn").fadeOut("slow");
 		$("#resetBtn").fadeOut("slow");
 		$(".ctrlDiv").fadeIn("slow");
-		//$(".ctrlDiv").show();
-		//document.getElementById("pomProg").style.width = '100%';
 
 	}
 }
@@ -90,8 +88,7 @@ $(document).ready(function(){
 
 	function reset (timeLabelres, isNatural,audPlay) {
 
-		 //delayReset=0;
-		 pomCount(intervalID,'reset');
+		pomCount(intervalID,'reset');
 
 		if (isNatural) {
 			audPlay.play();
@@ -115,11 +112,6 @@ $(document).ready(function(){
 			isDisabled=false;
 			resetTimes();
 		}
-
-
-		//reset delayReset to original values
-		delayReset=delayVal*resetDelFac;
-
 
 	}
 
@@ -149,10 +141,7 @@ $(document).ready(function(){
 		var minDisp=pad(Math.floor(useTime/60),2);
 		var secDisp=pad(useTime%60,2);
 
-		//console.log(timeLabel+':'+useTime);
 
-
-		//$('#timeLabel').html(timeLabel);
 		circleProg.setText(timeLabel);
 		$('#timeH').html('');
 		$('#timeH').append(minDisp+' minutes '+secDisp+' seconds');
@@ -170,12 +159,6 @@ $(document).ready(function(){
 			circleProg.set(useTime/startBreakTime);
 			//console.log(useTime/startBreakTime);
 		}
-
-
-
-		//document.getElementById("pomProg").style.width = progBar;
-	    
-
 
 		if (useTime<0){
 			//new Audio('audio/clock-tick8.mp3').play();
@@ -200,18 +183,12 @@ $(document).ready(function(){
 				reset(timeLabel, true,audPlay);
 			}
 
-			
-
-
-
 		}
 	}
 
 
 	//page variables
 	var delayVal=1;
-	var resetDelFac=2.5;
-	var delayReset=delayVal*resetDelFac;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
 	var startWorkTime=workTime;
@@ -225,7 +202,6 @@ $(document).ready(function(){
 
 	//Circle Prog bar from below
 	//http://progressbarjs.readthedocs.io/en/latest/api/shape/
-
     var circleProg = new ProgressBar.Circle('#progressCir', {
         color: 'black',
         strokeWidth: 16.0,
@@ -235,14 +211,13 @@ $(document).ready(function(){
 
 
 	var isDisabled = document.getElementById("startBtn").disabled;
+
 	toggleButtons('init');
 
+	function startFunc () {
 
-
-
-	$("#startBtn").on("click", function(){
 		toggleButtons('running');
-		console.log(isDisabled)
+		console.log(isDisabled);
 
 		if (isDisabled===false){
 			$("#startBtn").addClass("disabled");
@@ -252,18 +227,23 @@ $(document).ready(function(){
 			intervalID= setInterval(function() {pomCount(intervalID, false)},delayVal);
 
 		}
-		
-    });
-	$("#stopBtn").on("click", function(){
+	}
+
+	function stopFunc() {
 		pomCount(intervalID,'stop');
 		toggleButtons('stopped');
 		$("#startBtn").removeClass("disabled");
 		isDisabled=false;
-	});
-
-	$("#resetBtn").on("click", function(){
+	}
+	function resetFunc(){
 		reset('',false);
-	});
+	}
+
+
+
+	$("#startBtn").on("click", startFunc);
+	$("#stopBtn").on("click", stopFunc);
+	$("#resetBtn").on("click", reset);
     
 	//time buttons
 	if (isDisabled===false){
