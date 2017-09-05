@@ -53,17 +53,6 @@ function toggleButtons(state){
 //main function
 $(document).ready(function(){
 
-	
-	//$("#pomProg").hide();
-	/*
-    var circle = new ProgressBar.Circle('#progressCir', {
-        color: '#FF0000',
-        duration: 3000,
-        easing: 'easeInOut'
-    });
-
-    circle.animate(1);
-	*/
 
 	function resetTimes(){
 		workMin=parseInt($("#workLength").text());
@@ -99,24 +88,37 @@ $(document).ready(function(){
 		}
 	}
 
-	function reset (timeLabelres, isNatural) {
+	function reset (timeLabelres, isNatural,audPlay) {
 
-		var delayReset=0;
+		 //delayReset=0;
+		 pomCount(intervalID,'reset');
 
-		if (isNatural){
-			delayReset=1500;
-		}
+		if (isNatural) {
+			audPlay.play();
+			console.log(audPlay);		
 
-		pomCount(intervalID,'reset');
-		setTimeout(function() {
-			if (isNatural){alert(timeLabelres + " Complete!");}
+			$(audPlay).on("ended", function() { 
+				alert(timeLabelres + " Complete!");
+				toggleButtons('reset');
+				$('#titleTime').html('Complete');
+				$("#startBtn").removeClass("disabled");
+				isItWork=true;
+				isDisabled=false;
+				resetTimes();
+			});
+
+		} else {
 			toggleButtons('reset');
 			$('#titleTime').html('Complete');
 			$("#startBtn").removeClass("disabled");
 			isItWork=true;
 			isDisabled=false;
 			resetTimes();
-		},delayReset)
+		}
+
+
+		//reset delayReset to original values
+		delayReset=delayVal*resetDelFac;
 
 
 	}
@@ -162,11 +164,11 @@ $(document).ready(function(){
 		if (isItWork){
 			progBar=Math.floor((useTime/startWorkTime)*100).toString()+'%';
 			circleProg.set(useTime/startWorkTime);
-			console.log(useTime/startWorkTime);
+			//console.log(useTime/startWorkTime);
 		} else {
 			progBar=Math.floor((useTime/startBreakTime)*100).toString()+'%';
 			circleProg.set(useTime/startBreakTime);
-			console.log(useTime/startWorkTime);
+			//console.log(useTime/startBreakTime);
 		}
 
 
@@ -176,23 +178,30 @@ $(document).ready(function(){
 
 
 		if (useTime<0){
-			new Audio('audio/clock-tick8.mp3').play();
+			//new Audio('audio/clock-tick8.mp3').play();
 			$('#timeH').html(timeLabel + ' session complete.');
 			$('#titleTime').html('Complete');
+			//ensure empty circle
+			circleProg.set(0);
 			//play a sound
+			
+			var audPlay=new Audio('audio/clock-tick8.mp3');
 			
 			if (isItWork){
 				isItWork=false;
 				clearInterval(intervalIDfunc);
-				setTimeout(function() {
+				audPlay.play();
+				console.log(audPlay);
+				$(audPlay).on("ended", function() {
 		  			alert(timeLabel+ " Complete!");
 		  			intervalID=setInterval(function() {pomCount(intervalIDfunc,'default')},delayVal);
-				},500)
-				
+				});
 			} else {
-				reset(timeLabel, true);
-				
+				reset(timeLabel, true,audPlay);
 			}
+
+			
+
 
 
 		}
@@ -200,7 +209,9 @@ $(document).ready(function(){
 
 
 	//page variables
-	var delayVal=1000;
+	var delayVal=1;
+	var resetDelFac=2.5;
+	var delayReset=delayVal*resetDelFac;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
 	var startWorkTime=workTime;
