@@ -1,4 +1,6 @@
-
+//script for pomodor clock
+//Tanzim Mokammel
+//mtanzim@gmail.com
 
 
 //found on stackoverflow
@@ -188,7 +190,7 @@ $(document).ready(function(){
 
 
 	//page variables
-	var delayVal=1;
+	var delayVal=1000;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
 	var startWorkTime=workTime;
@@ -198,15 +200,29 @@ $(document).ready(function(){
 	var intervalID=0;
 	var prevInterval=0;
 	var isItWork=true;
-	var progBar='100%';
+	//var progBar='100%';
 
 	//Circle Prog bar from below
 	//http://progressbarjs.readthedocs.io/en/latest/api/shape/
     var circleProg = new ProgressBar.Circle('#progressCir', {
-        color: 'black',
-        strokeWidth: 16.0,
-        duration: workTime,
-        easing: 'easeInOut'
+        color: 'red',
+        strokeWidth: 1.0,
+        trailColor: '#b7b7b7',
+        trailWidth: 1.0,
+        //duration: workTime,
+        //easing: 'easeInOut'
+    	svgStyle: {
+        	display: 'block',
+        	width: '100%'
+		},
+		text: {
+			className:'progressbar-text',
+			style: {
+				color:'red',		
+			}
+			
+		}
+
     });
 
 

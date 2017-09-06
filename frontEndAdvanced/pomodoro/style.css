@@ -1,50 +1,35 @@
-
-/*
-.progressCir {
-    height: 20px;
-}
-
-.progressCir > svg {
-    height: 55%;
-    display: block;
-}
-*/
-
 /*overwrite progressbar.js API styles*/
 .progressbar-text{
 	font-size:250%;
-
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 0px;
+  margin: 0px;
+  transform: translate(-50%, -50%);
 }
-
+/*progressbar div*/
 #progressCir {
   margin: auto;	
   width: 250px;
   height: 250px;
-  position: block;
 }
 
-
-
-/*
- a:link {
-	opacity:0.8;
-	text-decoration: none;
-	//color: black;
+/*fonts*/		
+h1, .progressbar-text{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	font-size: 50px;
+	line-height: 65px;
 }
 
- a:hover{
-	opacity:1.0;
-	text-decoration: none;
+h3 {
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-size: 25px;
+	line-height: 25px;
 }
-
-
- a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	//color: black;
+/*overite bootstrap btn fonts*/
+p, h4, .btn{
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-size: 16px;
+	line-height: 20px;
 }
-
- a:active {
-		text-decoration: none;
-}
-*/
