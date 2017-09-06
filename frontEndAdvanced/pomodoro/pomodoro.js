@@ -205,10 +205,10 @@ $(document).ready(function(){
 	//Circle Prog bar from below
 	//http://progressbarjs.readthedocs.io/en/latest/api/shape/
     var circleProg = new ProgressBar.Circle('#progressCir', {
-        color: 'red',
+        color: '#b7b7b7',
         strokeWidth: 1.0,
-        trailColor: '#b7b7b7',
-        trailWidth: 1.0,
+        //trailColor: 'red',
+        //trailWidth: 1.0,
         //duration: workTime,
         //easing: 'easeInOut'
     	svgStyle: {
@@ -218,7 +218,7 @@ $(document).ready(function(){
 		text: {
 			className:'progressbar-text',
 			style: {
-				color:'red',		
+				color:'#b7b7b7',		
 			}
 			
 		}
