@@ -15,44 +15,42 @@ function pad (num, size){
 function toggleButtons(state){
 
 	if (state==='running'){
-		$("#startBtn").fadeOut("slow");
-		$("#resetBtn").fadeOut("slow");
-		$("#stopBtn").fadeIn("slow");
-		$(".ctrlDiv").fadeOut("slow");
-		//$(".ctrlDiv").hide();
-		$("#infoDiv").fadeIn("fast");
+		$('#pomJumbo').hide();
+		$("#startBtn").hide();
+		$("#resetBtn").show();
+		$("#resetBtn").addClass('hider');
+		$(".ctrlDiv").hide();
+		$("#infoDiv").fadeIn("slow");
 	}
 	else if (state==='stopped'){
-		$("#startBtn").fadeIn("slow");
-		$("#stopBtn").fadeOut("slow");
-		$("#resetBtn").fadeIn("slow");
+		$("#resetBtn").removeClass('hider');
 		$(".ctrlDiv").fadeOut("slow");
-		//$(".ctrlDiv").hide();
-		//$("#ctrlDiv").fadeTo("slow",0);
 	}
 	else if (state==='init'){
 		$("#infoDiv").hide();
 		$("#stopBtn").hide();
 		$("#resetBtn").hide();
-		//document.getElementById("pomProg").style.width = '100%';
 	}
 	else if (state==='reset'){
 		$('#timeLabel').html('');
 		$('#timeH').html('');
-		//$("#infoDiv").fadeTo("fast",0);
-		$("#infoDiv").fadeOut("fast");
+		$("#infoDiv").hide();
+		$("#resetBtn").hide();
 		$("#startBtn").fadeIn("slow");
-		$("#stopBtn").fadeOut("slow");
-		$("#resetBtn").fadeOut("slow");
+		$('#pomJumbo').fadeIn("slow");
 		$(".ctrlDiv").fadeIn("slow");
 
 	}
+
+	return state;
 }
 
 
 //main function
 $(document).ready(function(){
 
+	//enable bootstrap tooltips
+	$('[data-toggle="tooltip"]').tooltip();
 
 	function resetTimes(){
 		workMin=parseInt($("#workLength").text());
@@ -200,6 +198,7 @@ $(document).ready(function(){
 	var intervalID=0;
 	var prevInterval=0;
 	var isItWork=true;
+	var pomState='';
 	//var progBar='100%';
 
 	//Circle Prog bar from below
@@ -228,11 +227,13 @@ $(document).ready(function(){
 
 	var isDisabled = document.getElementById("startBtn").disabled;
 
-	toggleButtons('init');
+	pomState=toggleButtons('init');
 
 	function startFunc () {
 
-		toggleButtons('running');
+		pomState=toggleButtons('running');
+		toggleTooltip('stop');
+		console.log(pomState);
 		console.log(isDisabled);
 
 		if (isDisabled===false){
@@ -247,12 +248,24 @@ $(document).ready(function(){
 
 	function stopFunc() {
 		pomCount(intervalID,'stop');
-		toggleButtons('stopped');
+		pomState=toggleButtons('stopped');
+		console.log(pomState);
 		$("#startBtn").removeClass("disabled");
 		isDisabled=false;
+		//modify tooltip
+
 	}
 	function resetFunc(){
-		reset('',false);
+		pomState=reset('',false);
+		console.log(pomState);
+	}
+
+	function toggleTooltip (tipState) {
+		$("#progressCir").tooltip('hide')
+      			.attr('data-original-title', 'Click to '+tipState)
+      			.tooltip('fixTitle')
+      			//.tooltip('show');
+
 	}
 
 
@@ -260,6 +273,17 @@ $(document).ready(function(){
 	$("#startBtn").on("click", startFunc);
 	$("#stopBtn").on("click", stopFunc);
 	$("#resetBtn").on("click", reset);
+	$("#progressCir").on("click",function(){
+		if (pomState==='running'){
+			toggleTooltip('start');
+			stopFunc();
+		} else {
+			toggleTooltip('stop');
+			startFunc();
+		}
+	});
+
+	
     
 	//time buttons
 	if (isDisabled===false){

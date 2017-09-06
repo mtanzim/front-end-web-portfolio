@@ -15,6 +15,9 @@
   height: 250px;
 }
 
+.hider{
+   visibility:hidden;
+}
 /*fonts*/		
 h1, .progressbar-text{
 	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
