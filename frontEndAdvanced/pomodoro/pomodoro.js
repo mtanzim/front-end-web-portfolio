@@ -123,6 +123,7 @@ $(document).ready(function(){
 		if (pomState==='reset'){
 			clearInterval(intervalID);
 			clearInterval(prevInterval);
+			circleProg.set(1);
 			//$('#timeH').html(timeLabel + ' session reset.');
 			//progBar='100%';
 			return 0;
