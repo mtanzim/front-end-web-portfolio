@@ -20,7 +20,8 @@ function toggleButtons(state){
 		$("#resetBtn").show();
 		$("#resetBtn").addClass('hider');
 		$(".ctrlDiv").hide();
-		$("#infoDiv").fadeIn("slow");
+		$("#infoDiv").removeClass('hider');
+		$("#infoDiv").fadeIn("fast");
 	}
 	else if (state==='stopped'){
 		$("#resetBtn").removeClass('hider');
@@ -28,7 +29,7 @@ function toggleButtons(state){
 	}
 	else if (state==='init'){
 		$("#infoDiv").hide();
-		$("#stopBtn").hide();
+		//$("#stopBtn").hide();
 		$("#resetBtn").hide();
 	}
 	else if (state==='reset'){
@@ -59,7 +60,7 @@ $(document).ready(function(){
 		breakMin=parseInt($("#breakLength").text());
 		breakTime=breakMin*60;
 		startBreakTime=breakTime;
-		progBar='100%';
+		//progBar='100%';
 	}
 	function setTimes(isBreak, isAdd){
 		if(isBreak) {
@@ -69,8 +70,8 @@ $(document).ready(function(){
 			} else {breakMin--;console.log('less break');}
 			breakTime=breakMin*60;
 			startBreakTime=breakTime;
-			startWorkTime=workTime;
-			$('#breakLength').html(breakMin);
+			//startWorkTime=workTime;
+			$('#breakLength').html(pad(breakMin,2));
 
 		}
 		else {
@@ -80,7 +81,7 @@ $(document).ready(function(){
 			} else {workMin--;console.log('less work');}
 			workTime=workMin*60;
 			startWorkTime=workTime;
-			$('#workLength').html(workMin);
+			$('#workLength').html(pad(workMin,2));
 			$('#timeLabel').html('');
 			$('#timeH').html('');
 		}
@@ -123,24 +124,36 @@ $(document).ready(function(){
 		if (pomState==='reset'){
 			clearInterval(intervalID);
 			clearInterval(prevInterval);
-			circleProg.set(1);
+			timeLabel='Work';
+			circleProg.set(0);
+			circleProg.setText('');
 			//$('#timeH').html(timeLabel + ' session reset.');
 			//progBar='100%';
 			return 0;
 		} else if (pomState==='stop') {
 			prevInterval=intervalIDfunc;
 			clearInterval(intervalIDfunc);
+			workTime=timeLeft;
 			return 0;
     	}
 
+		//var timeLabel='';
+		//var useTime=workTime;
+		//if (isItWork){timeLabel='Work';}
+		//else {timeLabel='Break';}
 		
-		var useTime=workTime;
-		var timeLabel='Work'
-		if (isItWork){workTime --;}
-		else {breakTime--;useTime=breakTime;timeLabel='Break'}
+
+		//update timing functions to use getTime instead of relying on accuracy of setInterval
+		var pomNow = new Date().getTime();
+		//if (isItWork){workTime --;}
+		//else {breakTime--;useTime=breakTime;timeLabel='Break'}
+
+		var useTime=workTime-((pomNow-startTime)/(1000*timeSpeedFactor));
+		//keep track of time left in case it's stopped
+		timeLeft=useTime;
 
 		var minDisp=pad(Math.floor(useTime/60),2);
-		var secDisp=pad(useTime%60,2);
+		var secDisp=pad(parseInt(useTime%60.0),2);
 
 
 		circleProg.setText(timeLabel);
@@ -165,23 +178,31 @@ $(document).ready(function(){
 			//new Audio('audio/clock-tick8.mp3').play();
 			$('#timeH').html(timeLabel + ' session complete.');
 			$('#titleTime').html('Complete');
+
 			//ensure empty circle
-			circleProg.set(0);
+  			circleProg.set(0);
+			circleProg.setText('');
 			//play a sound
-			
 			var audPlay=new Audio('audio/clock-tick8.mp3');
 			
 			if (isItWork){
 				isItWork=false;
 				clearInterval(intervalIDfunc);
+
 				audPlay.play();
 				console.log(audPlay);
 				$(audPlay).on("ended", function() {
-		  			alert(timeLabel+ " Complete!");
+
+					alert(timeLabel+ " Complete!");
+					timeLabel='Break';
+		  			//update times for break session
+		  			startTime=new Date().getTime();
+		  			workTime=breakTime;
 		  			intervalID=setInterval(function() {pomCount(intervalIDfunc,'default')},delayVal);
 				});
 			} else {
 				reset(timeLabel, true,audPlay);
+				timeLabel='Work';
 			}
 
 		}
@@ -190,6 +211,7 @@ $(document).ready(function(){
 
 	//page variables
 	var delayVal=1000;
+	var timeSpeedFactor=1;
 	var workMin=parseInt($("#workLength").text());
 	var workTime=workMin*60;
 	var startWorkTime=workTime;
@@ -200,7 +222,11 @@ $(document).ready(function(){
 	var prevInterval=0;
 	var isItWork=true;
 	var pomState='';
+	var startTime=new Date().getTime();
+	//keeps track of number of seconds left when stopped
+	var timeLeft=startTime;
 	//var progBar='100%';
+	var timeLabel='Work';
 
 	//Circle Prog bar from below
 	//http://progressbarjs.readthedocs.io/en/latest/api/shape/
@@ -232,6 +258,10 @@ $(document).ready(function(){
 
 	function startFunc () {
 
+		//update startTime to indicate start of work
+		startTime=new Date().getTime();
+		console.log(startTime);
+
 		pomState=toggleButtons('running');
 		toggleTooltip('stop');
 		console.log(pomState);
@@ -253,7 +283,6 @@ $(document).ready(function(){
 		console.log(pomState);
 		$("#startBtn").removeClass("disabled");
 		isDisabled=false;
-		//modify tooltip
 
 	}
 	function resetFunc(){
@@ -272,7 +301,6 @@ $(document).ready(function(){
 
 
 	$("#startBtn").on("click", startFunc);
-	$("#stopBtn").on("click", stopFunc);
 	$("#resetBtn").on("click", reset);
 	$("#progressCir").on("click",function(){
 		if (pomState==='running'){
@@ -299,7 +327,7 @@ $(document).ready(function(){
 			} else {
 				alert ("Please select a valid time!");
 			}
-			workTime=workMin*60;
+			//workTime=workMin*60;
 	    });
 
 		//break lengths
