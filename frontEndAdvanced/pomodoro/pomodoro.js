@@ -21,11 +21,11 @@ function toggleButtons(state){
 		$("#resetBtn").addClass('hider');
 		$(".ctrlDiv").hide();
 		$("#infoDiv").removeClass('hider');
-		$("#infoDiv").fadeIn("fast");
+		$("#infoDiv").show();
 	}
 	else if (state==='stopped'){
 		$("#resetBtn").removeClass('hider');
-		$(".ctrlDiv").fadeOut("slow");
+		//$(".ctrlDiv").fadeOut("slow");
 	}
 	else if (state==='init'){
 		$("#infoDiv").hide();
@@ -118,8 +118,6 @@ $(document).ready(function(){
 
 
 	function pomCount(intervalIDfunc, pomState){
-
-		
 
 		if (pomState==='reset'){
 			clearInterval(intervalID);
@@ -263,7 +261,6 @@ $(document).ready(function(){
 		console.log(startTime);
 
 		pomState=toggleButtons('running');
-		toggleTooltip('stop');
 		console.log(pomState);
 		console.log(isDisabled);
 
@@ -272,6 +269,11 @@ $(document).ready(function(){
 			isDisabled=true;
 			intervalID=prevInterval;
 			//circleWorkProg.animate(1);
+			//add filler to avoid delayed response effect from set interval
+			//circleProg.set(1);
+			circleProg.setText('Start!');
+			//$('#timeH').html(workMin+' minutes 00 seconds');
+			toggleTooltip('stop');
 			intervalID= setInterval(function() {pomCount(intervalID, false)},delayVal);
 
 		}
@@ -280,6 +282,7 @@ $(document).ready(function(){
 	function stopFunc() {
 		pomCount(intervalID,'stop');
 		pomState=toggleButtons('stopped');
+		circleProg.setText('Paused');
 		console.log(pomState);
 		$("#startBtn").removeClass("disabled");
 		isDisabled=false;
