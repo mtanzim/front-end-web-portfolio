@@ -1,4 +1,40 @@
 /*overwrite progressbar.js API styles*/
+
+
+body { 
+    background: url("img/geometry/geometry/geometry.png") repeat 0 0;
+}
+
+.jumbotron {
+	background-color: rgba(0,0,0,0.0);
+	border-bottom: 2px outset;
+	border-radius:0%;
+}
+
+.btn{
+	color: #fff;
+	background-color:#FF4242;
+	border-color:#FF4242;
+	border-radius:100%;
+	border: none;
+}
+
+.btn:active, .btn:hover, .btn:visited, .btn:focus {
+    color: #fff;
+    background-color: #FF3F3F;
+    border-color: #FF3F3F;
+    border-radius:100%;
+    outline: 0;
+}
+
+.btn-square {
+	border-radius:0%;
+}
+
+.btn-square:hover,  .btn-square:focus, .btn-square:active {
+	border-radius:0%;
+}
+
 .progressbar-text{
 	font-size:250%;
   position: absolute;

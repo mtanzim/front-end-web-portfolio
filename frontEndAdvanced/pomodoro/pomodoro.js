@@ -220,7 +220,7 @@ $(document).ready(function(){
 	var prevInterval=0;
 	var isItWork=true;
 	var pomState='';
-	var startTime=new Date().getTime();
+	var startTime=new Date().getTime();	
 	//keeps track of number of seconds left when stopped
 	var timeLeft=startTime;
 	//var progBar='100%';
@@ -242,7 +242,7 @@ $(document).ready(function(){
 		text: {
 			className:'progressbar-text',
 			style: {
-				color:'#b7b7b7',		
+				color:'#b7b7b7'		
 			}
 			
 		}
