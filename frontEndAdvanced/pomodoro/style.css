@@ -7,23 +7,25 @@ body {
 
 .jumbotron {
 	background-color: rgba(0,0,0,0.0);
+	/*
 	border-bottom: 2px outset;
 	border-radius:0%;
+	*/
 }
 
-.btn{
+.btn, .btn-group{
 	color: #fff;
 	background-color:#FF4242;
 	border-color:#FF4242;
-	border-radius:100%;
+	border-radius:0%;
 	border: none;
 }
 
-.btn:active, .btn:hover, .btn:visited, .btn:focus {
+.btn:active, .btn-group:active,.btn:hover, .btn:visited, .btn:focus {
     color: #fff;
     background-color: #FF3F3F;
     border-color: #FF3F3F;
-    border-radius:100%;
+    border-radius:0%;
     outline: 0;
 }
 
