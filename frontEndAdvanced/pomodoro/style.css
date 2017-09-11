@@ -2,39 +2,25 @@
 
 
 body { 
-    background: url("img/geometry/geometry/geometry.png") repeat 0 0;
+    background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
 }
 
 .jumbotron {
-	background-color: rgba(0,0,0,0.0);
-	/*
-	border-bottom: 2px outset;
-	border-radius:0%;
-	*/
+	background-color: rgba(0,0,0,0.0) !important;
 }
 
-.btn, .btn-group{
-	color: #fff;
+.btn_pom{
+	color: #fff !important;
 	background-color:#FF4242;
 	border-color:#FF4242;
-	border-radius:0%;
-	border: none;
+	border-radius:0% !important;
 }
 
-.btn:active, .btn-group:active,.btn:hover, .btn:visited, .btn:focus {
-    color: #fff;
+.btn_pom:active, .btn_pom:hover, .btn_pom:visited, .btn_pom:focus {
+    color: #fff !important;
     background-color: #FF3F3F;
     border-color: #FF3F3F;
-    border-radius:0%;
-    outline: 0;
-}
-
-.btn-square {
-	border-radius:0%;
-}
-
-.btn-square:hover,  .btn-square:focus, .btn-square:active {
-	border-radius:0%;
+    border-radius:0% !important;
 }
 
 .progressbar-text{

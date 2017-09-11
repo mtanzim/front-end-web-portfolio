@@ -17,7 +17,8 @@ function toggleButtons(state){
 	if (state==='running'){
 		$('#pomJumbo').hide();
 		$("#startBtn").hide();
-		$("#resetBtn").show();
+		//$("#resetBtn").removeClass('hider');
+		//$("#resetBtn").show();
 		$("#resetBtn").addClass('hider');
 		$(".ctrlDiv").hide();
 		$("#infoDiv").removeClass('hider');
@@ -25,21 +26,24 @@ function toggleButtons(state){
 	}
 	else if (state==='stopped'){
 		$("#resetBtn").removeClass('hider');
+		//$("#resetBtn").show();
 		//$(".ctrlDiv").fadeOut("slow");
 	}
 	else if (state==='init'){
 		$("#infoDiv").hide();
 		//$("#stopBtn").hide();
-		$("#resetBtn").hide();
+		//$("#resetBtn").hide();
 	}
 	else if (state==='reset'){
 		$('#timeLabel').html('');
 		$('#timeH').html('');
 		$("#infoDiv").hide();
-		$("#resetBtn").hide();
+		//$("#resetBtn").hide();
+		$("#resetBtn").addClass('hider');
 		$("#startBtn").fadeIn("slow");
 		$('#pomJumbo').fadeIn("slow");
 		$(".ctrlDiv").fadeIn("slow");
+
 
 	}
 
