@@ -50,12 +50,6 @@ function toggleButtons(state){
 	return state;
 }
 
-$(window).on('resize', function () {
-  //disable collapse once min size reached:
-	$('#mainBody').toggleClass('out', $(window).width() < 275);
-});
-
-
 //main function
 $(document).ready(function(){
 
