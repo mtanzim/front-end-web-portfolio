@@ -23,8 +23,28 @@ body {
     border-radius:0% !important;
 }
 
+/*progressbar div*/
+#progressCir {
+  margin: auto;
+ 
+  width:35%;
+  height: 35%;
+ 
+}
+
+.hider{
+   visibility:hidden;
+}
+/*fonts*/		
+h1{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	font-size: 60px;
+	line-height: 65px;
+}
+
 .progressbar-text{
-	font-size:250%;
+	font-size:7vw;
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -32,31 +52,41 @@ body {
   margin: 0px;
   transform: translate(-50%, -50%);
 }
-/*progressbar div*/
-#progressCir {
-  margin: auto;	
-  width: 250px;
-  height: 250px;
-}
-
-.hider{
-   visibility:hidden;
-}
-/*fonts*/		
-h1, .progressbar-text{
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-	font-size: 50px;
-	line-height: 65px;
-}
 
 h3 {
 	font-family: 'Vollkorn', Georgia, Times, serif;
-	font-size: 25px;
+	font-size: 30px;
 	line-height: 25px;
 }
 /*overite bootstrap btn fonts*/
 p, h4, .btn{
 	font-family: 'Vollkorn', Georgia, Times, serif;
-	font-size: 16px;
-	line-height: 20px;
+	font-size: 25px;
+	line-height: 25px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+	#progressCir {
+	  margin: auto;
+	 
+	  width:70%;
+	  height: 70%;
+	 
+	}
+	p, h4, .btn{
+		font-size: 28px;
+		line-height: 28px;
+	}
+  .progressbar-text{
+    font-size:15vw;
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 0px;
+    margin: 0px;
+    transform: translate(-50%, -50%);
+  }
 }

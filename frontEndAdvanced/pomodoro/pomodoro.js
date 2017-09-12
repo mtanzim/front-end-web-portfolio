@@ -50,9 +50,16 @@ function toggleButtons(state){
 	return state;
 }
 
+$(window).on('resize', function () {
+  //disable collapse once min size reached:
+	$('#mainBody').toggleClass('out', $(window).width() < 275);
+});
+
 
 //main function
 $(document).ready(function(){
+
+
 
 	//enable bootstrap tooltips
 	$('[data-toggle="tooltip"]').tooltip();
@@ -90,34 +97,37 @@ $(document).ready(function(){
 			$('#timeH').html('');
 		}
 	}
+  
+  
+  function resetL2 () {
+    toggleButtons('reset');
+    $('#titleTime').html('Complete');
+    $("#startBtn").removeClass("disabled");
+    isItWork=true;
+    isDisabled=false;
+    resetTimes();
+  }
 
 	function reset (timeLabelres, isNatural,audPlay) {
 
-		pomCount(intervalID,'reset');
+	pomCount(intervalID,'reset');
 
 		if (isNatural) {
 			audPlay.play();
-			console.log(audPlay);		
-
-			$(audPlay).on("ended", function() { 
-				alert(timeLabelres + " Complete!");
-				toggleButtons('reset');
-				$('#titleTime').html('Complete');
-				$("#startBtn").removeClass("disabled");
-				isItWork=true;
-				isDisabled=false;
-				resetTimes();
-			});
-
+			console.log(audPlay);
+	    //this is needed to avoid chrome preventing background audio, and this site progression
+    	if (document.hasFocus()){
+        $(audPlay).on("ended", function() { 
+	  		alert(timeLabelres + " Complete!");
+        resetL2();
+      });
+  		} else {
+	      alert(timeLabelres + " Complete!");
+	      resetL2();
+    	}
 		} else {
-			toggleButtons('reset');
-			$('#titleTime').html('Complete');
-			$("#startBtn").removeClass("disabled");
-			isItWork=true;
-			isDisabled=false;
-			resetTimes();
-		}
-
+      resetL2();
+    }
 	}
 
 
@@ -182,26 +192,31 @@ $(document).ready(function(){
 			$('#titleTime').html('Complete');
 
 			//ensure empty circle
-  			circleProg.set(0);
+  		circleProg.set(0);
 			circleProg.setText('');
 			//play a sound
-			var audPlay=new Audio('audio/clock-tick8.mp3');
+			var audPlay=new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
 			
 			if (isItWork){
 				isItWork=false;
 				clearInterval(intervalIDfunc);
+        
+        //this is needed to avoid chrome preventing background audio, and this site progression
+        audPlay.play();
+        console.log(audPlay);
+        if (document.hasFocus()){
+          $(audPlay).on("ended", function() {
+              alert(timeLabel+ " Complete!");
+          });
+        } else {
+          alert(timeLabel+ " Complete!");
+        }
+        timeLabel='Break';
+        //update times for break session
+        startTime=new Date().getTime();
+        workTime=breakTime;
+        intervalID=setInterval(function() {pomCount(intervalIDfunc,'default')},delayVal);
 
-				audPlay.play();
-				console.log(audPlay);
-				$(audPlay).on("ended", function() {
-
-					alert(timeLabel+ " Complete!");
-					timeLabel='Break';
-		  			//update times for break session
-		  			startTime=new Date().getTime();
-		  			workTime=breakTime;
-		  			intervalID=setInterval(function() {pomCount(intervalIDfunc,'default')},delayVal);
-				});
 			} else {
 				reset(timeLabel, true,audPlay);
 				timeLabel='Work';
