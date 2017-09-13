@@ -1,39 +1,87 @@
 
+body { 
+    background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
+}
+
+.jumbotron {
+	background-color: rgba(0,0,0,0.0) !important;
+}
+
+.btnSelect{
+	color: #fff !important;
+	background-color:#FF4242;
+	border-color:#FF4242;
+	border-radius:0% !important;
+	opacity:0.85;
+
+		/*fonts*/
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-size: 40px;
+	line-height: 50px;
+}
+
+.btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
+	color: #fff !important;
+	background-color: #FF3F3F;
+	border-color: #FF3F3F;
+	border-radius:0% !important;
+	opacity:1.0;
+
+}
+
+
 .ticBtns {
-	width: 75%;
-	margin: 0px 15% 15% 0px;
+	width: 100%;
+	margin: 0px 10% 10% 0px;
+	background-color:rgba(0,0,0,0);
+	border: solid black 1px;
+	color:black;
+
+	/*fonts*/
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-size: 40px;
+	line-height: 50px;
 }
 
 .winBtn {
 	background-color: red;
+	color: #fff !important;
 }
 
 .winBtnAlt {
 	background-color: white;
+	color:black !important;
+}
+
+.hider{
+   visibility:hidden;
 }
 
 
-
-/*
- a:link {
-	opacity:0.8;
-	text-decoration: none;
-	//color: black;
+h1{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	font-size: 60px;
+	line-height: 65px;
 }
 
- a:hover{
-	opacity:1.0;
-	text-decoration: none;
+h3 {
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-size: 30px;
+	line-height: 25px;
+}
+
+p, h4, #statusArea {
+	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-size: 25px;
+	line-height: 45px;
+
 }
 
 
- a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	//color: black;
-}
+@media only screen and (max-width: 768px) {
 
- a:active {
-		text-decoration: none;
+	p, h4, #statusArea{
+		font-size: 28px;
+		line-height: 28px;
+	}
 }
-*/

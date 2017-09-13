@@ -9,7 +9,7 @@ function prepareGameBoard (divName) {
 	var buttonList=[];
 	var bootstrapColWidth="col-md-4 col-sm-4 col-xs-4"
 	var gridOrder=[0,1,2,3,4,5,6,7,8];
-	var btnClass="btn btn-default ticBtns well";
+	var btnClass="btn ticBtns";
 	for (var i in gridOrder){
 		var curButton='btn_'+gridOrder[i];
 		$(divName).append('<div class="'+bootstrapColWidth+'"><button type="button" id="'+curButton+'"class="'+btnClass+'">'+'<br>'+'</button></div>');

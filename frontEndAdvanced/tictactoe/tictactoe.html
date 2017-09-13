@@ -9,6 +9,11 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald" type="text/css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" type="text/css" rel="stylesheet">
+
+		<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 	</head>
@@ -31,8 +36,8 @@
 							<p>Please select the number of players:</p>
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 text-right" ><button id="1player" class="btn btn-primary">1</button></div>
-							<div class="col-md-6 col-sm-6 col-xs-6" id="2player"><button id="player" class="btn btn-primary">2</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6 text-right" ><button id="1player" class="btn btnSelect">1</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6" id="2player"><button id="player" class="btn btnSelect">2</button></div>
 						</div>
 					</div>
 					<div id="CharSelectP1">
@@ -40,15 +45,15 @@
 							<p>Please select the character for Player 1:</p>
 						</div>
 						<div class="row">
-							<div class="col-md-6 col-sm-6 col-xs-6 text-right"><button id="1playerX" class="btn btn-primary">X</button></div>
-							<div class="col-md-6 col-sm-6 col-xs-6"><button id="1playerO" class="btn btn-primary">O</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6 text-right"><button id="1playerX" class="btn btnSelect">X</button></div>
+							<div class="col-md-6 col-sm-6 col-xs-6"><button id="1playerO" class="btn btnSelect">O</button></div>
 						</div>
 				</div>
 			</div>
 			<div class="row"><br></div>
 			<div class="row text-center">
 				<div class="col-md-offset-4 col-md-5  col-sm-offset-4 col-sm-5 col-xs-12">
-					<div id="statusArea"></div>
+					<div class="statArea" id="statusArea"></div>
 				</div>
 			</div>
 			<div class="row"><br></div>
@@ -59,7 +64,7 @@
 			</div>
 			<div id="resetDiv" class="row">
 				<div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-3 col-xs-offset-9 text-center">
-					<button id="resetBtn" class="btn btn-danger">Reset</button>
+					<button id="resetBtn" class="btn btnSelect">Reset</button>
 				</div>
 			</div>
 	 	</div>
