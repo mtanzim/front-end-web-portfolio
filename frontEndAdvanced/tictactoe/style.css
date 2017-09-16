@@ -1,11 +1,25 @@
 
 body { 
+    /*
     background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
+    background: url("img/chalk.jpeg") repeat 0 0;
+    */
 }
 
-.jumbotron {
-	background-color: rgba(0,0,0,0.0) !important;
+
+/*
+#gameArea {
+	background-image: url("img/chalk.jpeg") repeat 0 0;
+	height: 100%;
+	width: 100%;
 }
+*/
+
+/*
+.jumbotron {
+	background-color: rgba(0,0,0,1.0) !important;
+}
+*/
 
 .btnSelect{
 	color: #fff !important;
@@ -30,17 +44,25 @@ body {
 }
 
 
+.noPadding {
+	padding: 0 !important;
+}
+
 .ticBtns {
 	width: 100%;
-	margin: 0px 10% 10% 0px;
+	height: 100%;
+	margin: 0px 0% 0% 0px;
+	padding: 0px 0px 0px 0px;
 	background-color:rgba(0,0,0,0);
 	border: solid black 1px;
+	/*
+	border: solid black 1px;
 	color:black;
-
+	*/
 	/*fonts*/
 	font-family: 'Vollkorn', Georgia, Times, serif;
 	font-size: 40px;
-	line-height: 50px;
+	line-height: 100px;
 }
 
 .winBtn {

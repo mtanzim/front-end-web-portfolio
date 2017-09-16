@@ -7,9 +7,9 @@
 function prepareGameBoard (divName) {
 
 	var buttonList=[];
-	var bootstrapColWidth="col-md-4 col-sm-4 col-xs-4"
+	var bootstrapColWidth="col-md-4 col-sm-4 col-xs-4 noPadding"
 	var gridOrder=[0,1,2,3,4,5,6,7,8];
-	var btnClass="btn ticBtns";
+	var btnClass="ticBtns";
 	for (var i in gridOrder){
 		var curButton='btn_'+gridOrder[i];
 		$(divName).append('<div class="'+bootstrapColWidth+'"><button type="button" id="'+curButton+'"class="'+btnClass+'">'+'<br>'+'</button></div>');
@@ -37,8 +37,10 @@ function alternateColors(btns){
 
 function rewardWin() {
 	var winArr=globalTicTacVars.getWinner();
+	//disable all buttons
 	for (var i in globalTicTacVars.getButtons()){
 		$("#"+globalTicTacVars.getButtons()[i]).prop("disabled",true);
+		console.log('Disabling buttons: '+globalTicTacVars.getButtons()[i]);
 	}
 
 	for (var j in winArr){
@@ -200,6 +202,8 @@ function checkGame () {
 
 	var turnsPlayed = globalTicTacVars.getGameStatus()['O'].length + globalTicTacVars.getGameStatus()['X'].length;
 
+
+
 	//console.log('Last Player: '+globalTicTacVars.getCurChar());
 	console.log('X has: '+globalTicTacVars.getGameStatus()['X']);
 	console.log('O has: '+globalTicTacVars.getGameStatus()['O']);
@@ -248,8 +252,12 @@ function checkGame () {
 	}
 
 	if (globalTicTacVars.getIsWin()){
+		console.log("rewarding winner");
 		rewardWin();
 	} else {
+		console.log('also came here, WHYYYYYY!!!!!');
+		//try enabling gaps at the end of the turn
+		globalTicTacVars.EnableGaps();
 		if (turnsPlayed===9 && globalTicTacVars.getIsWin()===false){
 			$(globalTicTacVars.getStatDiv()).html('Tie!');
 		} else {
@@ -262,8 +270,7 @@ function checkGame () {
 				console.log('AI Engaged');
 				$(globalTicTacVars.getStatDiv()).html('CPU Playing...');
 				setTimeout(function(){
-					engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]);
-					globalTicTacVars.EnableGaps(); 
+					engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
 				},AI_DELAY);
 				//need to enable buttons not played after this phase
 				
