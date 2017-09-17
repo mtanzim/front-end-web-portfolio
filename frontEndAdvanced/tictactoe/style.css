@@ -1,25 +1,35 @@
 
+/*
 body { 
     /*
     background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
     background: url("img/chalk.jpeg") repeat 0 0;
-    */
+    
 }
 
 
-/*
-#gameArea {
-	background-image: url("img/chalk.jpeg") repeat 0 0;
-	height: 100%;
-	width: 100%;
-}
-*/
-
-/*
 .jumbotron {
 	background-color: rgba(0,0,0,1.0) !important;
 }
 */
+
+
+.chalkFont {
+	font-family: 'Architects Daughter', cursive;
+	font-family: 'Indie Flower', cursive;
+	color: white;
+	font-size: 40px;
+	line-height: 100px;
+}
+
+.divBG {
+	/*background: url("https://preview.ibb.co/j5y2tk/chalk.jpg") repeat 0 0;*/
+	background: url("http://i64.tinypic.com/2zno5j4.png") repeat 0 0;
+	/*height: 100%;
+	width: 100%;
+	*/
+}
+
 
 .btnSelect{
 	color: #fff !important;
@@ -54,25 +64,22 @@ body {
 	margin: 0px 0% 0% 0px;
 	padding: 0px 0px 0px 0px;
 	background-color:rgba(0,0,0,0);
-	border: solid black 1px;
+	border: solid white 1px;
 	/*
 	border: solid black 1px;
 	color:black;
 	*/
-	/*fonts*/
+	/*fonts
 	font-family: 'Vollkorn', Georgia, Times, serif;
-	font-size: 40px;
-	line-height: 100px;
+	*/
 }
 
 .winBtn {
-	background-color: red;
-	color: #fff !important;
+	color: white;
 }
 
 .winBtnAlt {
-	background-color: white;
-	color:black !important;
+	color: rgba(1,1,1,0);
 }
 
 .hider{
