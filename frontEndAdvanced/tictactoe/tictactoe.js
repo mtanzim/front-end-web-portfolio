@@ -325,9 +325,19 @@ function checkGame () {
 function startGame(gameDiv) {
 
 	var buttonList=globalTicTacVars.setButtons(gameDiv);
+	
 	console.log(buttonList);
 
+	$('#'+globalTicTacVars.jumboDiv).hide();
+	$(gameDiv).removeClass('hider');
+	$(gameDiv).show();
+	$(resetDiv).removeClass('hider');
+	$(resetDiv).show();
+	$(globalTicTacVars.getStatDiv()).removeClass('hider');
+	$(globalTicTacVars.getStatDiv()).show();
+
 	globalTicTacVars.setCurChar();
+	$(globalTicTacVars.getStatDiv()).removeClass('hider');
 	$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
 
 	for (btnID in buttonList){
@@ -342,9 +352,7 @@ function startGame(gameDiv) {
 			checkGame();
 		});
 	}
-	$(gameDiv).show();
-	$(resetDiv).show();
-	$(globalTicTacVars.getStatDiv()).show();
+
 
 }
 
@@ -361,6 +369,7 @@ var globalTicTacVars = new function(){
 	this.DELAY_VAL=1000;
 	this.intervalID=0;
 	this.statDiv="#statusArea";
+	this.jumboDiv='ticJumbo';
 
 
 	this.resetGlobal = function(){
@@ -393,6 +402,7 @@ var globalTicTacVars = new function(){
 		var playerStat=globalTicTacVars.getGameStatus()[this.getChar()[0]];
 		var gaps=[];
 		var allPos=[0,1,2,3,4,5,6,7,8];
+		
 		for (var m in allPos){
 			if (AIstat.includes(allPos[m])===false && playerStat.includes(allPos[m])==false){
 				//gaps.push(allPos[m]);
@@ -496,9 +506,11 @@ $(document).ready(function(){
 	var resetDiv="#resetDiv";
 	var resetBtn="#resetBtn";
 
+	/*
 	$(P1SelectDiv).hide();
 	$(resetDiv).hide();
 	$(globalTicTacVars.getStatDiv()).hide();
+	*/
 
 	//disable 1 player game for now
 	//$(p1Button).prop("disabled",true);
@@ -509,6 +521,7 @@ $(document).ready(function(){
 		//alert("1 Player Selected");
 		globalTicTacVars.setPlayers(1);
 		console.log(globalTicTacVars.getPlayers());
+		$(P1SelectDiv).removeClass('hider');
 		$(P1SelectDiv).show();
 		$(pSelectDiv).hide();
 	});
@@ -516,6 +529,7 @@ $(document).ready(function(){
 		//alert("2 Players Selected");
 		globalTicTacVars.setPlayers(2);
 		console.log(globalTicTacVars.getPlayers());
+		$(P1SelectDiv).removeClass('hider');
 		$(P1SelectDiv).show();
 		$(pSelectDiv).hide();
 	});
@@ -543,6 +557,8 @@ $(document).ready(function(){
 		$(resetDiv).hide();
 		$(gameDiv).html('');
 		$(globalTicTacVars.getStatDiv()).html('');
-		$(pSelectDiv).show();
+		//$('#'+globalTicTacVars.jumboDiv).removeClass("hider");
+		$('#'+globalTicTacVars.jumboDiv).fadeIn("slow");
+		$(pSelectDiv).fadeIn("slow");
 	});	
 });
