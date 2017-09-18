@@ -1,21 +1,18 @@
 
-/*
+
 body { 
-    /*
-    background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
-    background: url("img/chalk.jpeg") repeat 0 0;
+    background: url("http://i65.tinypic.com/33cx6af.jpg") repeat 0 0;
     
 }
 
 
 .jumbotron {
-	background-color: rgba(0,0,0,1.0) !important;
+	background-color: rgba(0,0,0,0.0) !important;
+	border-bottom: white solid 3px;
 }
-*/
 
 
 .chalkFont {
-	font-family: 'Architects Daughter', cursive;
 	font-family: 'Indie Flower', cursive;
 	color: white;
 	font-size: 40px;
@@ -23,40 +20,35 @@ body {
 }
 
 .divBG {
-	/*background: url("https://preview.ibb.co/j5y2tk/chalk.jpg") repeat 0 0;*/
-	background: url("http://i64.tinypic.com/2zno5j4.png") repeat 0 0;
-	/*height: 100%;
-	width: 100%;
-	*/
+	background-color: rgba(0,0,0,0.0) !important;
 }
 
+.noPadding {
+	padding: 0 !important;
+}
 
 .btnSelect{
 	color: #fff !important;
-	background-color:#FF4242;
-	border-color:#FF4242;
-	border-radius:0% !important;
-	opacity:0.85;
+	background-color: rgba(0,0,0,0);
 
-		/*fonts*/
-	font-family: 'Vollkorn', Georgia, Times, serif;
+	border-radius:0% !important;
+	border: solid white 3px;
+	
+	/*fonts*/
 	font-size: 40px;
 	line-height: 50px;
 }
 
 .btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
 	color: #fff !important;
-	background-color: #FF3F3F;
-	border-color: #FF3F3F;
+	background-color: rgba(0,0,0,0);
+	border: solid white 3px !important;
 	border-radius:0% !important;
-	opacity:1.0;
-
+	outline: none !important;
+	
 }
 
 
-.noPadding {
-	padding: 0 !important;
-}
 
 .ticBtns {
 	width: 100%;
@@ -64,14 +56,12 @@ body {
 	margin: 0px 0% 0% 0px;
 	padding: 0px 0px 0px 0px;
 	background-color:rgba(0,0,0,0);
-	border: solid white 1px;
-	/*
-	border: solid black 1px;
-	color:black;
-	*/
-	/*fonts
-	font-family: 'Vollkorn', Georgia, Times, serif;
-	*/
+	border: solid white 3px;
+
+}
+
+.ticBtns:active, .ticBtns:hover, .ticBtns:visited, .ticBtns:focus {
+	outline: 0;
 }
 
 .winBtn {
@@ -87,24 +77,30 @@ body {
 }
 
 
+h1, h3, p, h4, #statusArea, .btnSelect {
+	font-family: 'Indie Flower', cursive;
+	color: white !important;
+}
+
 h1{
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	/*font-family: 'Ubuntu', Helvetica, Arial, sans-serif;*/
 	font-size: 60px;
 	line-height: 65px;
 }
 
 h3 {
-	font-family: 'Vollkorn', Georgia, Times, serif;
+	/*font-family: 'Vollkorn', Georgia, Times, serif;*/
 	font-size: 30px;
 	line-height: 25px;
 }
 
 p, h4, #statusArea {
-	font-family: 'Vollkorn', Georgia, Times, serif;
+	/*font-family: 'Vollkorn', Georgia, Times, serif;*/
 	font-size: 25px;
 	line-height: 45px;
 
 }
+
 
 
 @media only screen and (max-width: 768px) {

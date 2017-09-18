@@ -3,6 +3,41 @@
 //mtanzim@gmail.com
 
 
+//fix borders
+
+function fixBorders (buttonList) {
+	$('#'+buttonList[0]).css('border','none');
+
+	$('#'+buttonList[1]).css('border-top','none');
+	$('#'+buttonList[1]).css('border-bottom','none');
+
+	$('#'+buttonList[2]).css('border-top','none');
+	$('#'+buttonList[2]).css('border-left','none')
+	$('#'+buttonList[2]).css('border-right','none');
+	$('#'+buttonList[2]).css('border-bottom','none');
+
+	$('#'+buttonList[3]).css('border-left','none');
+	$('#'+buttonList[3]).css('border-right','none');
+
+
+	$('#'+buttonList[5]).css('border-left','none')
+	$('#'+buttonList[5]).css('border-right','none');
+
+	$('#'+buttonList[6]).css('border-top','none');
+	$('#'+buttonList[6]).css('border-left','none')
+	$('#'+buttonList[6]).css('border-right','none');
+	$('#'+buttonList[6]).css('border-bottom','none');
+
+	$('#'+buttonList[8]).css('border-top','none');
+	$('#'+buttonList[8]).css('border-left','none')
+	$('#'+buttonList[8]).css('border-right','none');
+	$('#'+buttonList[8]).css('border-bottom','none');
+
+	$('#'+buttonList[7]).css('border-top','none');
+	$('#'+buttonList[7]).css('border-bottom','none');
+
+}
+
 //creates a grid of buttons
 function prepareGameBoard (divName) {
 
@@ -15,6 +50,9 @@ function prepareGameBoard (divName) {
 		$(divName).append('<div class="'+divClass+'"><button type="button" id="'+curButton+'"class="'+btnClass+'">'+'<br>'+'</button></div>');
 		buttonList.push(curButton);
 	}
+
+	fixBorders(buttonList);
+
 	return buttonList;
 }
 
