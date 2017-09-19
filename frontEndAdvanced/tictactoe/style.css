@@ -1,7 +1,7 @@
 
 
 body { 
-    background: url("http://i65.tinypic.com/33cx6af.jpg") repeat 0 0;
+    background: url("http://i67.tinypic.com/wb48x4.jpg") repeat 0 0;
     
 }
 
@@ -30,21 +30,23 @@ body {
 .btnSelect{
 	color: #fff !important;
 	background-color: rgba(0,0,0,0);
-
-	border-radius:0% !important;
-	border: solid white 3px;
 	
+  border: solid white 3px !important;
+  border-radius:0% !important;
+  
 	/*fonts*/
-	font-size: 40px;
-	line-height: 50px;
+	font-size: 40px !important;
+	line-height: 40px !important;
 }
 
 .btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
-	color: #fff !important;
-	background-color: rgba(0,0,0,0);
+
 	border: solid white 3px !important;
 	border-radius:0% !important;
 	outline: none !important;
+  /*fonts*/
+	font-size: 40px !important;
+	line-height: 40px !important;
 	
 }
 
@@ -78,14 +80,14 @@ body {
 
 
 h1, h3, p, h4, #statusArea, .btnSelect {
-	font-family: 'Indie Flower', cursive;
+	font-family: 'Indie Flower', cursive !important;
 	color: white !important;
 }
 
 h1{
 	/*font-family: 'Ubuntu', Helvetica, Arial, sans-serif;*/
-	font-size: 60px;
-	line-height: 65px;
+	font-size: 60px !important;
+	line-height: 65px !important;
 }
 
 h3 {
@@ -96,7 +98,7 @@ h3 {
 
 p, h4, #statusArea {
 	/*font-family: 'Vollkorn', Georgia, Times, serif;*/
-	font-size: 25px;
+	font-size: 25px !important;
 	line-height: 45px;
 
 }
@@ -104,7 +106,7 @@ p, h4, #statusArea {
 
 
 @media only screen and (max-width: 768px) {
-
+  
 	p, h4, #statusArea{
 		font-size: 28px;
 		line-height: 28px;
