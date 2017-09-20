@@ -1,24 +1,44 @@
-
-/*
- a:link {
-	opacity:0.8;
-	text-decoration: none;
-	//color: black;
+.noPadding {
+	padding: 0 !important;
 }
 
- a:hover{
-	opacity:1.0;
-	text-decoration: none;
+.calcBtns {
+	width: 100%;
+	height: 100%;
+	margin: 0px 0% 0% 0px;
+	padding: 0px 0px 0px 0px;
+	background-color:rgba(0,0,0,0);
+	border: solid white 3px;
+
+	/*fonts*/	
+	font-size: 50px !important;
+	line-height: 50px !important;
+}
+
+.calcBtns:active, .calcBtns:hover, .calcBtns:visited, .calcBtns:focus {
+
+	border: solid white 3px !important;
+	border-radius:0% !important;
+	outline: none !important;
+  /*fonts*/
+	font-size: 50px !important;
+	line-height: 50px !important;
+	
 }
 
 
- a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	//color: black;
-}
+@media only screen and (max-width: 768px) {
+  
+	.calcBtns {
+		/*fonts*/	
+		font-size: 30px !important;
+		line-height: 30px !important;
+	}
 
- a:active {
-		text-decoration: none;
+	.calcBtns:active, .calcBtns:hover, .calcBtns:visited, .calcBtns:focus {
+	  /*fonts*/
+		font-size: 30px !important;
+		line-height: 30px !important;
+		
+	}
 }
-*/

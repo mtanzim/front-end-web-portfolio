@@ -13,16 +13,17 @@ function pad (num, size){
 
 function prepareButtons () {
 	var calcOrder=['AC','CE','/', '*',7,8,9,'-',4,5,6,'+',1,2,3,'.',0,'=' ];
-	var bootstrapColWidth="col-md-3"
+	var bootstrapColWidth="noPadding col-md-3 col-sm-3 col-xs-3"
+	var calcButtonClasses="noPadding calcBtns"
 	var buttonList=[];
 	for (var i in calcOrder){
 		var curButton='btn_'+calcOrder[i];
 		if (calcOrder[i]==='='){
-			bootstrapColWidth="col-md-9"
-		} else {bootstrapColWidth="col-md-3";}
-		$('#calcButtons').append('<div class="'+bootstrapColWidth+'"" text-center"><button type="button" id="'+curButton+'"class="calcBtns btn btn-primary btn-lg ">'+calcOrder[i]+'</button></div>');
+			bootstrapColWidth="col-md-9 col-sm-9 col-xs-9 noPadding"
+		} else {bootstrapColWidth="col-md-3 col-sm-3 col-xs-3 noPadding";}
+		$('#calcButtons').append('<div class="'+bootstrapColWidth+'"" text-center"><button type="button" id="'+curButton+'"class="'+calcButtonClasses+'">'+calcOrder[i]+'</button></div>');
 		if (['*', '-', '+','.'].includes(calcOrder[i])){
-			$('#calcButtons').append('<div class="col-md-12"><br></div>')
+			//$('#calcButtons').append('<div class="col-md-12"><br></div>')
 		}
 		buttonList.push(curButton);
 	}
