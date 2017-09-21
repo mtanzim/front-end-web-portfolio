@@ -14,7 +14,7 @@ function pad (num, size){
 function prepareButtons () {
 	var calcOrder=['AC','CE','/', '*',7,8,9,'-',4,5,6,'+',1,2,3,'.',0,'=' ];
 	var bootstrapColWidth="noPadding col-md-3 col-sm-3 col-xs-3"
-	var calcButtonClasses="noPadding calcBtns"
+	var calcButtonClasses="calcBtns"
 	var buttonList=[];
 	for (var i in calcOrder){
 		var curButton='btn_'+calcOrder[i];

@@ -15,8 +15,8 @@ body {
 .chalkFont {
 	font-family: 'Indie Flower', cursive;
 	color: white;
-	font-size: 40px;
-	line-height: 100px;
+	font-size: 100px;
+	line-height: 160px;
 }
 
 .divBG {
@@ -36,7 +36,7 @@ body {
   
 	/*fonts*/
 	font-size: 40px !important;
-	line-height: 40px !important;
+	line-height: 60px !important;
 }
 
 .btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
@@ -46,7 +46,7 @@ body {
 	outline: none !important;
   /*fonts*/
 	font-size: 40px !important;
-	line-height: 40px !important;
+	line-height: 60px !important;
 	
 }
 

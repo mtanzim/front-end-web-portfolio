@@ -87,6 +87,7 @@ function rewardWin() {
 
 
 	globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
+
 }
 
 
