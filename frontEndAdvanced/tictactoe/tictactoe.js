@@ -73,21 +73,55 @@ function alternateColors(btns){
 }
 
 
+function liveReset () {
+	//reset the game after 3 seconds
+	var gameDiv="#gameArea";
+	var resetBtn="#resetBtn";
+	globalTicTacVars.toggleCurChar();
+	$(gameDiv).html('');
+	if (globalTicTacVars.getPlayers()===2) {
+		$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+	} else if (globalTicTacVars.getPlayers()===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[0]) {
+		$(globalTicTacVars.getStatDiv()).html('Your Turn');
+	}
+	globalTicTacVars.restartGlobal();
+	startGame(gameDiv, true);
+	$(gameDiv).fadeIn("slow");
+	$(resetBtn).show();
+
+}
+
 function rewardWin() {
-	var winArr=globalTicTacVars.getWinner();
+
+	var gameDiv="#gameArea";
+	var resetBtn="#resetBtn";
+	$(resetBtn).hide()
+	
 	//disable all buttons
 	for (var i in globalTicTacVars.getButtons()){
 		$("#"+globalTicTacVars.getButtons()[i]).prop("disabled",true);
 		console.log('Disabling buttons: '+globalTicTacVars.getButtons()[i]);
 	}
 
-	for (var j in winArr){
-		$("#btn_"+winArr[j]).addClass('winBtn');
+	if (globalTicTacVars.getIsWin()) {
+			var winArr=globalTicTacVars.getWinner();
+			for (var j in winArr){
+				$("#btn_"+winArr[j]).addClass('winBtn');
+			}
+			globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
+	} else {
+		$(globalTicTacVars.getStatDiv()).html('Tie!');
 	}
 
-
-	globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
-
+	setTimeout(function () {
+		$(globalTicTacVars.getStatDiv()).html('Restarting Now...');
+		
+		$(gameDiv).fadeOut("slow");
+		
+		setTimeout(liveReset,globalTicTacVars.RST_DELAY_VAL/2);
+	},globalTicTacVars.RST_DELAY_VAL);
+	
+	
 }
 
 
@@ -280,7 +314,27 @@ function checkGame () {
 						if (matchCount===3){
 							console.log(globalTicTacVars.getCurChar()+' won with: '+ winCases[i]);
 							globalTicTacVars.setWinner(winCases[i]);
-							$(globalTicTacVars.getStatDiv()).html(globalTicTacVars.getCurChar()+' Won!');
+
+							//assumes P1 is always human
+
+							console.log ("p1 is :"+ globalTicTacVars.getChar()[0]);
+							console.log ("p2 is :"+ globalTicTacVars.getChar()[1]);
+							console.log ("current player is :"+ globalTicTacVars.getCurChar());
+
+							var winningPlayer='';
+							if (globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[0] && globalTicTacVars.getPlayers()===1 ){
+								winningPlayer="You";
+							} else if (globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1] && globalTicTacVars.getPlayers()===1) {
+								winningPlayer="CPU";
+							} else {
+								winningPlayer=globalTicTacVars.getCurChar();
+							}
+
+							console.log ("p1 is :"+ globalTicTacVars.getChar()[0]);
+							console.log ("p2 is :"+ globalTicTacVars.getChar()[1]);
+							console.log ("winningPlayer is :"+ winningPlayer);
+
+							$(globalTicTacVars.getStatDiv()).html(winningPlayer+' Won!');
 							break;
 						}
 					}
@@ -293,15 +347,22 @@ function checkGame () {
 	if (globalTicTacVars.getIsWin()){
 		console.log("rewarding winner");
 		rewardWin();
+
 	} else {
-		console.log('also came here, WHYYYYYY!!!!!');
+		//console.log('also came here, WHYYYYYY!!!!!');
 		//try enabling gaps at the end of the turn
 		globalTicTacVars.EnableGaps();
 		if (turnsPlayed===9 && globalTicTacVars.getIsWin()===false){
-			$(globalTicTacVars.getStatDiv()).html('Tie!');
+			console.log("rewarding tie")
+			rewardWin();
 		} else {
 			globalTicTacVars.toggleCurChar();
-			$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+			if (globalTicTacVars.getPlayers()===2) {
+				$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+			} else if (globalTicTacVars 	.getPlayers()===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[0]) {
+				$(globalTicTacVars.getStatDiv()).html('Your Turn');
+			}
+			
 			//assume P1 is always human
 			if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
 				//need to disable all buttons during this phase
@@ -323,7 +384,7 @@ function checkGame () {
 
 
 
-function startGame(gameDiv) {
+function startGame(gameDiv, isReset) {
 
 	var buttonList=globalTicTacVars.setButtons(gameDiv);
 	
@@ -337,9 +398,17 @@ function startGame(gameDiv) {
 	$(globalTicTacVars.getStatDiv()).removeClass('hider');
 	$(globalTicTacVars.getStatDiv()).show();
 
-	globalTicTacVars.setCurChar();
+	if (isReset===false) {
+		globalTicTacVars.setCurChar();
+	}
+	
 	$(globalTicTacVars.getStatDiv()).removeClass('hider');
-	$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+
+	if (globalTicTacVars.getPlayers()===2) {
+		$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
+	} else if (globalTicTacVars.getPlayers()===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[0]) {
+		$(globalTicTacVars.getStatDiv()).html('Your Turn');
+	}
 
 	for (btnID in buttonList){
 		console.log(buttonList[btnID]);
@@ -368,6 +437,7 @@ var globalTicTacVars = new function(){
 	this.curChar='';
 	this.winningArr=[];
 	this.DELAY_VAL=1000;
+	this.RST_DELAY_VAL=3000;
 	this.intervalID=0;
 	this.statDiv="#statusArea";
 	this.jumboDiv='ticJumbo';
@@ -386,6 +456,15 @@ var globalTicTacVars = new function(){
 
 		clearInterval(this.intervalID);
 		console.log('stopping intervalID');
+
+	}
+
+	this.restartGlobal = function(){
+		this.gameStatus ={'X':[],'O':[]};
+		this.winningArr=[];
+		this.isWon=false;
+		clearInterval(this.intervalID);
+		console.log('stopping intervalID, restarting game');
 
 	}
 
@@ -442,7 +521,7 @@ var globalTicTacVars = new function(){
 	}
 
 	this.toggleCurChar = function () {
-		//console.log ("Toggling from: "+this.curChar)
+		console.log ("Toggling from: "+this.curChar)
 		if (this.curChar===this.P1Char){
 			this.curChar=this.P2Char;
 		} else {
@@ -541,7 +620,7 @@ $(document).ready(function(){
 		globalTicTacVars.setChar('X');
 		console.log(globalTicTacVars.getChar());
 		$(P1SelectDiv).hide();
-		startGame(gameDiv);
+		startGame(gameDiv, false);
 	});
 
 	$(p1O).on("click", function(){
@@ -549,7 +628,7 @@ $(document).ready(function(){
 		globalTicTacVars.setChar('O');
 		console.log(globalTicTacVars.getChar());
 		$(P1SelectDiv).hide();
-		startGame(gameDiv);
+		startGame(gameDiv, false);
 	});
 
 	$(resetBtn).on("click", function(){
