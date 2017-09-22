@@ -57,15 +57,27 @@ function prepareGameBoard (divName) {
 }
 
 function alternateColors(btns){
-	console.log('aternating colors for: '+btns);
-	for (var i in btns){
-		console.log(btns[i]);
-		if($("#btn_"+btns[i]).hasClass('winBtn')){
-			$("#btn_"+btns[i]).removeClass('winBtn');
-			$("#btn_"+btns[i]).addClass('winBtnAlt');
+
+	if(globalTicTacVars.getIsWin()){
+		console.log('aternating colors for: '+btns);
+		for (var i in btns){
+			console.log(btns[i]);
+			if($("#btn_"+btns[i]).hasClass('winBtn')){
+				$("#btn_"+btns[i]).removeClass('winBtn');
+				$("#btn_"+btns[i]).addClass('winBtnAlt');
+			} else {
+				$("#btn_"+btns[i]).addClass('winBtn');
+				$("#btn_"+btns[i]).removeClass('winBtnAlt');
+			}
+		}
+	} else {
+		console.log(globalTicTacVars.getStatDiv());
+		if($(globalTicTacVars.getStatDiv()).hasClass('winBtn')){
+			$(globalTicTacVars.getStatDiv()).addClass('winBtnAlt');
+			$(globalTicTacVars.getStatDiv()).removeClass('winBtn');
 		} else {
-			$("#btn_"+btns[i]).addClass('winBtn');
-			$("#btn_"+btns[i]).removeClass('winBtnAlt');
+			$(globalTicTacVars.getStatDiv()).addClass('winBtn');
+			$(globalTicTacVars.getStatDiv()).removeClass('winBtnAlt');
 		}
 	}
 	//$(winBtn).addClass('winBtn');
@@ -112,7 +124,7 @@ function rewardWin() {
 			}
 			globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
 	} else {
-		globalTicTacVars.setIntervalID(setInterval(function() {alternateColors([0,1,2,3,4,5,6,7,8]);},globalTicTacVars.DELAY_VAL));
+		globalTicTacVars.setIntervalID(setInterval(function() {alternateColors();},globalTicTacVars.DELAY_VAL));
 		$(globalTicTacVars.getStatDiv()).html('Tie!');
 	}
 
@@ -126,6 +138,8 @@ function rewardWin() {
 }
 
 
+
+//EASY CPU ALGORITHM
 //AI code
 //assumes P1 is always human
 //has redundant code, consider refactoring
@@ -142,6 +156,8 @@ function engageAI(AIchar,playerChar) {
 
 	var AIcompleted=false;
 	var playerBlocked=false;
+
+
 
 	//check if AI can complete
 	if (AIstat.length>1){
@@ -326,7 +342,8 @@ function checkGame () {
 							if (globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[0] && globalTicTacVars.getPlayers()===1 ){
 								winningPlayer="You";
 							} else if (globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1] && globalTicTacVars.getPlayers()===1) {
-								winningPlayer="CPU";
+								if(globalTicTacVars.getDif()){winningPlayer="UberCPU";}
+								else{winningPlayer="CPU";}
 							} else {
 								winningPlayer=globalTicTacVars.getCurChar();
 							}
@@ -368,11 +385,24 @@ function checkGame () {
 			if (globalTicTacVars.numPlayers===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[1]){
 				//need to disable all buttons during this phase
 				globalTicTacVars.disableAll();
-				console.log('AI Engaged');
-				$(globalTicTacVars.getStatDiv()).html('CPU Playing...');
-				setTimeout(function(){
-					engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
-				},AI_DELAY);
+				console.log('AI Engaging');
+				//hard game
+				if(globalTicTacVars.getDif()){
+					$(globalTicTacVars.getStatDiv()).html('UberCPU Playing...');
+					//minmax algorthm not implemented yet, just make the CPU faster for now :D
+					setTimeout(function(){
+						engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
+					},AI_DELAY/4);
+				}
+				//easy game
+				else{
+					$(globalTicTacVars.getStatDiv()).html('CPU Playing...');
+					setTimeout(function(){
+						engageAI(globalTicTacVars.getCurChar(),globalTicTacVars.getChar()[0]); 
+					},AI_DELAY);
+				}
+				
+
 				//need to enable buttons not played after this phase
 				
 			}
@@ -442,6 +472,7 @@ var globalTicTacVars = new function(){
 	this.intervalID=0;
 	this.statDiv="#statusArea";
 	this.jumboDiv='ticJumbo';
+	this.isHard=false;
 
 
 	this.resetGlobal = function(){
@@ -454,6 +485,7 @@ var globalTicTacVars = new function(){
 		this.curChar='';
 		this.winningArr=[];
 		this.isWon=false;
+		this.isHard=false;
 
 		clearInterval(this.intervalID);
 		console.log('stopping intervalID');
@@ -467,6 +499,14 @@ var globalTicTacVars = new function(){
 		clearInterval(this.intervalID);
 		console.log('stopping intervalID, restarting game');
 
+	}
+
+	this.setDif = function (isItHard) {
+		this.isHard=isItHard;
+		console.log('Is hard is: '+this.isHard);
+	}
+	this.getDif = function (isItHard) {
+		return this.isHard;
 	}
 
 	this.disableAll = function () {
@@ -582,19 +622,13 @@ $(document).ready(function(){
 	var p1O="#1playerO";
 
 	var p2Button="#2player";
-	//var p2X="#2playerX";
-	//var p2O="#2playerO";
+
 	var resetDiv="#resetDiv";
 	var resetBtn="#resetBtn";
+	var difDiv="#difDiv";
+	var easyBtn="#easyBtn";
+	var hardBtn="#hardBtn";
 
-	/*
-	$(P1SelectDiv).hide();
-	$(resetDiv).hide();
-	$(globalTicTacVars.getStatDiv()).hide();
-	*/
-
-	//disable 1 player game for now
-	//$(p1Button).prop("disabled",true);
 
 
 	//game type selection
@@ -603,8 +637,19 @@ $(document).ready(function(){
 		globalTicTacVars.setPlayers(1);
 		console.log(globalTicTacVars.getPlayers());
 		$(P1SelectDiv).removeClass('hider');
+		$(difDiv).removeClass('hider');
+		$(difDiv).show();
 		$(P1SelectDiv).show();
 		$(pSelectDiv).hide();
+
+		if (globalTicTacVars.getDif()) {
+			$(hardBtn).addClass('active');
+			$(easyBtn).removeClass('active');
+		} else {
+			$(easyBtn).addClass('active');
+			$(hardBtn).removeClass('active');
+		}
+
 	});
 	$(p2Button).on("click", function(){
 		//alert("2 Players Selected");
@@ -613,6 +658,19 @@ $(document).ready(function(){
 		$(P1SelectDiv).removeClass('hider');
 		$(P1SelectDiv).show();
 		$(pSelectDiv).hide();
+		$(difDiv).addClass('hider');
+		$(difDiv).hide();
+	});
+
+	$(easyBtn).on("click", function(){
+		globalTicTacVars.setDif(false);
+		$(easyBtn).addClass('active');
+		$(hardBtn).removeClass('active');
+	});
+	$(hardBtn).on("click", function(){
+		globalTicTacVars.setDif(true);
+		$(hardBtn).addClass('active');
+		$(easyBtn).removeClass('active');
 	});
 
 	//P1 char selection

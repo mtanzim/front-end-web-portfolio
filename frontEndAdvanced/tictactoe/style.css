@@ -5,12 +5,10 @@ body {
     
 }
 
-
 .jumbotron {
 	background-color: rgba(0,0,0,0.0) !important;
 	border-bottom: white solid 3px;
 }
-
 
 .chalkFont {
 	font-family: 'Indie Flower', cursive;
@@ -30,26 +28,53 @@ body {
 .btnSelect{
 	color: #fff !important;
 	background-color: rgba(0,0,0,0);
+
 	
   border: solid white 3px !important;
   border-radius:0% !important;
   
 	/*fonts*/
 	font-size: 40px !important;
-	line-height: 60px !important;
+	line-height: 40px !important;
 }
 
 .btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
 
+	background-color: rgba(255,255,255,0.3) !important;
 	border: solid white 3px !important;
 	border-radius:0% !important;
 	outline: none !important;
   /*fonts*/
 	font-size: 40px !important;
-	line-height: 60px !important;
+	line-height: 40px !important;
 	
 }
 
+.difSelect{
+	color: #fff !important;
+	background-color: rgba(0,0,0,0);
+  border: solid white 3px;
+	border-radius:0% !important;
+	outline: none !important;
+	/*fonts*/
+	font-size: 40px !important;
+	line-height: 40px !important;
+}
+
+.difSelect:active, .difSelect:hover, .difSelect:visited, .difSelect:focus {
+	background-color: rgba(255,255,255,0.3);
+	border: solid white 3px;
+	border-radius:0% !important;
+	outline: none !important;
+  /*fonts*/
+	font-size: 40px !important;
+	line-height: 40px !important;
+	
+}
+
+.active {
+	background-color: rgba(255,255,255,0.3) !important;
+}
 
 
 .ticBtns {
@@ -65,13 +90,12 @@ body {
 .ticBtns:active, .ticBtns:hover, .ticBtns:visited, .ticBtns:focus {
 	outline: 0;
 }
-
 .winBtn {
-	color: white;
+	color: white !important;
 }
 
 .winBtnAlt {
-	color: rgba(1,1,1,0);
+	color: rgba(1,1,1,0) !important;
 }
 
 .hider{
@@ -79,7 +103,7 @@ body {
 }
 
 
-h1, h3, p, h4, #statusArea, .btnSelect {
+h1, h3, p, h4, #statusArea, .btnSelect, .difSelect {
 	font-family: 'Indie Flower', cursive !important;
 	color: white !important;
 }
@@ -103,12 +127,17 @@ p, h4, #statusArea {
 
 }
 
-
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 425px) {
   
 	p, h4, #statusArea{
 		font-size: 28px;
 		line-height: 28px;
 	}
+	.chalkFont {
+		font-family: 'Indie Flower', cursive;
+		color: white;
+		font-size: 100px;
+		line-height: 120px;
+	}
+
 }
