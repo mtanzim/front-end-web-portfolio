@@ -77,14 +77,16 @@ function liveReset () {
 	//reset the game after 3 seconds
 	var gameDiv="#gameArea";
 	var resetBtn="#resetBtn";
-	globalTicTacVars.toggleCurChar();
+	globalTicTacVars.restartGlobal();
+	
 	$(gameDiv).html('');
 	if (globalTicTacVars.getPlayers()===2) {
+		globalTicTacVars.toggleCurChar();
 		$(globalTicTacVars.getStatDiv()).html('Now Playing: '+globalTicTacVars.getCurChar());
-	} else if (globalTicTacVars.getPlayers()===1 && globalTicTacVars.getCurChar()===globalTicTacVars.getChar()[0]) {
+	} else {
 		$(globalTicTacVars.getStatDiv()).html('Your Turn');
 	}
-	globalTicTacVars.restartGlobal();
+	
 	startGame(gameDiv, true);
 	$(gameDiv).fadeIn("slow");
 	$(resetBtn).show();
@@ -110,14 +112,13 @@ function rewardWin() {
 			}
 			globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
 	} else {
+		globalTicTacVars.setIntervalID(setInterval(function() {alternateColors([0,1,2,3,4,5,6,7,8]);},globalTicTacVars.DELAY_VAL));
 		$(globalTicTacVars.getStatDiv()).html('Tie!');
 	}
 
 	setTimeout(function () {
 		$(globalTicTacVars.getStatDiv()).html('Restarting Now...');
-		
 		$(gameDiv).fadeOut("slow");
-		
 		setTimeout(liveReset,globalTicTacVars.RST_DELAY_VAL/2);
 	},globalTicTacVars.RST_DELAY_VAL);
 	
@@ -398,7 +399,7 @@ function startGame(gameDiv, isReset) {
 	$(globalTicTacVars.getStatDiv()).removeClass('hider');
 	$(globalTicTacVars.getStatDiv()).show();
 
-	if (isReset===false) {
+	if (globalTicTacVars.getPlayers()===1 || isReset===false) {
 		globalTicTacVars.setCurChar();
 	}
 	
@@ -436,8 +437,8 @@ var globalTicTacVars = new function(){
 	this.P2Char='';
 	this.curChar='';
 	this.winningArr=[];
-	this.DELAY_VAL=1000;
-	this.RST_DELAY_VAL=3000;
+	this.DELAY_VAL=750;
+	this.RST_DELAY_VAL=this.DELAY_VAL*3;
 	this.intervalID=0;
 	this.statDiv="#statusArea";
 	this.jumboDiv='ticJumbo';
