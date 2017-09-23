@@ -3,17 +3,26 @@
 }
 
 .flatRadius {
-	border-radius: 0% !important;
+	border-radius: 5% !important;
 }
 
 .calcBG {
-	background: url("http://i67.tinypic.com/wb48x4.jpg") repeat 0 0;
+	/*background: url("http://i67.tinypic.com/wb48x4.jpg") repeat 0 0;*/
+	background: rgba(2,2,2,0.6	);
 }
 
 .noBorder {
 	border:none;
 	border-radius: 0;
 }
+
+.calcInp {
+	/*fonts*/
+	color: black;	
+	font-size: 1.5vw !important;
+	line-height: 3.5vw !important;
+}
+
 
 .calcBtns {
 	width: 100%;
@@ -30,10 +39,11 @@
 
 #calcDiv p {
 	color:white;
+	font-size: 0.7vw !important;
+	line-height: 0.7vw !important;
 }
 
 .calcBtns:active, .calcBtns:hover, .calcBtns:visited, .calcBtns:focus {
-
 	border: solid white 3px !important;
 	border-radius:0% !important;
 	outline: none !important;
@@ -44,19 +54,37 @@
 	
 }
 
+.calcBtns:hover {
+	background-color: rgba(255,255,255,0.3) !important;
+	
+}
+
 
 @media only screen and (max-width: 768px) {
   
+  .calcInp {
+		/*fonts*/
+		color: black;	
+		font-size: 20px !important;
+		line-height: 40px !important;
+	}
 	.calcBtns {
 		/*fonts*/	
-		font-size: 30px !important;
-		line-height: 45px !important;
+		font-size: 20px !important;
+		line-height: 40px !important;
 	}
 
 	.calcBtns:active, .calcBtns:hover, .calcBtns:visited, .calcBtns:focus {
 	  /*fonts*/
-		font-size: 30px !important;
-		line-height: 45px !important;
+		font-size: 20px !important;
+		line-height: 40px !important;
 		
+	}
+
+
+	#calcDiv p {
+		color:white;
+		font-size: 15px !important;
+		line-height: 30px !important;
 	}
 }
