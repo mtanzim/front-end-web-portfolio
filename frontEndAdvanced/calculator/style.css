@@ -8,7 +8,7 @@
 
 .calcBG {
 	/*background: url("http://i67.tinypic.com/wb48x4.jpg") repeat 0 0;*/
-	background: rgba(2,2,2,0.6	);
+	background: rgba(2,2,2,0.6);
 }
 
 .noBorder {
@@ -18,7 +18,7 @@
 
 .calcInp {
 	/*fonts*/
-	color: black;	
+	background-color: (0,200,0, 0.66);	
 	font-size: 1.5vw !important;
 	line-height: 3.5vw !important;
 }
@@ -33,7 +33,7 @@
 
 	/*fonts*/
 	color: white;	
-	font-size: 1.5vw !important;
+	font-size: 1.2vw !important;
 	line-height: 3.5vw !important;
 }
 
@@ -49,7 +49,7 @@
 	outline: none !important;
 	/*fonts*/
 	color: white;	
-	font-size: 1.5vw !important;
+	font-size: 1.2vw !important;
 	line-height: 3.5vw !important;
 	
 }
@@ -57,6 +57,15 @@
 .calcBtns:hover {
 	background-color: rgba(255,255,255,0.3) !important;
 	
+}
+
+.calcBtns:hover {
+	background-color: rgba(255,255,255,0.3) !important;
+	
+}
+
+.calcBtns:active {
+  transform: translateY(4px);
 }
 
 

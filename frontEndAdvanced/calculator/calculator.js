@@ -162,11 +162,17 @@ function useButton (btnID, equationFunc){
 
 
 	if (numButtons.includes(equationToken)){
-		equationFunc+=equationToken;
+		var MAX_LEN=10;
+		var mainLength = $('#mainText').val().length;
+		if (mainLength < MAX_LEN){
+			equationFunc+=equationToken;
+		} else {
+			console.log("MAX_LEN of "+MAX_LEN+" exceeded.");
+		}
 		
 	}
 	else if (opButtons.includes(equationToken)){
-		mainText='';
+		mainText=equationToken;
 		if (opButtons.includes(lastChar)===false && equationFunc!=='' && lastChar!=='-'){
 			equationFunc+=equationToken;
 			subText=equationFunc;
@@ -189,9 +195,16 @@ function useButton (btnID, equationFunc){
 
 	}
 	//usage of decimal button
+
 	else if (equationToken==='.'){
-		if (lastChar!==equationToken && numButtons.includes(lastChar)){
+		console.log('main text is:' + mainText);
+		var tempMainText=mainText.substring(0, mainText.length - 1);
+		console.log('tempMainText  is:' + tempMainText);
+		if (lastChar!==equationToken && numButtons.includes(lastChar) && tempMainText.includes('.')===false){
 			equationFunc+=equationToken;
+		} else {
+			console.log (equationToken+ " was rejected.");
+			mainText=tempMainText;
 		}
 	}
 	else if (equationToken==='-'){
@@ -201,29 +214,36 @@ function useButton (btnID, equationFunc){
 		//treat as operation button
 		if ($('#mainText').val()!==''){
 			//console.log('mainText not empty')
-			mainText='';
+			//mainText='';
+			mainText=equationToken;
 			subText=equationFunc;
 			$('#subText').val(subText);
 		}
 	}
-	else if (equationToken==='='){
-		//resolve divisions and multiplications first
+	else if (equationToken==='=') {
+
 		subText=equationFunc;
-		var i=0;
-		while (equationFunc.indexOf('/') >=0 || equationFunc.indexOf('*') >=0 || i===10){
-			equationFunc=resolveEqn(equationFunc,'DM');
-			i++;
-			console.log("after resolve="+equationFunc);
+		if (opButtons.includes(lastChar) || ['-'].includes(lastChar)) {
+			mainText='';
+			console.log('invalid operation');
+		} else {
+			//resolve divisions and multiplications first
+			
+			var i=0;
+			while (equationFunc.indexOf('/') >=0 || equationFunc.indexOf('*') >=0 || i===10){
+				equationFunc=resolveEqn(equationFunc,'DM');
+				i++;
+				console.log("after resolve="+equationFunc);
+			}
+			i=0;
+			//while (equationFunc.indexOf('+') >=0 || equationFunc.indexOf('-') >=0 || isNaN(equationFunc) || i===10){
+			while (isNaN(equationFunc) && i<10){
+				equationFunc=resolveEqn(equationFunc,'AS');
+				i++;
+				console.log("after resolve="+equationFunc);
+			}
+			mainText=equationFunc;
 		}
-		i=0;
-		//while (equationFunc.indexOf('+') >=0 || equationFunc.indexOf('-') >=0 || isNaN(equationFunc) || i===10){
-		while (isNaN(equationFunc) && i<10){
-			equationFunc=resolveEqn(equationFunc,'AS');
-			i++;
-			console.log("after resolve="+equationFunc);
-		}
-		mainText=equationFunc;
-		//subText='';
 		$('#subText').val(subText);
 		
 	}
@@ -244,12 +264,13 @@ function useButton (btnID, equationFunc){
 $(document).ready(function(){
 
 	//alert ("Hi, I'm the calculator!")
+	
 	var buttons=prepareButtons();
 	var equation='';
 	console.log(buttons);	
 		
 	$(".calcBtns").on("click", function(){
-		equation=useButton(this.id,equation);
-		//console.log(equation);
+			equation=useButton(this.id,equation);
+			//console.log(equation);
 	});
 });
