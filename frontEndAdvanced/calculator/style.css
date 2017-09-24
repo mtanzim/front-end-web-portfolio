@@ -109,7 +109,7 @@ span {
 @media only screen and (max-width: 768px) {
 
 	.calcBG {
-		padding: 30px;
+		padding: 30px !important;
 	}
 
   .calcInp {
