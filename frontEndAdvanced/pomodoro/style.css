@@ -20,7 +20,13 @@ body {
     color: #fff !important;
     background-color: #FF3F3F;
     border-color: #FF3F3F;
+    outline: none !important;
     border-radius:0% !important;
+}
+
+.btn_pom:active {
+  transform: translateY(2px);
+  outline: none !important;
 }
 
 /*progressbar div*/

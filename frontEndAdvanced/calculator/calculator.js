@@ -139,6 +139,10 @@ function useButton (btnID, equationFunc){
 	//use these for UI division
 	var mainText='';
 	var subText='';
+
+	var MAX_LEN=10;
+	//var MAX_DEC=10;
+
 	equationToken=equationToken[equationToken.length-1];
 
 	//for main text, need to get all the characters before the last operation, and then add it
@@ -162,7 +166,7 @@ function useButton (btnID, equationFunc){
 
 
 	if (numButtons.includes(equationToken)){
-		var MAX_LEN=10;
+		
 		var mainLength = $('#mainText').val().length;
 		if (mainLength < MAX_LEN){
 			equationFunc+=equationToken;
@@ -242,7 +246,14 @@ function useButton (btnID, equationFunc){
 				i++;
 				console.log("after resolve="+equationFunc);
 			}
-			mainText=equationFunc;
+
+			//console.log(equationFunc.split(''));
+			if (equationFunc.length > MAX_LEN){
+				mainText=parseFloat(equationFunc).toPrecision(MAX_LEN);
+			} else {
+				mainText=equationFunc;
+			}
+			
 		}
 		$('#subText').val(subText);
 		
