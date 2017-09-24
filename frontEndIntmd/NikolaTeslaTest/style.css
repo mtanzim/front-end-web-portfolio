@@ -1,0 +1,47 @@
+body {
+  margin-top: 60px;
+}
+
+#cover {
+  height: 863px;
+  border: white medium solid;
+  position:relative;
+  background: url("https://goo.gl/3vkb7v");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+
+}
+.border{
+  padding:0% 10% 10% 10%;
+  /*border: gray medium solid;
+  border-radius: 0px;*/
+}
+
+.suppl {
+  float:right;
+  border: white medium solid;
+  margin-top: 20%;
+  margin-left: 30px;
+}
+
+/*
+.content{
+  border: 25px solid green;
+  padding: 25px;
+  margin: 25px;
+
+}
+*/
+.spacer {
+  margin-bottom:50px;
+  padding-bottom:50px;
+  /*border-bottom: medium solid gray;*/
+}
+
+.thumb {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
