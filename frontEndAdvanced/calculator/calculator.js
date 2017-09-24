@@ -246,13 +246,10 @@ function useButton (btnID, equationFunc){
 				i++;
 				console.log("after resolve="+equationFunc);
 			}
-
-			//console.log(equationFunc.split(''));
 			if (equationFunc.length > MAX_LEN){
-				mainText=parseFloat(equationFunc).toPrecision(MAX_LEN);
-			} else {
-				mainText=equationFunc;
+				equationFunc=parseFloat(equationFunc).toPrecision(MAX_LEN);
 			}
+			mainText=equationFunc;
 			
 		}
 		$('#subText').val(subText);
