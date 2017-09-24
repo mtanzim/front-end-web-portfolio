@@ -23,14 +23,17 @@ function toggleButtons(state){
 		$(".ctrlDiv").hide();
 		$("#infoDiv").removeClass('hider');
 		$("#infoDiv").show();
+    $("#footer").hide();
 	}
 	else if (state==='stopped'){
 		$("#resetBtn").removeClass('hider');
+    $("#footer").removeClass('hider');
+		$("#footer").show();
 		//$("#resetBtn").show();
 		//$(".ctrlDiv").fadeOut("slow");
 	}
 	else if (state==='init'){
-		$("#infoDiv").hide();
+		//$("#infoDiv").hide();
 		//$("#stopBtn").hide();
 		//$("#resetBtn").hide();
 	}
@@ -43,6 +46,7 @@ function toggleButtons(state){
 		$("#startBtn").fadeIn("slow");
 		$('#pomJumbo').fadeIn("slow");
 		$(".ctrlDiv").fadeIn("slow");
+		$("#footer").hide();
 
 
 	}
@@ -359,10 +363,5 @@ $(document).ready(function(){
 			}
 	    });
 	}
-		
-		
-	
-	
-	
 
 });

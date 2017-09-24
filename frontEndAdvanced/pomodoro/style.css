@@ -1,6 +1,4 @@
 /*overwrite progressbar.js API styles*/
-
-
 body { 
     background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
 }
@@ -33,8 +31,8 @@ body {
 #progressCir {
   margin: auto;
  
-  width:35%;
-  height: 35%;
+  width:27%;
+  height: 27%;
  
 }
 
@@ -43,14 +41,14 @@ body {
 }
 /*fonts*/		
 h1{
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
 	font-size: 60px;
 	line-height: 65px;
 }
 
 .progressbar-text{
-	font-size:7vw;
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+	font-size:6vw;
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -60,15 +58,40 @@ h1{
 }
 
 h3 {
-	font-family: 'Vollkorn', Georgia, Times, serif;
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
 	font-size: 30px;
 	line-height: 25px;
 }
 /*overite bootstrap btn fonts*/
 p, h4, .btn{
-	font-family: 'Vollkorn', Georgia, Times, serif;
-	font-size: 25px;
-	line-height: 25px;
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
+	font-size: 25px !important;
+	line-height: 25px !important;
+}
+
+footer p {
+	margin-top:1% !important;
+	font-size: 12px !important;
+}
+
+/*social buttons*/
+.socialbtn a:link {
+	opacity:0.8;
+	text-decoration: none;
+	color: red;
+}
+
+.socialbtn a:hover{
+	opacity:1.0;
+	text-decoration: none;
+	/*color: green;*/
+}
+
+
+.socialbtn a:visited {
+	opacity:0.6;
+	text-decoration: none;
+	color: black;
 }
 
 
@@ -87,7 +110,7 @@ p, h4, .btn{
 	}
   .progressbar-text{
     font-size:15vw;
-    font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+    font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
     position: absolute;
     left: 50%;
     top: 50%;
