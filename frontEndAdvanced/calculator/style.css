@@ -2,6 +2,7 @@ body {
 	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
 }
 
+/*BRANDING*/
 .brandFoot {
 	margin-bottom: 1%;
 	background-color:rgba(255,255,255,0.5) !important;
@@ -15,6 +16,25 @@ body {
 .brandFoot a{
 	font-size: 44px !important;
 }
+
+/*social buttons*/
+.socialbtn a:link {
+	opacity:0.8;
+	text-decoration: none;
+	color: black;
+}
+
+.socialbtn a:hover{
+	opacity:1.0;
+	text-decoration: none;
+}
+
+.socialbtn a:visited {
+	opacity:0.6;
+	text-decoration: none;
+	color: black;
+}
+/*BRANDING*/
 
 input {
     width: 100%;
