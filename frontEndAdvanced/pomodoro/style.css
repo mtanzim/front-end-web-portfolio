@@ -3,15 +3,65 @@ body {
     background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
 }
 
+/*BRANDING*/
+.brandFoot {
+	margin-bottom: 1%;
+	background-color:rgba(255,255,255,0.0) !important;
+	border:none;
+}
+
+.brandFoot p{
+	font-size: 12px !important;
+}
+
+.brandFoot a{
+	font-size: 44px !important;
+}
+
+/*social buttons*/
+.socialbtn a:link {
+	opacity:0.8;
+	text-decoration: none;
+	color: black;
+}
+
+.socialbtn a:hover{
+	opacity:1.0;
+	text-decoration: none;
+	/*color: green;*/
+}
+
+
+.socialbtn a:visited {
+	opacity:0.6;
+	text-decoration: none;
+	color: black;
+}
+/*BRANDING*/
+
 .jumbotron {
 	background-color: rgba(0,0,0,0.0) !important;
 }
+
+.btnLbl {
+	background-color: rgba(0,0,0,0.0) !important;
+	border:none;
+	outline: none;
+}
+
+.btnLbl:active, .btnLbl:hover, .btnLbl:visited, .btnLbl:focus {
+	border:none;
+	outline: none;
+	/*cursor: pointer;*/
+}
+
 
 .btn_pom{
 	color: #fff !important;
 	background-color:#FF4242;
 	border-color:#FF4242;
 	border-radius:0% !important;
+	outline: none !important;
 }
 
 .btn_pom:active, .btn_pom:hover, .btn_pom:visited, .btn_pom:focus {
@@ -20,6 +70,7 @@ body {
     border-color: #FF3F3F;
     outline: none !important;
     border-radius:0% !important;
+    cursor: pointer;
 }
 
 .btn_pom:active {
@@ -31,8 +82,8 @@ body {
 #progressCir {
   margin: auto;
  
-  width:27%;
-  height: 27%;
+  width:35%;
+  height: 35%;
  
 }
 
@@ -42,8 +93,8 @@ body {
 /*fonts*/		
 h1{
 	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
-	font-size: 60px;
-	line-height: 65px;
+	font-size: 60px !important;
+	line-height: 65px !important;
 }
 
 .progressbar-text{
@@ -63,36 +114,14 @@ h3 {
 	line-height: 25px;
 }
 /*overite bootstrap btn fonts*/
-p, h4, .btn{
+p, h4, .btn, .btnLbl {
 	font-family: 'Vollkorn', Georgia, Times, serif !important;
 	font-size: 25px !important;
 	line-height: 25px !important;
 }
 
-footer p {
-	margin-top:1% !important;
-	font-size: 12px !important;
-}
-
-/*social buttons*/
-.socialbtn a:link {
-	opacity:0.8;
-	text-decoration: none;
-	color: red;
-}
-
-.socialbtn a:hover{
-	opacity:1.0;
-	text-decoration: none;
-	/*color: green;*/
-}
 
 
-.socialbtn a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	color: black;
-}
 
 
 @media only screen and (max-width: 768px) {
@@ -104,7 +133,7 @@ footer p {
 	  height: 70%;
 	 
 	}
-	p, h4, .btn{
+	p, h4, .btn, .btnLbl{
 		font-size: 28px;
 		line-height: 28px;
 	}

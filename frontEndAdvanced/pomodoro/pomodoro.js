@@ -18,35 +18,37 @@ function toggleButtons(state){
 		$('#pomJumbo').hide();
 		$("#startBtn").hide();
 		//$("#resetBtn").removeClass('hider');
-		//$("#resetBtn").show();
 		$("#resetBtn").addClass('hider');
+		$("#resetBtn").show();
 		$(".ctrlDiv").hide();
 		$("#infoDiv").removeClass('hider');
 		$("#infoDiv").show();
-    $("#footer").hide();
+    	$("#footer").hide();
 	}
 	else if (state==='stopped'){
 		$("#resetBtn").removeClass('hider');
-    $("#footer").removeClass('hider');
-		$("#footer").show();
+		//$("#resetBtn").show();
+    	$("#footer").removeClass('hider');
+		$("#footer").hide();
 		//$("#resetBtn").show();
 		//$(".ctrlDiv").fadeOut("slow");
 	}
 	else if (state==='init'){
-		//$("#infoDiv").hide();
+		$("#infoDiv").hide();
 		//$("#stopBtn").hide();
 		//$("#resetBtn").hide();
 	}
 	else if (state==='reset'){
+		$("#resetBtn").addClass('hider');
+		$("#resetBtn").hide();
 		$('#timeLabel').html('');
 		$('#timeH').html('');
 		$("#infoDiv").hide();
-		//$("#resetBtn").hide();
-		$("#resetBtn").addClass('hider');
+		
 		$("#startBtn").fadeIn("slow");
 		$('#pomJumbo').fadeIn("slow");
 		$(".ctrlDiv").fadeIn("slow");
-		$("#footer").hide();
+		$("#footer").fadeIn("slow");
 
 
 	}
@@ -71,12 +73,12 @@ $(document).ready(function(){
 		startBreakTime=breakTime;
 		//progBar='100%';
 	}
-	function setTimes(isBreak, isAdd){
+	function setTimes(isBreak, isAdd, qty){
 		if(isBreak) {
 			if (isAdd){
-				breakMin++;
+				breakMin+=qty;
 				console.log('added break');
-			} else {breakMin--;console.log('less break');}
+			} else {breakMin-=qty;console.log('less break');}
 			breakTime=breakMin*60;
 			startBreakTime=breakTime;
 			//startWorkTime=workTime;
@@ -85,9 +87,9 @@ $(document).ready(function(){
 		}
 		else {
 			if (isAdd){
-				workMin++;
+				workMin+=qty;
 				console.log('added work');
-			} else {workMin--;console.log('less work');}
+			} else {workMin-=qty;console.log('less work');}
 			workTime=workMin*60;
 			startWorkTime=workTime;
 			$('#workLength').html(pad(workMin,2));
@@ -313,7 +315,7 @@ $(document).ready(function(){
 	function toggleTooltip (tipState) {
 		$("#progressCir").tooltip('hide')
       			.attr('data-original-title', 'Click to '+tipState)
-      			.tooltip('fixTitle')
+      			//.tooltip('fixTitle')
       			//.tooltip('show');
 
 	}
@@ -332,36 +334,47 @@ $(document).ready(function(){
 		}
 	});
 
-	
     
+	var PRESS_RES=1;
+	var LONG_PRESS_RES=5;
+	var MAX_TIME=30;
+
 	//time buttons
 	if (isDisabled===false){
-		//work lengths
+		//work lengths press
 		$("#addWork").on("click", function(){
-			setTimes(false,true);
+			if (workMin<MAX_TIME){
+				setTimes(false,true,PRESS_RES);
+			} else {
+				alert ("Please select a valid time!");
+			}
+			
 	    });
 
 		$("#lessWork").on("click", function(){
-			if (workMin>1){
-				setTimes(false,false);
+			if (workMin>PRESS_RES){
+				setTimes(false,false,PRESS_RES);
 			} else {
 				alert ("Please select a valid time!");
 			}
 			//workTime=workMin*60;
-	    });
+    });
 
 		//break lengths
 		$("#addBreak").on("click", function(){
-			setTimes(true,true);
-				
-	    });
-		$("#lessBreak").on("click", function(){
-			if (breakMin>1){
-				setTimes(true,false);
+			if (breakMin < MAX_TIME){
+				setTimes(true,true,PRESS_RES);
 			} else {
 				alert ("Please select a valid time!");
 			}
-	    });
+    });
+		$("#lessBreak").on("click", function(){
+			if (breakMin>PRESS_RES){
+				setTimes(true,false,PRESS_RES);
+			} else {
+				alert ("Please select a valid time!");
+			}
+    });
 	}
 
 });

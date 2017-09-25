@@ -42,7 +42,7 @@ function fixBorders (buttonList) {
 function prepareGameBoard (divName) {
 
 	var buttonList=[];
-	var divClass="col-md-4 col-sm-4 col-xs-4 noPadding divBG chalkFont"
+	var divClass="col-4 noPadding divBG chalkFont"
 	var gridOrder=[0,1,2,3,4,5,6,7,8];
 	var btnClass="ticBtns";
 	for (var i in gridOrder){
@@ -421,6 +421,7 @@ function startGame(gameDiv, isReset) {
 	
 	console.log(buttonList);
 
+	$("#footer").hide();
 	$('#'+globalTicTacVars.jumboDiv).hide();
 	$(gameDiv).removeClass('hider');
 	$(gameDiv).show();
@@ -629,6 +630,8 @@ $(document).ready(function(){
 	var easyBtn="#easyBtn";
 	var hardBtn="#hardBtn";
 
+	$(gameDiv).hide();
+  $(P1SelectDiv).hide();
 
 
 	//game type selection
@@ -691,6 +694,7 @@ $(document).ready(function(){
 	});
 
 	$(resetBtn).on("click", function(){
+		$("#footer").fadeIn("slow");
 		globalTicTacVars.resetGlobal();
 		$(P1SelectDiv).hide();
 		$(resetDiv).hide();

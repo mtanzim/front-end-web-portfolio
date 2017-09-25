@@ -5,6 +5,48 @@ body {
     
 }
 
+
+/*BRANDING*/
+.brandFoot {
+	margin-bottom: 1%;
+	background-color:rgba(255,255,255,0.0) !important;
+	border:none;
+}
+
+.brandFoot p{
+	font-size: 12px !important;
+}
+
+.brandFoot a{
+	font-size: 44px !important;
+}
+
+/*social buttons*/
+.socialbtn a:link {
+	opacity:0.8;
+	text-decoration: none;
+	color: white !important;
+}
+
+.socialbtn a:hover{
+	opacity:1.0;
+	text-decoration: none;
+}
+
+
+.socialbtn a:visited {
+	opacity:0.6;
+	text-decoration: none;
+	color: white !important;
+}
+
+/*BRANDING*/
+
+#gameArea {
+	padding-left: 33%;
+	padding-right: 33%;
+}
+
 .jumbotron {
 	background-color: rgba(0,0,0,0.0) !important;
 	border-bottom: white solid 3px;
@@ -12,7 +54,7 @@ body {
 
 .chalkFont {
 	font-family: 'Indie Flower', cursive;
-	color: white;
+	color: white !important;
 	font-size: 100px;
 	line-height: 160px;
 }
@@ -26,6 +68,7 @@ body {
 }
 
 .btnSelect{
+	cursor: pointer;
 	color: #fff !important;
 	background-color: rgba(0,0,0,0);
 
@@ -39,7 +82,7 @@ body {
 }
 
 .btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
-
+	cursor: pointer;
 	background-color: rgba(255,255,255,0.3) !important;
 	border: solid white 3px !important;
 	border-radius:0% !important;
@@ -56,9 +99,10 @@ body {
 }
 
 .difSelect{
+	cursor: pointer;
 	color: #fff !important;
 	background-color: rgba(0,0,0,0);
-  border: solid white 3px;
+  border: solid white 3px !important;
 	border-radius:0% !important;
 	outline: none !important;
 	/*fonts*/
@@ -67,6 +111,7 @@ body {
 }
 
 .difSelect:active, .difSelect:hover, .difSelect:visited, .difSelect:focus {
+	cursor: pointer;
 	background-color: rgba(255,255,255,0.3);
 	border: solid white 3px;
 	border-radius:0% !important;
@@ -81,6 +126,7 @@ body {
 
 
 .ticBtns {
+	cursor: pointer;
 	width: 100%;
 	height: 100%;
 	margin: 0px 0% 0% 0px;
@@ -88,6 +134,12 @@ body {
 	background-color:rgba(0,0,0,0);
 	border: solid white 3px;
 
+}
+
+.ticBtns:disabled {
+	/*fixed for bootstrap4*/
+	cursor: default;
+	color: white;
 }
 
 .ticBtns:active, .ticBtns:hover, .ticBtns:visited, .ticBtns:focus {
@@ -131,6 +183,11 @@ p, h4, #statusArea {
 }
 
 @media only screen and (max-width: 425px) {
+
+	#gameArea {
+		padding-left: 10%;
+		padding-right: 10%;
+	}
   
 	p, h4, #statusArea{
 		font-size: 28px;
