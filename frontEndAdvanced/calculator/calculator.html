@@ -3,18 +3,19 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title id="titleTime">Calculator</title>
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Oswald" type="text/css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans" type="text/css" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<!--bootstrap4.0alpha-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
 		<!--fonts-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
 		
+		<link rel="stylesheet" type="text/css" href="style.css">
+
 	</head>
 	<body id="body">
     <!--
@@ -30,41 +31,38 @@
     -->
 		<div class="container-fluid">
       <div class="row"><br><br><br></div>
-			<div class="row">
-				<div id="calcDiv" class="col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 col-xs-offset-2 col-xs-8 text-center calcBG flatRadius">
+			<div class="row justify-content-center">
+				<div id="calcDiv" class="col-8 col-sm-6 col-md-4 calcBG flatRadius">
 					<div class="row">
-						<p class="text-right">CalcMaster20078</p>
+						<p class="">CalcMaster20078</p>
 					</div>
 					<div class="row">
-							
-						 <span class=""><input disabled type="text" id="mainText" class="text-right noBorder calcInp" placeholder=""></span>
-						 <span><input disabled type="text" id="subText" class="text-right noBorder calcInpSub" placeholder=""></span>
-						 <!--	
-						 <div id="" class="row text-right">	<p id="mainText">0</p></div>
-						 <div id="" class="row text-right">	<p id="subText">0</p></div>
-						 -->
+						 <input disabled type="text" id="mainText" class="text-right noBorder calcInp" placeholder="">
+						 <input disabled type="text" id="subText" class="text-right noBorder calcInpSub" placeholder="">
 					</div>
 					<div class="row" id=""><br></div>	
 					<div class="row" id="calcButtons"></div>
 				</div>
 		 	</div>
 		 </div>
-		 <nav class="navbar navbar-default navbar-fixed-bottom brandFoot text-center">
-			 	<div class="navbar-header">
-			 			<p>Designed and Developed by Tanzim Mokammel</p>
-					<div class="socialbtn">
-						<a href="https://github.com/mtanzim" class="fa fa-github" target="_blank"></a>
-						<a href="https://www.instagram.com/tanzim_m/" class="fa fa-instagram " target="_blank"></a>
-						<a href="https://www.linkedin.com/in/tanzim-mokammel-726b7b50/" class="fa fa-linkedin" target="_blank"></a>
-					</div>
+		 <div class="fixed-bottom brandFoot text-center">
+			 	<div class="">
+		 			<p>Designed and Developed by Tanzim Mokammel</p>
 		 		</div>
-			</nav>
+				<div class="socialbtn">
+					<a href="https://github.com/mtanzim" class="fa fa-github" target="_blank"></a>
+					<a href="https://www.instagram.com/tanzim_m/" class="fa fa-instagram " target="_blank"></a>
+					<a href="https://www.linkedin.com/in/tanzim-mokammel-726b7b50/" class="fa fa-linkedin" target="_blank"></a>
+				</div>
+	 		</div>
 
 
 
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="calculator.js"></script>
 		
 	</body>
