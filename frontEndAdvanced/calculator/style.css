@@ -1,10 +1,11 @@
 body {
 	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
-	padding-bottom: 70px;
 }
 
-footer {
+.brandFoot {
 	/*margin-top:1%;*/
+	background-color:rgba(255,255,255,0.5) !important;
+	border:none;
 	font-size: 12px;
 }
 
@@ -116,13 +117,13 @@ span {
 .socialbtn a:link {
 	opacity:0.8;
 	text-decoration: none;
-	color: red;
+	color: black;
 }
 
 .socialbtn a:hover{
 	opacity:1.0;
 	text-decoration: none;
-	/*color: green;*/
+	color: black;
 }
 
 
@@ -142,7 +143,7 @@ span {
   .calcInp {
   	padding: 5px;
 		font-size: 20px !important;
-		line-height: 20px !important;
+		line-height: 10px !important;
 	}
 	.calcInpSub {
 		color: white;
