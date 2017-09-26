@@ -3,24 +3,19 @@
 //mtanzim@gmail.com
 
 function prepareSimonButtons () {
-	//var simonButtons=['g','r','b','y'];
-	//var bootstrapColWidth="col-md-3"
+
 	var buttonList=[];
+	var simonBtnClasses="btn btn-primary simonBigBtn";
 	console.log(Object.keys(globalSimonVars.simonButtons));
 
-	//$('#simonButtons').append('<div class="col-md-3 btn-group">');
-	//$('#simonButtons').append('<div class="row">');	
+
 	for (var i in Object.keys(globalSimonVars.simonButtons)){
-		//console.log(Object.keys(simonButtons)[i]);
 		var curButton='btn_'+Object.keys(globalSimonVars.simonButtons)[i];
-		//$('#simonButtons').append('<div class="'+bootstrapColWidth+'"><button type="button" id="'+curButton+'" class="btn btn-primary btn-lg">'+simonButtons[i]+'</button></div>');
-		$('#simonButtons').append('<button type="button" id="'+curButton+'" class="btn btn-primary simonBigBtn"></button>');
-		//$('#simonButtons').append('<div class="col-md-12"><br></div>');
+		$('#simonButtons').append('<button type="button" id="'+curButton+'" class="'+simonBtnClasses+'"></button>');
 		buttonList.push(curButton);
 	}
-	//$('#simonButtons').append('</div>');
+
 	$('#simonButtons').append('</div>');
-	//console.log(buttonList);
 	return buttonList;
 
 }
@@ -48,7 +43,7 @@ function togglePower (isOn, btnID, startID, strictID){
 		isOn=true;	
 		$('#'+btnID).removeClass("btn-danger");
 		$('#'+btnID).addClass("btn-success");
-		$('#'+btnID).html("ON");
+		$('#'+btnID).html("ON&nbsp");
 		$('#'+startID).prop("disabled",false);
 		$('#'+strictID).prop("disabled",false);
 	}
