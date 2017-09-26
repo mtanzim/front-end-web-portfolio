@@ -138,6 +138,11 @@ p, h4, .btn, .btnLbl {
 		font-size: 28px !important;
 		line-height: 28px !important;
 	}
+  .btn_pom{
+    /*fonts*/
+    font-size: 50px !important;
+    line-height: 55px !important;
+  }
   .progressbar-text{
     font-size:15vw;
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
@@ -148,4 +153,18 @@ p, h4, .btn, .btnLbl {
     margin: 0px;
     transform: translate(-50%, -50%);
   }
+}
+
+
+@media only screen and (max-width: 375px) {
+	p, h4, .btn, .btnLbl{
+		font-size: 20px !important;
+		line-height: 20px !important;
+	}
+  .btn_pom{
+    /*fonts*/
+    font-size: 35px !important;
+    line-height: 40px !important;
+  }
+
 }
