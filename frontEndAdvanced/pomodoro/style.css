@@ -45,13 +45,13 @@ body {
 
 .btnLbl {
 	background-color: rgba(0,0,0,0.0) !important;
-	border:none;
-	outline: none;
+	border:none !important;
+	outline: none !important;
 }
 
 .btnLbl:active, .btnLbl:hover, .btnLbl:visited, .btnLbl:focus {
-	border:none;
-	outline: none;
+	border:none !important;
+	outline: none !important;
 	/*cursor: pointer;*/
 }
 
@@ -59,23 +59,24 @@ body {
 .btn_pom{
 	color: #fff !important;
 	background-color:#FF4242;
-	border-color:#FF4242;
+	border:none;
 	border-radius:0% !important;
 	outline: none !important;
+  
+  /*fonts*/
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
+	font-size: 35px !important;
+	line-height: 40px !important;
 }
 
 .btn_pom:active, .btn_pom:hover, .btn_pom:visited, .btn_pom:focus {
-    color: #fff !important;
-    background-color: #FF3F3F;
-    border-color: #FF3F3F;
-    outline: none !important;
-    border-radius:0% !important;
     cursor: pointer;
+    outline: 0 !important;
 }
 
 .btn_pom:active {
   transform: translateY(2px);
-  outline: none !important;
+  outline: 0 !important;
 }
 
 /*progressbar div*/
@@ -110,14 +111,14 @@ h1{
 
 h3 {
 	font-family: 'Vollkorn', Georgia, Times, serif !important;
-	font-size: 30px;
-	line-height: 25px;
+	font-size: 30px !important;
+	line-height: 25px !important;
 }
 /*overite bootstrap btn fonts*/
 p, h4, .btn, .btnLbl {
 	font-family: 'Vollkorn', Georgia, Times, serif !important;
 	font-size: 25px !important;
-	line-height: 25px !important;
+	line-height: 28px !important;
 }
 
 
@@ -134,8 +135,8 @@ p, h4, .btn, .btnLbl {
 	 
 	}
 	p, h4, .btn, .btnLbl{
-		font-size: 28px;
-		line-height: 28px;
+		font-size: 28px !important;
+		line-height: 28px !important;
 	}
   .progressbar-text{
     font-size:15vw;

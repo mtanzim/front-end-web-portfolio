@@ -337,7 +337,7 @@ $(document).ready(function(){
     
 	var PRESS_RES=1;
 	var LONG_PRESS_RES=5;
-	var MAX_TIME=30;
+	var MAX_TIME=100;
 
 	//time buttons
 	if (isDisabled===false){
