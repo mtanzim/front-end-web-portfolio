@@ -42,6 +42,7 @@ body {
 
 /*BRANDING*/
 
+/*default game area*/
 #gameArea {
 	padding-left: 33%;
 	padding-right: 33%;
@@ -179,6 +180,34 @@ p, h4, #statusArea {
 	/*font-family: 'Vollkorn', Georgia, Times, serif;*/
 	font-size: 25px !important;
 	line-height: 45px;
+
+}
+
+
+@media only screen and (min-width: 1440px) {
+
+	#gameArea {
+		padding-left: 37%;
+		padding-right: 37%;
+	}
+
+}
+
+@media only screen and (min-width: 2560px) {
+
+	#gameArea {
+		padding-left: 40%;
+		padding-right: 40%;
+	}
+
+}
+
+@media only screen and (max-width: 768px) {
+
+	#gameArea {
+		padding-left: 20%;
+		padding-right: 20%;
+	}
 
 }
 
