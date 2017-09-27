@@ -58,7 +58,7 @@ function prepareGameBoard (divName) {
 
 function alternateColors(btns){
 
-	if(globalTicTacVars.getIsWin()){
+	//if(globalTicTacVars.getIsWin()){
 		console.log('aternating colors for: '+btns);
 		for (var i in btns){
 			console.log(btns[i]);
@@ -70,7 +70,7 @@ function alternateColors(btns){
 				$("#btn_"+btns[i]).removeClass('winBtnAlt');
 			}
 		}
-	} else {
+	/*} else {
 		console.log(globalTicTacVars.getStatDiv());
 		if($(globalTicTacVars.getStatDiv()).hasClass('winBtn')){
 			$(globalTicTacVars.getStatDiv()).addClass('winBtnAlt');
@@ -80,6 +80,7 @@ function alternateColors(btns){
 			$(globalTicTacVars.getStatDiv()).removeClass('winBtnAlt');
 		}
 	}
+	*/
 	//$(winBtn).addClass('winBtn');
 	//$(winBtn).removeClass('winBtnAlt');
 }
@@ -124,8 +125,12 @@ function rewardWin() {
 			}
 			globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(winArr);},globalTicTacVars.DELAY_VAL));
 	} else {
-		globalTicTacVars.setIntervalID(setInterval(function() {alternateColors();},globalTicTacVars.DELAY_VAL));
+		var tieArr=[0,1,2,3,4,5,6,7,8];
 		$(globalTicTacVars.getStatDiv()).html('Tie!');
+		for (var k in tieArr){
+			$("#btn_"+tieArr[k]).addClass('winBtn');
+		}
+		globalTicTacVars.setIntervalID(setInterval(function() {alternateColors(tieArr);},globalTicTacVars.DELAY_VAL));
 	}
 
 	setTimeout(function () {
@@ -626,25 +631,26 @@ $(document).ready(function(){
 
 	var resetDiv="#resetDiv";
 	var resetBtn="#resetBtn";
-	var difDiv="#difDiv";
-	var easyBtn="#easyBtn";
-	var hardBtn="#hardBtn";
+	//var difDiv="#difDiv";
+	//var easyBtn="#easyBtn";
+	//var hardBtn="#hardBtn";
 
-	$(gameDiv).hide();
-  $(P1SelectDiv).hide();
 
 
 	//game type selection
+  $(gameDiv).hide();
+  $(P1SelectDiv).hide();
 	$(p1Button).on("click", function(){
 		//alert("1 Player Selected");
 		globalTicTacVars.setPlayers(1);
 		console.log(globalTicTacVars.getPlayers());
 		$(P1SelectDiv).removeClass('hider');
-		$(difDiv).removeClass('hider');
-		$(difDiv).show();
+		//$(difDiv).removeClass('hider');
+		//$(difDiv).show();
 		$(P1SelectDiv).show();
 		$(pSelectDiv).hide();
-
+    
+		/*
 		if (globalTicTacVars.getDif()) {
 			$(hardBtn).addClass('active');
 			$(easyBtn).removeClass('active');
@@ -652,6 +658,7 @@ $(document).ready(function(){
 			$(easyBtn).addClass('active');
 			$(hardBtn).removeClass('active');
 		}
+		*/
 
 	});
 	$(p2Button).on("click", function(){
@@ -661,10 +668,11 @@ $(document).ready(function(){
 		$(P1SelectDiv).removeClass('hider');
 		$(P1SelectDiv).show();
 		$(pSelectDiv).hide();
-		$(difDiv).addClass('hider');
-		$(difDiv).hide();
+		//$(difDiv).addClass('hider');
+		//$(difDiv).hide();
 	});
 
+	/*
 	$(easyBtn).on("click", function(){
 		globalTicTacVars.setDif(false);
 		$(easyBtn).addClass('active');
@@ -675,6 +683,7 @@ $(document).ready(function(){
 		$(hardBtn).addClass('active');
 		$(easyBtn).removeClass('active');
 	});
+	*/
 
 	//P1 char selection
 	$(p1X).on("click", function(){
