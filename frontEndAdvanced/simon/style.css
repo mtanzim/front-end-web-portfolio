@@ -1,11 +1,17 @@
+.gameCont {
+	border: solid 1px red;
+	padding: 10% 5% 10% 5%;
+	border-radius: 0%;
+}
+
 .btn {
 	cursor: pointer;
 	border-radius: 0%;
 }
 
 .simonBigBtn, .simonBigBtn:focus, .simonBigBtn:visited {
-	width: 5vw;
-	height: 5vw;
+	width: 75px;
+	height: 75px;
 	outline: none;
 	opacity: 0.6;
 	border-radius: 0%;
@@ -24,6 +30,10 @@
 	cursor: pointer;
 	opacity: 1.0;
 	
+}
+
+.winText {
+	color:rgba(0,0,0,0);
 }
 
 .simonBtnActive {
@@ -57,7 +67,8 @@
 }
 
 
-@media only screen and (max-width: 768px) {
+
+@media only screen and (max-width: 425px) {
 
 	.simonBigBtn, .simonBigBtn:focus, .simonBigBtn:visited {
 		width: 20vw;

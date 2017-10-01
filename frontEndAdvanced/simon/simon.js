@@ -154,10 +154,17 @@ function checkInput(btnID) {
 					} else {
 						if (globalSimonVars.isGlobalOn){
 							//alert('You Win!');
-							$('#stageCount').val("YOU WON!!!");
+							$('#stageCount').val("You Win!");
+
+							var altTimer=setInterval(function(){
+								$('#stageCount').toggleClass('winText');
+								console.log('WIN!!!!')
+							},globalSimonVars.DELAY_VAL_RST/2);
+
 							setTimeout(function(){
 								//globalSimonVars.currentStage=1;
 								globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn', 'startBtn','isStrict');
+								clearInterval(altTimer);
 							},globalSimonVars.DELAY_VAL_RST*3);
 						} else {
 						//globalSimonVars.currentStage=1;
@@ -211,7 +218,7 @@ var globalSimonVars = new function(){
 
 	this.DELAY_VAL=700;
 	this.DELAY_VAL_RST=1400;
-	this.COUNT_LIMIT=20; //max number of stages
+	this.COUNT_LIMIT=3; //max number of stages
 	this.isInputReq=false;
 	this.lastBtn='';
 	this.currentStage=1;
