@@ -61,26 +61,28 @@ function togglePower (isOn, btnID, startID, strictID){
 
 function playAsound (){
 	var sequence=globalSimonVars.globalSeq;
-	var defOpacity='0.7';
-	var pressedOpacity='1.0';
-	var translateVal='translateY(4px)';
-
 
 	$('#stageCount').val('Stage: '+globalSimonVars.currentStage);
 	globalSimonVars.isInputReq=false;
-	$('.simonBigBtn').css("opacity",pressedOpacity);
-	$('.simonBigBtn').css("transform",translateVal);
+
+	//$('.simonBigBtn').css("opacity",pressedOpacity);
+	//$('.simonBigBtn').css("transform",translateVal);
 	console.log('passed sequence is: '+sequence);
 	if (sequence.length>0){
 		var seqKeys = Object.keys(globalSimonVars.simonButtons);
-		var btn_name=seqKeys[sequence[0]];
+		var btn_name=seqKeys[sequence[0]];	
 
 		console.log ('start '+sequence);
 		console.log ('playing sound:'+btn_name);
-		new Audio(globalSimonVars.simonButtons[btn_name]).play();
-		$('#btn_'+btn_name).css("opacity",defOpacity);
-		sequence.shift();
-		console.log ('end: ' + sequence);
+		var audPlay=new Audio(globalSimonVars.simonButtons[btn_name]);
+		audPlay.play();
+		$('#btn_'+btn_name).toggleClass('simonBtnActive');
+		$(audPlay).on("ended", function() {
+			$('#btn_'+btn_name).toggleClass('simonBtnActive');
+    	sequence.shift();
+			console.log ('end: ' + sequence);
+    });
+		
 	} else {
 		globalSimonVars.isInputReq=true;
 		//restore the sequence
@@ -209,7 +211,7 @@ var globalSimonVars = new function(){
 
 	this.DELAY_VAL=700;
 	this.DELAY_VAL_RST=1400;
-	this.COUNT_LIMIT=3; //max number of stages
+	this.COUNT_LIMIT=20; //max number of stages
 	this.isInputReq=false;
 	this.lastBtn='';
 	this.currentStage=1;

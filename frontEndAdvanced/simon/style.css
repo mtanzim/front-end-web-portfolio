@@ -1,37 +1,47 @@
-.simonBigBtn {
-	width: 20vw;
-	height: 20vw;
-	outline: none;
-	opacity: 0.7;
+.btn {
+	cursor: pointer;
 	border-radius: 0%;
 }
 
+.simonBigBtn, .simonBigBtn:focus, .simonBigBtn:visited {
+	width: 5vw;
+	height: 5vw;
+	outline: none;
+	opacity: 0.6;
+	border-radius: 0%;
+	cursor: pointer;
+	touch-action:auto;
+}
 
-.simonBigBtn:active, .simonBigBtn:hover, .simonBigBtn:visited, .simonBigBtn:focus {
+.simonBigBtn:hover {
+	opacity: 0.8;
+	/*transform: translateY(-6px);*/
+}
+
+.simonBigBtn:active{
+	transform: translateY(8px);
 	outline: none !important;
 	cursor: pointer;
 	opacity: 1.0;
 	
 }
 
-.simonBigBtn:active {
-  transform: translateY(4px);
+.simonBtnActive {
+
+	transform: translateY(8px);
   outline: none !important;
+  opacity: 1.0;
+
 }
 
 
 /*
-.circle {
-	border: 5px solid black;
-	border-radius: 50%;
-	height: auto;
-	width: 100%;
-	padding-top: 15%;
-	padding-bottom: 15%;
-	padding-right: 15%;
-	padding-left: 15%;
+.simonBigBtn:active {
+  transform: translateY(4px);
 }
 */
+
+
 
 #btn_g {
   background-color:green;
@@ -47,26 +57,12 @@
 }
 
 
-/*
- a:link {
-	opacity:0.8;
-	text-decoration: none;
-	//color: black;
-}
+@media only screen and (max-width: 768px) {
 
- a:hover{
-	opacity:1.0;
-	text-decoration: none;
-}
+	.simonBigBtn, .simonBigBtn:focus, .simonBigBtn:visited {
+		width: 20vw;
+		height: 20vw;
+	}
 
 
- a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	//color: black;
 }
-
- a:active {
-		text-decoration: none;
-}
-*/
