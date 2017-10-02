@@ -1,22 +1,32 @@
-.gameCont {
-	border: solid 1px red;
-	padding: 10% 5% 10% 5%;
-	border-radius: 0%;
+
+/*
+.btn {
+	outline: none;
+	border: none;
 }
 
-.btn {
-	cursor: pointer;
-	border-radius: 0%;
+.btn :focus, .btn:visited, .btn :active {
+	outline: none;
+	border: none;
+
+}
+
+
+
+*/
+
+button:disabled {
+	cursor: not-allowed !important;
 }
 
 .simonBigBtn, .simonBigBtn:focus, .simonBigBtn:visited {
-	width: 75px;
+	width: 66px;
 	height: 75px;
 	outline: none;
 	opacity: 0.6;
 	border-radius: 0%;
 	cursor: pointer;
-	touch-action:auto;
+	border: white solid 2px;
 }
 
 .simonBigBtn:hover {
@@ -32,17 +42,91 @@
 	
 }
 
+/*simulat button press when sound is playing*/
+.simonBtnActive {
+	transform: translateY(8px);
+	outline: none !important;
+	cursor: pointer;
+	opacity: 1.0;
+	
+}
+.gameCont {
+	border: solid 1px red;
+	/*padding: 10% 5% 10% 5%;*/
+	border-radius: 0%;
+}
+
+.contBts {
+	font-size: 20px;
+	line-height: 30px;
+	padding:15%;
+	border: white 2px solid;
+}
+
+#pwrBtn {
+	color: white;
+	outline: none;
+	cursor: pointer;
+}
+
+#pwrBtn:focus, #pwrBtn:visited, #pwrBtn:active {
+	outline: none;
+	cursor: pointer;
+}
+
+#startBtn  {
+	color: white;
+	background-color: blue;
+	outline: none;
+	cursor: pointer;
+}
+
+#startBtn:focus, #startBtn:visited, #startBtn:active {
+	outline: none;
+	cursor: pointer;
+	transform: translateY(8px);
+}
+
+#startBtn:disabled {
+	opacity: 0.5;
+}
+
+
+
+
+
+
+.grad {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left,rgba(255,0,0,0),rgba(255,0,0,1)); /*Safari 5.1-6*/
+  background: -o-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /*Fx 3.6-15*/
+  background: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1)); /*Standard*/
+}
+
+.gradReverse {
+  background: white; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(right,rgba(255,0,0,0),rgba(255,0,0,1)); /*Safari 5.1-6*/
+  background: -o-linear-gradient(left,rgba(255,0,0,0),rgba(255,0,0,1)); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(left,rgba(255,0,0,0),rgba(255,0,0,1)); /*Fx 3.6-15*/
+  background: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1)); /*Standard*/
+}
+
+#stageCount {
+	width:100%;
+	background-color: rgba(0,0,0,0);
+	outline:none;
+	border:none;
+}
+
+
+
+
 .winText {
 	color:rgba(0,0,0,0);
 }
 
-.simonBtnActive {
 
-	transform: translateY(8px);
-  outline: none !important;
-  opacity: 1.0;
-
-}
 
 
 /*
