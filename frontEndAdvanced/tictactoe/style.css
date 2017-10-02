@@ -230,3 +230,16 @@ p, h4, #statusArea {
 	}
 
 }
+
+@media only screen and (max-height: 500px) {
+
+	.brandFoot {
+		visibility: hidden;
+  	/*
+  	opacity: 0;
+  	transition: visibility 0s 0.5s, opacity 0.5s linear;
+  	*/
+	}
+
+
+}
