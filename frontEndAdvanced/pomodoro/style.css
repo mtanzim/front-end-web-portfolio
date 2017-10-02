@@ -18,6 +18,7 @@ body {
 	font-size: 44px !important;
 }
 
+
 /*social buttons*/
 .socialbtn a:link {
 	opacity:0.8;
@@ -31,7 +32,6 @@ body {
 	/*color: green;*/
 }
 
-
 .socialbtn a:visited {
 	opacity:0.6;
 	text-decoration: none;
@@ -44,6 +44,9 @@ body {
 }
 
 .btnLbl {
+	max-width: 35px;
+	min-width: 10px;
+	text-align: center;
 	background-color: rgba(0,0,0,0.0) !important;
 	border:none !important;
 	outline: none !important;
@@ -58,8 +61,8 @@ body {
 
 .btn_pom{
 	color: #fff !important;
-	background-color:#FF4242;
-	border:none;
+	background-color:#d32f2f;
+	border:1px white;
 	border-radius:0% !important;
 	outline: none !important;
   
@@ -160,6 +163,10 @@ p, h4, .btn, .btnLbl {
 	p, h4, .btn, .btnLbl{
 		font-size: 20px !important;
 		line-height: 20px !important;
+	}
+	.btnLbl {
+		max-width: 30px;
+		min-width: 10px;
 	}
   .btn_pom{
     /*fonts*/

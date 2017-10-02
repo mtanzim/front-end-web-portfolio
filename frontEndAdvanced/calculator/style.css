@@ -139,6 +139,11 @@ span {
   transform: translateY(4px);
 }
 
+/*modify special calc buttons*/	
+
+#btn_AC, #btn_CE {
+	background-color: #d32f2f !important;
+}
 
 /*social buttons*/
 .socialbtn a:link {

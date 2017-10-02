@@ -24,6 +24,7 @@ function prepareSimonButtons () {
 function togglePower (isOn, btnID, startID, strictID){
 	//console.log(btnID	);
 
+	$('#stageCount').removeClass('winText');
 	if (isOn){
 		globalSimonVars.reset();
 		disableButtons();
@@ -39,7 +40,7 @@ function togglePower (isOn, btnID, startID, strictID){
 
 		$('#'+btnID).removeClass("grad");
 		$('#'+btnID).addClass("gradReverse");
-		$('#'+btnID).html("OFF");	
+		$('#'+btnID).html("Off");	
 		$('#'+startID).prop("disabled",true);
 		$('#'+strictID).prop("disabled",true);
 		$('#stageCount').val('Power on, then start game.');
@@ -53,9 +54,10 @@ function togglePower (isOn, btnID, startID, strictID){
 		//$('#'+btnID).addClass("btn-success");
 		$('#'+btnID).removeClass("gradReverse");
 		$('#'+btnID).addClass("grad");
-		$('#'+btnID).html("ON&nbsp");
+		$('#'+btnID).html("On&nbsp");
 		$('#'+startID).prop("disabled",false);
 		$('#'+strictID).prop("disabled",false);
+		
 		
 		$('#stageCount').val('Press Start to begin game.');
 	}
@@ -104,12 +106,19 @@ function playAsound (){
 		console.log ('playing sound:'+btn_name);
 		var audPlay=new Audio(globalSimonVars.simonButtons[btn_name]);
 		audPlay.play();
+		//clearInterval(globalSimonVars.intervalID);
+		sequence.shift();
 		$('#btn_'+btn_name).toggleClass('simonBtnActive');
+		//use a timer instead for the next sound
+		//setTimeout(function () {
 		$(audPlay).on("ended", function() {
 			$('#btn_'+btn_name).toggleClass('simonBtnActive');
-    	sequence.shift();
 			console.log ('end: ' + sequence);
-    });
+			//play the next sequence
+			//globalSimonVars.intervalID=setInterval(function() {playAsound();},globalSimonVars.DELAY_VAL);
+			playAsound();
+  	//},globalSimonVars.DELAY_VAL);
+  	});
 		
 	} else {
 		globalSimonVars.isInputReq=true;
@@ -130,8 +139,8 @@ function generateSeries(isIncr){
 
 	//store the original sequence
 	globalSimonVars.globalStoreSeq=globalSimonVars.globalSeq.slice();
- 	globalSimonVars.intervalID=setInterval(function() {playAsound();},globalSimonVars.DELAY_VAL);
-
+ 	//globalSimonVars.intervalID=setInterval(function() {playAsound();},globalSimonVars.DELAY_VAL);
+ 	setTimeout(function(){playAsound();},globalSimonVars.DELAY_VAL);
 	
 	
 
@@ -233,9 +242,9 @@ var globalSimonVars = new function(){
 					  'b':'https://s3.amazonaws.com/freecodecamp/simonSound3.mp3',
 					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
 
-	this.DELAY_VAL=700;
+	this.DELAY_VAL=750;
 	this.DELAY_VAL_RST=1400;
-	this.COUNT_LIMIT=3; //max number of stages
+	this.COUNT_LIMIT=20; //max number of stages
 	this.isInputReq=false;
 	this.lastBtn='';
 	this.currentStage=1;
