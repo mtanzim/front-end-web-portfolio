@@ -51,7 +51,6 @@ function togglePower (isOn, btnID, startID, strictID){
 			
 		//$('#'+btnID).removeClass("btn-danger");
 		//$('#'+btnID).addClass("btn-success");
-		enableButtons();
 		$('#'+btnID).removeClass("gradReverse");
 		$('#'+btnID).addClass("grad");
 		$('#'+btnID).html("ON&nbsp");
@@ -196,7 +195,7 @@ function checkInput(btnID) {
 			//restart the same stage based on strict or not strict
 			disableButtons();
 			globalSimonVars.isInputReq=false;
-			if ($("#isStrict").prop('checked')){
+			if ($("#isStrict").hasClass('strikeText')===false){
 				$('#stageCount').val("Incorrect! Game Over.");
 				//alert("Game Over!");
 				setTimeout( function() {
@@ -269,7 +268,7 @@ var globalSimonVars = new function(){
 //main function
 $(document).ready(function(){
 
-	//globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn','startBtn');
+	
 	
 
 	// /alert ("Hi, I'm the Simon game!");
@@ -278,7 +277,8 @@ $(document).ready(function(){
 	//var buttons=prepareSimonButtons();
 	var buttons = globalSimonVars.setButtons();
 	console.log(buttons);
-	disableButtons();
+	//disableButtons();
+	globalSimonVars.isGlobalOn=togglePower(true, 'pwrBtn','startBtn', 'isStrict');
 
 	$('#stageCount').prop('disabled',true);
 	$('#stageCount').val('Power on, then start game.');
@@ -293,7 +293,7 @@ $(document).ready(function(){
 		//reset input Req
 		globalSimonVars.isInputReq=false;
 		//enableButtons();
-		$('#stageCount').val('--');
+		$('#stageCount').val('Starting game...');
 		$('#'+this.id).prop("disabled",true);
 		$('#isStrict').prop("disabled", true);
 		//generateSeries(globalSimonVars.currentStage,'stageCount', globalSimonVars.COUNT_LIMIT);
@@ -307,5 +307,9 @@ $(document).ready(function(){
 	$('#btn_r').on("click", function(){checkInput(this.id);});
 	$('#btn_b').on("click", function(){checkInput(this.id);});
 	$('#btn_y').on("click", function(){checkInput(this.id);});
+
+	$('#isStrict').on("click", function(){
+		$(this).toggleClass('strikeText');
+	});
 
 });
