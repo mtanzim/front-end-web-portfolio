@@ -3,10 +3,14 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Frank Ocean</title>
+		
+		<link rel="stylesheet" type="text/css" href="../../common/footer.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!--fonts-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:50" type="text/css" rel="stylesheet" >
 	</head>
 	<body>
@@ -122,7 +126,14 @@
 							<h2>Please check out his <a href="https://en.wikipedia.org/wiki/Frank_Ocean" target"_blank">Wikipedia Page</a>.</h2></div>
 					</div>
 				</div>
+				<div id="footer"></div>
 			</div>
 		</div>
-	</body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript">
+			$('#footer').load('../../common/footerBS3.html #footerCommon', function(){
+				console.log('loaded footer');
+			});		
+		</script>
+	</body>	
 </html>

@@ -51,6 +51,9 @@ function initWeather () {
 }
 
 $(document).ready(function(){
+	$('#footer').load('../../common/footerBS3.html #footerCommon', function(){
+		console.log('loaded footer');
+	});		
 	initWeather();
 	$("#togBtn").on("click", function(){
 		toggleUnit ((this));

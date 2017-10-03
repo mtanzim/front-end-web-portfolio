@@ -87,46 +87,51 @@ function enableButtons () {
 
 
 function playAsound (){
-	var sequence=globalSimonVars.globalSeq;
-	
-
-	$('#stageCount').val('Stage: '+globalSimonVars.currentStage);
-	globalSimonVars.isInputReq=false;
 
 
-	//$('.simonBigBtn').css("opacity",pressedOpacity);
-	//$('.simonBigBtn').css("transform",translateVal);
-	console.log('passed sequence is: '+sequence);
-	if (sequence.length>0){
-		var seqKeys = Object.keys(globalSimonVars.simonButtons);
-		var btn_name=seqKeys[sequence[0]];	
-
-		disableButtons();
-		console.log ('start '+sequence);
-		console.log ('playing sound:'+btn_name);
-		var audPlay=new Audio(globalSimonVars.simonButtons[btn_name]);
-		audPlay.play();
-		//clearInterval(globalSimonVars.intervalID);
-		sequence.shift();
-		$('#btn_'+btn_name).toggleClass('simonBtnActive');
-		//use a timer instead for the next sound
-		//setTimeout(function () {
-		$(audPlay).on("ended", function() {
-			$('#btn_'+btn_name).toggleClass('simonBtnActive');
-			console.log ('end: ' + sequence);
-			//play the next sequence
-			//globalSimonVars.intervalID=setInterval(function() {playAsound();},globalSimonVars.DELAY_VAL);
-			playAsound();
-  	//},globalSimonVars.DELAY_VAL);
-  	});
+	if (globalSimonVars.isGlobalOn){
+		var sequence=globalSimonVars.globalSeq;
 		
-	} else {
-		globalSimonVars.isInputReq=true;
-		//restore the sequence
-		globalSimonVars.globalSeq=globalSimonVars.globalStoreSeq.slice();
-		clearInterval(globalSimonVars.intervalID);
-		enableButtons();
+
+		$('#stageCount').val('Stage: '+globalSimonVars.currentStage);
+		globalSimonVars.isInputReq=false;
+
+
+		//$('.simonBigBtn').css("opacity",pressedOpacity);
+		//$('.simonBigBtn').css("transform",translateVal);
+		console.log('passed sequence is: '+sequence);
+		if (sequence.length>0){
+			var seqKeys = Object.keys(globalSimonVars.simonButtons);
+			var btn_name=seqKeys[sequence[0]];	
+
+			disableButtons();
+			console.log ('start '+sequence);
+			console.log ('playing sound:'+btn_name);
+			var audPlay=new Audio(globalSimonVars.simonButtons[btn_name]);
+			audPlay.play();
+			//clearInterval(globalSimonVars.intervalID);
+			sequence.shift();
+			$('#btn_'+btn_name).toggleClass('simonBtnActive');
+			//use a timer instead for the next sound
+			//setTimeout(function () {
+			$(audPlay).on("ended", function() {
+				$('#btn_'+btn_name).toggleClass('simonBtnActive');
+				console.log ('end: ' + sequence);
+				//play the next sequence
+				//globalSimonVars.intervalID=setInterval(function() {playAsound();},globalSimonVars.DELAY_VAL);
+				playAsound();
+	  	//},globalSimonVars.DELAY_VAL);
+	  	});
+			
+		} else {
+			globalSimonVars.isInputReq=true;
+			//restore the sequence
+			globalSimonVars.globalSeq=globalSimonVars.globalStoreSeq.slice();
+			clearInterval(globalSimonVars.intervalID);
+			enableButtons();
+		}
 	}
+
 }
 
 
@@ -140,7 +145,9 @@ function generateSeries(isIncr){
 	//store the original sequence
 	globalSimonVars.globalStoreSeq=globalSimonVars.globalSeq.slice();
  	//globalSimonVars.intervalID=setInterval(function() {playAsound();},globalSimonVars.DELAY_VAL);
- 	setTimeout(function(){playAsound();},globalSimonVars.DELAY_VAL);
+ 	//if(globalSimonVars.isGlobalOn){
+		setTimeout(function(){playAsound();},globalSimonVars.DELAY_VAL);
+	//}
 	
 	
 
@@ -175,6 +182,7 @@ function checkInput(btnID) {
 						globalSimonVars.globalSeq=globalSimonVars.globalStoreSeq.slice();
 						generateSeries(true);
 					} else {
+						//if user wins
 						if (globalSimonVars.isGlobalOn){
 							//alert('You Win!');
 							disableButtons();
@@ -243,7 +251,7 @@ var globalSimonVars = new function(){
 					  'y':'https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'};
 
 	this.DELAY_VAL=750;
-	this.DELAY_VAL_RST=1400;
+	this.DELAY_VAL_RST=750;
 	this.COUNT_LIMIT=20; //max number of stages
 	this.isInputReq=false;
 	this.lastBtn='';
@@ -278,8 +286,10 @@ var globalSimonVars = new function(){
 $(document).ready(function(){
 
 	
-	
-
+	//use jQuery to load footer
+	$('#footer').load('../../common/footer.html #footerCommon', function(){
+		console.log('loaded footer');
+	});
 	// /alert ("Hi, I'm the Simon game!");
 	console.log(globalSimonVars.simonButtons);
 

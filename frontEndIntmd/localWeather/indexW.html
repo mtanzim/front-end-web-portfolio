@@ -2,12 +2,14 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>MokaTek Weather Network</title>
+		<title>Local Weather</title>
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald" type="text/css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" type="text/css" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="../../common/footer.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 	</head>
@@ -18,7 +20,7 @@
 			<div class = "container-fluid">
 				<div class="row">
 					<div class="col-md-12 text-center">
-						<h1 class="" style="display:inline">Local Weather <h3 style="display:inline">brought to you by The MokaTek Weather Network</h3></h1>
+						<h1 class="" style="display:inline">Local Weather <h3 style="display:inline">plan out your day!</h3></h1>
 					</div>
 				</div>
 			</div>
@@ -27,7 +29,7 @@
 		<div id="weatherDiv" class="container-fluid">
 			
 			<div class="row">
-				<div class="col-md-4 col-md-offset-4 text-center well">
+				<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5 text-center well">
 					<div class="row"><h2 id="weatherInfo"></h2></div>
 					<div class="row"><h3 id="debugDiv"></h3></div>
 					<div class="row ">
@@ -39,11 +41,11 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4 col-md-offset-4 text-right">
-					<p>by mtanzim</p>
 					<p>powered by <a href="http://openweathermap.org/current#geo" target="_blank">OpenWeatherMap</a></p>
 				</div>
 			</div>
 		</div>
+		<div id="footer"></div>
 
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
