@@ -22,7 +22,7 @@
 			<div class = "container-fluid">
 				<div class="row justify-content-center">
 					<div class="text-center">
-						<h1 class="" style="display:inline">Pomodoro<h3 style="display:inline"> be at your most effective!</h3></h1>
+						<h1 class="" style="display:inline"><span id="pomTxtRst" data-toggle='tooltip' data-placement='top' title='Press to reset to default intervals!'>Pomodoro</span><h3 style="display:inline"> be at your most effective!</h3></h1>
 					</div>
 				</div>
 			</div>
@@ -32,20 +32,20 @@
 			<div class="row justify-content-center" id="">
 				<div id="workCtrl" class="col-6 text-center ctrlDiv">
 					<div class="btn-group">
-					 	<button type="button" id="lessWork" class="btn_pom">&nbsp-&nbsp</button>
+					 	<button type="button" id="lessWork" class="btn_pom ">&nbsp-&nbsp</button>
 				 	</div>
-				 	<button type="button" class="btnLbl" id="workLength" style="">25</button>
+				 	<button type="button" class="btnLbl" id="workLength" data-toggle="tooltip" data-placement="top" title="Press to specify time.">25</button>
 			 		<div class="btn-group">
-					 	<button type="button" id="addWork" class="btn_pom">&nbsp+&nbsp</button>
+					 	<button type="button" id="addWork" class="btn_pom ">&nbsp+&nbsp</button>
 				 	</div>
 			 	</div>
 			 	<div id="breakCtrl" class="col-6 text-center ctrlDiv">
 					<div class="btn-group">
-					 	<button type="button" id="lessBreak" class="btn_pom">&nbsp-&nbsp</button>
+					 	<button type="button" id="lessBreak" class="btn_pom ">&nbsp-&nbsp</button>
 				 	</div>
-				 	<button type="button" class="btnLbl" id="breakLength" style="">05</button>
+				 	<button type="button" class="btnLbl" id="breakLength" data-toggle="tooltip" data-placement="top" title="Press to specify time.">05</button>
 			 		<div class="btn-group">
-					 	<button type="button" id="addBreak" class="btn_pom">&nbsp+&nbsp</button>
+					 	<button type="button" id="addBreak" class="btn_pom ">&nbsp+&nbsp</button>
 				 	</div>
 		 		</div>
 		 	</div>
@@ -89,7 +89,49 @@
 			</div>
 	 	</div>
 
-	 <div class="fixed-bottom brandFoot" id="footer">
+
+	 	<!--
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
+		-->
+		
+
+		<div class="modal fade" id="workModal" tabindex="-1" role="dialog" aria-labelledby="workModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="workModalLabel"></h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <form>
+		          <div class="form-group">
+		            <input type="text" class="form-control" id="workTimeForm" autofocus>
+		          </div>
+		        </form>
+		      </div>
+		      <div class="modal-footer" id="workModalFooter">
+		      	<div class="container-fluid">
+			      	<div id="workFooterMsg" class="row"><p></p></div>
+			      	<div class="row justify-content-end">
+			      		<div class="col-4 col-lg-3 align-self-end">
+				        	<button type="button" id="workFormClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        	</div>
+			        	<div class="col-4 col-lg-3 align-self-end">
+				        	<button type="button" class="btn btn-primary" id="workSave">Save</button>
+				     	 	</div>
+		        </div>
+		      	</div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	 		
+	 	</div>
+
+
+		<div class="fixed-bottom brandFoot" id="footer">
 		 	<div class="row justify-content-center">
 		 		<p>Designed and Developed by <strong>Tanzim Mokammel</strong></p>
 		 	</div>
@@ -98,7 +140,7 @@
 				<a href="https://www.instagram.com/tanzim_m/" class="fa fa-instagram " target="_blank">&nbsp</a>  
 				<a href="https://www.linkedin.com/in/tanzim-mokammel-726b7b50/" class="fa fa-linkedin" target="_blank">&nbsp</a>
 			</div>
-	 </div>
+		</div>
 
 	 	<!--bootstrap4.0beta-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

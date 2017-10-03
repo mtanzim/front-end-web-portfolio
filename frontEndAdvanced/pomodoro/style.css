@@ -3,6 +3,11 @@ body {
     background: url("https://image.ibb.co/gB6FOa/geometry.png") repeat 0 0;
 }
 
+button:active, button:hover, button:visited, button:focus, #pomTxtRst {
+	cursor: pointer;
+	outline: none !important;
+}
+
 /*BRANDING*/
 .brandFoot {
 	margin-bottom: 1%;
@@ -44,18 +49,40 @@ body {
 }
 
 .btnLbl {
-	max-width: 35px;
-	min-width: 10px;
-	text-align: center;
+
 	background-color: rgba(0,0,0,0.0) !important;
 	border:none !important;
 	outline: none !important;
+	width: 10vw;
+	height: 10vw;
+
+
+	/*
+	max-width: 30px;
+	min-width: 10px;
+	*/
 }
 
-.btnLbl:active, .btnLbl:hover, .btnLbl:visited, .btnLbl:focus {
-	border:none !important;
+
+
+
+#workSave {
+	background-color:#d32f2f;
+	border:1px white;
+	border-radius:0% !important;
 	outline: none !important;
-	/*cursor: pointer;*/
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
+}
+
+#workFormClose {
+	border-radius:0% !important;
+	outline: none !important;
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
+}
+
+.btn:active, .btn:hover, .btn:visited, .btn:focus {
+    cursor: pointer;
+    outline: 0 !important;
 }
 
 
@@ -97,7 +124,7 @@ body {
 /*fonts*/		
 h1{
 	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
-	font-size: 60px !important;
+	font-size: 55px !important;
 	line-height: 65px !important;
 }
 
@@ -112,7 +139,7 @@ h1{
   transform: translate(-50%, -50%);
 }
 
-h3 {
+h3, h5 {
 	font-family: 'Vollkorn', Georgia, Times, serif !important;
 	font-size: 30px !important;
 	line-height: 25px !important;
@@ -164,10 +191,6 @@ p, h4, .btn, .btnLbl {
 		font-size: 20px !important;
 		line-height: 20px !important;
 	}
-	.btnLbl {
-		max-width: 30px;
-		min-width: 10px;
-	}
   .btn_pom{
     /*fonts*/
     font-size: 35px !important;
@@ -180,10 +203,6 @@ p, h4, .btn, .btnLbl {
 
 	.brandFoot {
 		visibility: hidden;
-  	/*
-  	opacity: 0;
-  	transition: visibility 0s 0.5s, opacity 0.5s linear;
-  	*/
 	}
 
 

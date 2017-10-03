@@ -63,6 +63,17 @@ $(document).ready(function(){
 
 	//enable bootstrap tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+	//init modal
+	$('#workModal').modal({
+	  focus: true,
+	  keyboard:true,
+	  show: false
+
+	});
+	//focusModal
+	$('#workModal').on('shown.bs.modal', function () {
+    $('#workTimeForm').focus();
+	})
 
 	function resetTimes(){
 		workMin=parseInt($("#workLength").text());
@@ -73,7 +84,8 @@ $(document).ready(function(){
 		startBreakTime=breakTime;
 		//progBar='100%';
 	}
-	function setTimes(isBreak, isAdd, qty){
+	function setTimes(isBreak, isAdd, qty, isForm){
+
 		if(isBreak) {
 			if (isAdd){
 				breakMin+=qty;
@@ -338,6 +350,71 @@ $(document).ready(function(){
 	var PRESS_RES=1;
 	var LONG_PRESS_RES=5;
 	var MAX_TIME=100;
+	var whichLength='';
+
+	//reset to standard pomodoro
+	$("#pomTxtRst").on("click", function(){
+		console.log('resetting times');
+		workMin=25;
+		workTime=workMin*60;
+		startWorkTime=workTime;
+		breakMin=5;
+		breakTime=breakMin*60;
+		startBreakTime=breakTime;
+		$('#workLength').html(pad(workMin,2));
+		$('#breakLength').html(pad(breakMin,2));
+	});
+
+
+
+	//input boxes for time length
+	$("#workLength").on("click", function(){
+		//$("#workTimeForm").focus();
+		
+		whichLength=this.id;
+		$('#'+this.id).tooltip('hide');
+		$('#workModalLabel').html('Work Length');
+		$('#workTimeForm').val('');
+		$("#workFooterMsg").html("<p>Specify the work length:</p>");
+		$('#workModal').modal('toggle');
+	});
+
+
+	$("#breakLength").on("click", function(){
+		//$("#workTimeForm").focus();
+		whichLength=this.id;
+		$('#'+this.id).tooltip('hide');
+		$('#workModalLabel').html('Break Length');
+		$('#workTimeForm').val('');
+		$("#workFooterMsg").html("<p>Specify the break length:</p>");
+		$('#workModal').modal('toggle');
+	});
+
+	$("#workSave").on("click", function(){
+		//alert($(workTimeForm).val());
+		var inputVal=parseInt($('#workTimeForm').val());
+		console.log(inputVal);
+		if (Number.isNaN(inputVal)===false){
+			if (inputVal > 0 && inputVal < 100){
+				$('#'+whichLength).html(pad(inputVal,2));
+				//update the times for pomodoro operation
+				workMin=parseInt($("#workLength").text());
+				workTime=workMin*60;
+				startWorkTime=workTime;
+				breakMin=parseInt($("#breakLength").text());
+				breakTime=breakMin*60;
+				startBreakTime=breakTime;
+
+				$('#workModal').modal('toggle');
+			} else {
+				$("#workFooterMsg").html("<p>Specify between 0 and 100.</p>");
+				$('#workTimeForm').val('');
+			}
+		} else {
+			$("#workFooterMsg").html("<p>Please specify a valid time.</p>");
+			$('#workTimeForm').val('');
+		}
+	})
 
 	//time buttons
 	if (isDisabled===false){
