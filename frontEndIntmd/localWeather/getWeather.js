@@ -23,7 +23,7 @@ function getWeather (location) {
 
 
 
-	$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+location[0]+"&lon="+location[1]+"&APPID="+owmAPI+"&units="+globalWeatherVars.tempUnit[globalWeatherVars.isCel], function(json) {
+	$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat="+location[0]+"&lon="+location[1]+"&APPID="+owmAPI+"&units="+globalWeatherVars.tempUnit[globalWeatherVars.isCel], function(json) {
   		var html = '';
   		//html += lat+","+longt+"<br>";
   		//html+=JSON.stringify(json)+"<br><br>";
