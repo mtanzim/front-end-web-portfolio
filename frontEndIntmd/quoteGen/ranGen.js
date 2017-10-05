@@ -6,6 +6,13 @@ $(document).ready(function(){
 	var $tweetLink ="https://twitter.com/intent/tweet?text=";
 	var $hashtags = "&hashtags=inspired";
 	
+	function toggleTooltip (isLong, msg) {
+		$("#twtBtn").tooltip('hide')
+	      			.attr('data-original-title', msg)
+	      			.tooltip('fixTitle')
+
+		/*if (isLong){$("#twtBtn").tooltip('show');};*/
+	}
 	
 	function call_api_chuck () {
 		$.ajax({
@@ -25,6 +32,15 @@ $(document).ready(function(){
 	};
 	
 	function getRandomQuote () {
+
+		var	count_limit=300;
+		var tweetLimit=140;
+		console.log($(document).height());
+		if ($(document).height()<568){
+			count_limit=100;
+		}
+		
+
 		$.ajax( {
 			url: "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1",
 			success: function(data) {
@@ -33,14 +49,31 @@ $(document).ready(function(){
 				$author = data[0]["title"];
 				$quote = jQuery($quote).text();
 				//$author = jQuery($author).text();
-				$("#quote").html($quote);
-				$("#author").html("-" + $author);
+				console.log ($quote.length);
+
+				if ($quote.length > tweetLimit) {
+					$('#twtBtn').prop('disabled',true);
+					console.log ($quote.length+ 'is too long for twitter');
+					toggleTooltip(true, 'Too long for twitter!');
+				} else {
+						$('#twtBtn').prop('disabled',false);
+						toggleTooltip(true, 'Click to tweet');
+				}
+
+				if (($quote.length)>count_limit){
+					console.log ($quote.length+ 'is too long');
+					getRandomQuote ();
+				} else {
+					$("#quote").html($quote);
+					$("#author").html("-" + $author);
+				}
+				
 			},
 			cache: false
 		});
 	};
 	
-
+	$('[data-toggle="tooltip"]').tooltip();
 	
 	getRandomQuote();
 	//call_api_chuck();

@@ -1,33 +1,15 @@
-.aboutBG {
-	background-image: url("http://i67.tinypic.com/s1ngh0.jpg");
-	background-size: cover;
+body {
+	/*background-image: url('img/pexels-photo-583842.jpeg');*/
+	background-image: url('http://i63.tinypic.com/2bxt8m.jpg');
 	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center; 
-	
-}
-
-.socialbtn a:link {
-	opacity:0.8;
-	text-decoration: none;
-	color: black;
-}
-
-.socialbtn a:hover{
-	opacity:1.0;
-	text-decoration: none;
-	/*color: green;*/
+	background-attachment: scroll;
+	background-size: cover;
 }
 
 
-.socialbtn a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	color: black;
-}
-
-.socialbtn a:active {
-		text-decoration: none;
+.jumbotron, .well{
+	background: rgba(255,255,255,0.3);
+	border:none;
 }
 
 .fa {
@@ -36,4 +18,27 @@
     width: 50px;
     text-align: center;
     text-decoration: none;
+}
+
+#quoteDiv {
+}
+
+
+
+h1, h2{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+}
+
+h3, p, .matchFont, .btn {
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
+}
+
+/*brandfoot customization*/
+.brandFoot {
+	/*border-top: 2px solid #f44336;;*/
+	background-color:rgba(255,255,255,0.3) !important;
+	margin-top: 0px !important;
+	padding-top: 1%;
+	padding-bottom: : 1%;
+	/*padding-top: 2%;*/
 }
