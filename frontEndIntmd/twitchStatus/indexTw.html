@@ -4,63 +4,72 @@
 		<meta charset="utf-8">
 		<title>Twitch Status</title>
 		
+		<!--bootstrap3-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!--fonts-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald" type="text/css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans" type="text/css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+
+		<!--css-->
+		<link rel="stylesheet" type="text/css" href="../../common/footerBS3.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
 	</head>
 	<body id="body">
 
-	<div id="space" class="jumbotron">
-		<div class = "container-fluid">
+	<div class="content">
+		<div id="space" class="jumbotron">
+			<div class = "container-fluid">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<h1 class="" style="display:inline">Twitch Status<h3 style="display:inline"> keep up with your favourite streamers!</h3></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12 text-center">
-					<h1 class="" style="display:inline">Twitch Status<h3 style="display:inline"> keep up with your favourite streamers!</h3></h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 text-center">
-				<div class="btn-group">
-				 	<button type="button" id="all" class="btn btn-primary">All</button>
-				 	<button type="button" id="online" class="btn btn-success">Online</button>
-				 	<button type="button" id="offline" class="btn btn-danger">Offline</button>
+				<div class="col-md-6 col-md-offset-3 text-center">
+					<div class="btn-group">
+					 	<button type="button" id="all" class="btn btn-primary">All</button>
+					 	<button type="button" id="online" class="btn btn-success">Online</button>
+					 	<button type="button" id="offline" class="btn btn-danger">Offline</button>
+			 		</div>
 		 		</div>
-	 		</div>
-	 	</div>
-	 	<div class="row" id="debug"><br></div>
-	 	<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="panel panel-default">
-			  <!-- Default panel contents -->
-				  <div class="panel-heading">Streamers</div>
-				  	<!-- Table -->
-					  <table id="statusTable" class="table table-condensed">
-					  	<!--
-					  	<tr class="active">
-					  		<th>Icon</th>
-					  		<th>User</th>
-					  		<th>Status</th>
-					  	</tr>
-					  	<!--
-					  	<tr class="success">
-					  		<td>Icon</th>
-					  		<td>User</th>
-					  		<td>Status</th>
-					  	</tr>
-					  	-->
-					  </table>
+		 	</div>
+		 	<div class="row" id="debug"><br></div>
+		 	<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="panel panel-default">
+				  <!-- Default panel contents -->
+					  <div class="panel-heading">Streamers</div>
+					  	<!-- Table -->
+						  <table id="statusTable" class="table table-condensed">
+						  	<!--
+						  	<tr class="active">
+						  		<th>Icon</th>
+						  		<th>User</th>
+						  		<th>Status</th>
+						  	</tr>
+						  	<!--
+						  	<tr class="success">
+						  		<td>Icon</th>
+						  		<td>User</th>
+						  		<td>Status</th>
+						  	</tr>
+						  	-->
+						  </table>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 text-right"><p>by <strong>MokaTek</strong></p></div>
 		</div>
  	</div>
+
+ 	<div id="footer" class="matchFont"></div>
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

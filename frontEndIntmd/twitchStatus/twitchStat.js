@@ -131,6 +131,10 @@ $(document).ready(function(){
 	var userArray = checkUserGetStat (userList, twitchDefautIcon);
 	updateTables (userList, userArray, 'all', twitchDefautIcon);
 
+	$('#footer').load('../../common/footerBS3.html #footerCommon', function(){
+		console.log('loaded footer');
+	});
+
 	$("#all").on("click", function(){
 		updateTables (userList, userArray, 'all', twitchDefautIcon);
     });
