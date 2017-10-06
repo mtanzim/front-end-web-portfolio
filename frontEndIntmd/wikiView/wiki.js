@@ -54,7 +54,7 @@ function searchWikiJSON (searchVal) {
 
 		for (var l=0; l < lenInner; l++){
 			resultsContent += '<div class="row">';
-			resultsContent += '<div class="col-md-8 col-md-offset-2  well">';
+			resultsContent += '<div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1  well">';
 			for (var m=1; m < lenOuter; m++){
 				var startTagType = "<p>";
 				var endTagType = "</p>";
@@ -92,18 +92,43 @@ function searchWikiJSON (searchVal) {
 }
 
 
+function initSearch () {
+	$("#debug").html("Searching...");
+	var searchVal = document.getElementById("searchInput").value;
+	searchWikiJSON(searchVal);
+	//$("#debug").html("Searched");
+}
+
 
 
 $(document).ready(function(){
+	$('#searchInput').focus();
+	$('#searchInput').val('');
+
+	$('#searchInput').focusout(function() {
+		if ($('#searchInput').val()===''){
+			$('#searchInput').val('Search');
+		}
+	});
+
+	$("#searchInput").keypress(function(key){
+    	if(key.which == 13) {
+        	console.log('Enter Pressed');
+        	initSearch();
+    	}
+	});
+
+	$('#footer').load('../../common/footerBS3.html #footerCommon', function(){
+		console.log('loaded footer');
+	});	
+
 	$("#wikSearch").on("click", function(){
-		$("#debug").html("Searching...");
-		var searchVal = document.getElementById("searchInput").value;
-		searchWikiJSON(searchVal);
-		//$("#debug").html("Searched");
-    });
-    $("#searchInput").on("click", function(){
-    	if ($(this).val() === "Search") {$(this).val("");}
-        
-    });
+		initSearch();
+  });
+
+  $("#searchInput").on("click", function(){
+  	if ($(this).val() === "Search") {$(this).val("");}
+      
+  });
 	
 });

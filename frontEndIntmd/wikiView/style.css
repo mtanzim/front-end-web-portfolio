@@ -1,25 +1,17 @@
 
-
-/*
- a:link {
-	opacity:0.8;
-	text-decoration: none;
-	//color: black;
+body {
+	/*background-image: url("img/circles-and-roundabouts/circles-and-roundabouts.png.png");*/
+	background-image: url("http://i67.tinypic.com/f1du3a.png");
 }
 
- a:hover{
-	opacity:1.0;
-	text-decoration: none;
+.jumbotron, .brandFoot {
+	background: rgba(255,255,255,0.0);
 }
 
-
- a:visited {
-	opacity:0.6;
-	text-decoration: none;
-	//color: black;
+h1, h2, .panel-heading{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
 }
 
- a:active {
-		text-decoration: none;
+h3, p, .matchFont, .btn, #searchInput {
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
 }
-*/
