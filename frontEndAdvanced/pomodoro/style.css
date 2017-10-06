@@ -53,8 +53,8 @@ button:active, button:hover, button:visited, button:focus, #pomTxtRst {
 	background-color: rgba(0,0,0,0.0) !important;
 	border:none !important;
 	outline: none !important;
-	width: 10vw;
-	height: 10vw;
+	width: 40px;
+	height: 5vw;
 
 
 	/*
@@ -95,7 +95,7 @@ button:active, button:hover, button:visited, button:focus, #pomTxtRst {
   
   /*fonts*/
   font-family: 'Vollkorn', Georgia, Times, serif !important;
-	font-size: 35px !important;
+	font-size: 30px !important;
 	line-height: 40px !important;
 }
 
@@ -193,7 +193,7 @@ p, h4, .btn, .btnLbl {
 	}
   .btn_pom{
     /*fonts*/
-    font-size: 35px !important;
+    font-size: 32px !important;
     line-height: 40px !important;
   }
 
