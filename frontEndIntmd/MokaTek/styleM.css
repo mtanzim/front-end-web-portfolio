@@ -5,12 +5,12 @@ body {
 
 h1, h2, h3 {
 	
-	font-family: Oswald, sans-serif;
+	font-family: Oswald, sans-serif !important;
 	
 }
 
 p {
-	font-family:"Open Sans";
+	font-family:"Open Sans" !important;
 }
 
 #aboutdiv  p { 
@@ -77,8 +77,8 @@ p {
 
 .fa {
     padding: 20px;
-    font-size: 50px;
-    width: 50px;
+    font-size: 50px !important;
+    width: 50px !important;
     text-align: center;
     text-decoration: none;
 }
