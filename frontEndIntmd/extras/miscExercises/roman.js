@@ -1,3 +1,4 @@
+
  
 //found on stack overflow
 var next = function(db, key) {
@@ -9,7 +10,7 @@ var next = function(db, key) {
     console.log ('came to loop');
     if (Object.keys(db)[i] === key) {
       //console.log (db[Object.keys(db)[i+1]]);
-      return db[Object.keys(db)[i+1]];
+      return [Object.keys(db)[i+1], db[Object.keys(db)[i+1]]];
     }
   }
 };
@@ -23,6 +24,8 @@ function convertToRoman(num) {
   var romans=[];
   var romanChars=[];
   var newNum=num;
+  var difference=0;
+  var nextElem='';
   
   Object.keys(denums).reverse().forEach(function(element) {
     var remainder=0;
@@ -38,8 +41,16 @@ function convertToRoman(num) {
           romanChars.push(denums[element]);
         }
       } else {
-        //console.log ('error case found, current roman element is: '+denums[element]);
-        console.log ('error case found, next roman element is: '+next(denums,element));
+        //console.log ('alternate case found, current roman element is: '+denums[element]);
+        //console.log ('alternate case found, next roman element is: '+next(denums,element));
+        //console.log ('difference is: '+ parseInt(next(denums,element)[0] - intDiv));
+        difference=parseInt(next(denums,element)[0] - intDiv);
+        nextElem = next(denums,element)[1];
+        for (var k=0; k < difference; k++){
+          romanChars.push(denums[element]);
+        }
+        romanChars.push(nextElem);
+        
       }
       
       console.log(romanChars);
@@ -60,4 +71,5 @@ function convertToRoman(num) {
   
 }
 
-convertToRoman(649);
+convertToRoman(9);
+
