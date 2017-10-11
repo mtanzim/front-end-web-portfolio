@@ -45,10 +45,10 @@ body {
 	color: black;
 }
 
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 700px) {
 
 	.brandFoot {
-		visibility: hidden;
+		display: none;
 	}
 
 /*BRANDING*/

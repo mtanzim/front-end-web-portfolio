@@ -1,0 +1,17 @@
+
+body {
+	/*background-image: url("img/circles-and-roundabouts/circles-and-roundabouts.png.png");*/
+	background-image: url("img/circles-and-roundabouts/circles-and-roundabouts.png");
+}
+
+.jumbotron, .brandFoot {
+	background: rgba(255,255,255,0.3);
+}
+
+h1, h2, .panel-heading{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+}
+
+h3, p, .matchFont, .btn, .table {
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
+}

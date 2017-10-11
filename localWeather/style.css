@@ -1,0 +1,137 @@
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+  color:white !important;
+}
+
+body {
+	background-image: url('img/caudata-strelitzia-bird-of-paradise-flower-strelitzia-orchids.jpg');
+	/*background-image: url('https://static.pexels.com/photos/109546/pexels-photo-109546.jpeg');*/
+	background-repeat: no-repeat;
+	background-size: cover !important;
+}
+
+h1, h2{
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+}
+
+h3, p, .matchFont {
+	font-family: 'Vollkorn', Georgia, Times, serif !important;
+}
+
+
+/*brandfoot customization*/
+.brandFoot {
+	/*border-top: 2px solid #f44336;;*/
+	background-color:rgba(255,255,255,0.0) !important;
+  color:white !important;
+	margin-top: 0px !important;
+	padding-top: 1%;
+	padding-bottom: : 1%;
+	/*padding-top: 2%;*/
+}
+
+#weatherIcon {
+
+	height: 50px;
+	width: auto;
+	text-align: center;
+	text-decoration: none;
+}
+
+
+.jumbotron {
+	/*border-bottom:2px solid #f44336;*/
+	background: rgba(255,255,255,0.0) !important;
+  
+	
+	/*height: 50%;*/
+}
+.well{
+	border: none !important;
+	/*
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom:2px solid #f44336;*/
+	background: rgba(0,0,0,0.1)  !important;
+}
+
+.credit {
+	/*background: rgba(255,255,255,0.3);*/
+}
+
+
+
+
+
+.togBtn {
+	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+	font-size: 18px;
+	padding:2%;
+	color: black;
+	/*border: 3px solid #f44336;*/
+	border:none;
+	border-radius: 4px;
+	outline: none;
+	opacity: 0.8;
+}
+
+.togBtn:focus, .togBtn:visited, .togBtn:active {
+	text-decoration: none;
+	outline: none;
+}
+
+.togBtn:hover{
+	opacity: 1.0;
+}
+
+
+.leftCol {
+  background: -webkit-linear-gradient(left,rgba(0,0,0,0),white); 
+  background: -o-linear-gradient(right,rgba(0,0,0,0),white); 
+  background: -moz-linear-gradient(right,rgba(0,0,0,0),white); 
+  background: linear-gradient(to right, rgba(0,0,0,0), white);
+}
+
+.rightCol {
+  background: -webkit-linear-gradient(right,rgba(0,0,0,0),white); 
+  background: -o-linear-gradient(left,rgba(0,0,0,0),white); 
+  background: -moz-linear-gradient(left,rgba(0,0,0,0),white); 
+  background: linear-gradient(to left, rgba(0,0,0,0), white);
+}
+
+
+
+/*social buttons mod*/
+.socialbtn a:link, {
+	color: white;
+	text-decoration: none;
+}
+
+.socialbtn a:hover{
+	color: white;
+	text-decoration: none;
+}
+
+
+.socialbtn a:visited {
+	color: white;
+	text-decoration: none;
+}
+a:link, a:active, a:focus {
+	color: white;
+	text-decoration: none;
+	opacity: 0.6;
+}
+
+a:hover {
+	opacity: 1.0;
+}

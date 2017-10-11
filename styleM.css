@@ -97,27 +97,10 @@ p {
 
 
 
-.aboutBG {
-	/*background-image: url("http://i67.tinypic.com/s1ngh0.jpg");*/
-	background-image: url("img/mokammel.JPG");
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center; 
-	
-}
-
 .whiteText {
 	
 	color: white;
 
-}
-
-#frankthumb {
-	background-image: url("https://goo.gl/pfDxll");
-}
-#nikolathumb {
-	background-image: url("https://goo.gl/s1qzP8");
 }
 
 
