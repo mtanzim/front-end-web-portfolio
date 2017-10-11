@@ -55,13 +55,12 @@ p {
 .socialbtn a:link {
 	opacity:0.8;
 	text-decoration: none;
-	color: red;
+	color: black;
 }
 
 .socialbtn a:hover{
 	opacity:1.0;
 	text-decoration: none;
-	/*color: green;*/
 }
 
 
@@ -99,7 +98,8 @@ p {
 
 
 .aboutBG {
-	background-image: url("http://i67.tinypic.com/s1ngh0.jpg");
+	/*background-image: url("http://i67.tinypic.com/s1ngh0.jpg");*/
+	background-image: url("img/mokammel.JPG");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -110,28 +110,8 @@ p {
 .whiteText {
 	
 	color: white;
-	/*
-	background-color:rgba(255,255,255,0.3);
-	border: 5px solid;
-	border-color: rgba(255,255,255,0.3);
-	margin-top: 5%;
-	margin-bottom: 5%
-	*/
-}
 
-/*
-#bgabout {
-	position: absolute;
-	overflow: hidden;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: auto;
-	object-fit:contain;
-	opacity: 0.6;
 }
-*/
-
 
 #frankthumb {
 	background-image: url("https://goo.gl/pfDxll");
