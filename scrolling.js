@@ -66,6 +66,25 @@ $(document).ready(function(){
 	
 	});
 
+	//loadProjects
+	var projects = ["https://mtanzim.github.io/webPortfolio/pomodoro/",
+					"https://mtanzim.github.io/webPortfolio/simon/"
+					];
+	var numProj=2;
+
+	for (var i=0; i<numProj; i++){
+		$("#aProj"+i).attr("href",projects[i]);
+	}
+
+		$(".loadProj").on("click", function(){
+			var projId=this.id.split('_')[1];
+			$("#iframeProj"+projId).attr("src",projects[projId]);
+			console.log ("clicked "+ this.id);
+			console.log ("loading "+ projects[projId]);
+		});
+	
+
+
 	
 });
 	

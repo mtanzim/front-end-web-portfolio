@@ -14,11 +14,11 @@ p {
 }
 
 
-/*
-.projThumb {
-	height: 568px !important;
+.projEmbed {
+	height:700px;
+	width: 100%;
+	border: none;
 }
-*/
 
 #aboutdiv  p { 
 	font-size: 220%;
