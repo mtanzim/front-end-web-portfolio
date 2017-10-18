@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var $ANIMATTION_SPEED = 700;
 	var $FADE_ANIMATTION_SPEED = 150;
 
-	function loadProjects () {
+	function loadProjects (startProjID,endProjID) {
 
 		var projects = ["https://mtanzim.github.io/webPortfolio/pomodoro/",
 							"https://mtanzim.github.io/webPortfolio/simon/",
@@ -25,11 +25,35 @@ $(document).ready(function(){
 														"Wikipedia Search",
 														"Frank Ocean"
 													];
-			var numProj=projectsNames.length;
+			//var numProj=projectsNames.length;
+			var numProj=endProjID-startProjID+1;
 			var colType='col-md-5 col-md-offset-1';
+
+			var isLoadDefault=true;
 
 			var setContains=2;
 			var numSets=Math.floor(numProj/setContains);
+
+
+			//clear projects first
+			$("#portdivChild").html('');
+
+			//disable buttons depending on position
+			//$("#prevProj").removeClass('disabled');
+			//$("#nextProj").removeClass('disabled');
+
+			$("#prevProj").attr("disabled", false);
+			$("#nextProj").attr("disabled", false);
+
+			if (startProjID===0){
+				//$("#prevProj").addClass('disabled');
+				$("#prevProj").attr("disabled", true);
+			}
+
+			if (endProjID===projects.length-1){
+				//$("#nextProj").addClass('disabled');
+				$("#nextProj").attr("disabled", true);
+			}
 
 			if (numProj%setContains!==0) {
 				numSets++;
@@ -38,10 +62,12 @@ $(document).ready(function(){
 			console.log('number of sets is: '+numSets);
 
 
-			for (var i=0; i<numProj; i++){
-				if (i%2===0){
+			for (var i=startProjID; i<endProjID+1; i++){
+				colType='col-md-12'
+				/* for supporting multiple columns per panel
+				if ((i-startProjID)%2===0){
 					
-					if (i===numProj-1) {
+					if (i===numProj) {
 						colType='col-md-6 col-md-offset-3';	
 					} else {
 						colType='col-md-5 col-md-offset-1';
@@ -49,10 +75,11 @@ $(document).ready(function(){
 				} else {
 					colType='col-md-5';
 				}
+				*/
 
 
 				$("#portdivChild").append('<div class="'+colType+'">'+
-				'<div id="" class="thumbnail">'+
+				'<div id="projThumb" class="thumbnail">'+
 					'<iframe id="iframeProj'+i+'" class="projEmbed" src=""></iframe>'+
 			    	'<div class="caption text-right">'+
 				     		'<h3 id="projTitle'+i+'" class="">'+projectsNames[i]+'</h3>'+
@@ -62,15 +89,28 @@ $(document).ready(function(){
 			    		'</div>'+
 						'</div>'+
 					'</div>');
+
+					if (isLoadDefault===true){
+						//load projects by default
+						$("#iframeProj"+i).attr("src",projects[i]);
+						$("#loadProj_"+i).html("Reload");
+					}
 			}
 
 
-		$(".loadProj").on("click", function(){
-			var projId=this.id.split('_')[1];
-			$("#iframeProj"+projId).attr("src",projects[projId]);
-			console.log ("clicked "+ this.id);
-			console.log ("loading "+ projects[projId]);
-		});
+
+			
+
+
+			//load projects on demand
+			//if (isLoadDefault===false){
+				$(".loadProj").on("click", function(){
+					var projId=this.id.split('_')[1];
+					$("#iframeProj"+projId).attr("src",projects[projId]);
+					console.log ("clicked "+ this.id);
+					console.log ("loading "+ projects[projId]);
+				});
+			//}
 		
 	}
 	
@@ -83,24 +123,34 @@ $(document).ready(function(){
 	
 	function adaptNav () {
 		var viewportWidth = $(window).width();
+		$('.projControl').height($('#projThumb').height());
+
 		if (viewportWidth < 768) {
 				$("#topbar").removeClass("navbar-fixed-top").addClass("navbar-static-top");
 				$("#navbarMokaB").addClass('needed');
 				$("#navbarMokaB").removeClass('hidden');
-				
+				$('.projControl').height('25px');
+				//$('#prevProj').html ('Previous');
+				//$('#nextProj').html ('Next');
 		}		
 		else {
 			$("#topbar").addClass("navbar-fixed-top").removeClass("navbar-static-top");
 			$("#navbarMokaB").removeClass('needed');
 			$("#navbarMokaB").addClass('hidden');
-			
+			$('.projControl').height($('#projThumb').height());
+			//$('#prevProj').html ('<');
+			//$('#nextProj').html ('>');
 		}
 	}
 
 	//MAIN FUNCTION
 	
+	var startProj=0;
+	var endProj=startProj+1;
+	loadProjects(startProj,startProj);
 	adaptNav();
-	loadProjects();
+	
+
 	
 	$('body').scrollspy({target: '.navbar-fixed-top'});
 	/*scrollBody ("#body");*/
@@ -120,7 +170,19 @@ $(document).ready(function(){
     });
 	$("#expandBtn").click(function(){
 		$("#abtbtn").addClass('active');
-    });
+  });
+
+  $("#nextProj").click(function(){
+		startProj++;
+		endProj++;
+		loadProjects(startProj,startProj);
+  });
+
+  $("#prevProj").click(function(){
+		startProj--;
+		endProj--;
+		loadProjects(startProj,startProj);
+  });
 
 	
 	$(window).resize(function () {

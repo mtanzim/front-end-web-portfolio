@@ -14,6 +14,16 @@ p {
 }
 
 
+#portChildDiv {
+	margin-bottom: 0px;
+}
+
+.projControl, .projControl:hover, .projControl:active, .projControl:focus {
+	width: 100%;
+	border:none;
+	outline: none;
+}
+
 .projEmbed {
 	height:700px;
 	width: 100%;
