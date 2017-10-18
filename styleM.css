@@ -14,6 +14,10 @@ p {
 }
 
 
+.projSeeker a:hover {
+	cursor: pointer !important;
+}
+
 .glyphicon {
 	font-size: 30px;
 }

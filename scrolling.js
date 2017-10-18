@@ -37,6 +37,8 @@ $(document).ready(function(){
 
 			//clear projects first
 			$("#portdivChild").html('');
+			$(".projSeeker").removeClass('active');
+			$("#projListItem_"+startProjID).addClass('active');
 
 			//disable buttons depending on position
 			//$("#prevProj").removeClass('disabled');
@@ -61,7 +63,6 @@ $(document).ready(function(){
 
 			console.log('number of sets is: '+numSets);
 
-
 			for (var i=startProjID; i<endProjID+1; i++){
 				//colType='col-md-8'
 				/* for supporting multiple columns per panel
@@ -85,7 +86,7 @@ $(document).ready(function(){
 				     		'<h3 id="projTitle'+i+'" class="">'+projectsNames[i]+'</h3>'+
 				    		'<a id="aProj'+i+'" class="" href="'+projects[i]+'" target="_blank">'+
 				    		'<button class="btn btn-default">Explore</button></a>'+
-				    		'<button id="loadProj_'+i+'" class="btn btn-default loadProj">Load Here</button>'+	
+				    		'<!---<button id="loadProj_'+i+'" class="btn btn-default loadProj">Load Here</button>-->'+	
 			    		'</div>'+
 						'</div>'+
 					'</div>');
@@ -125,6 +126,7 @@ $(document).ready(function(){
 		var viewportWidth = $(window).width();
 		$('.projControl').height($('.projEmbed').height());
 
+		
 		if (viewportWidth <= 992) {
 			$('.projControl').height('50px');
 		} else {
@@ -149,13 +151,18 @@ $(document).ready(function(){
 	}
 
 	//MAIN FUNCTION
-	
+	//make this smarter
+	const NUM_PROJECTS=9;
+
 	var startProj=0;
 	var endProj=startProj+1;
 	loadProjects(startProj,startProj);
 	adaptNav();
-	
 
+	for (var k=0; k<NUM_PROJECTS; k++){
+		$('#projIndicator').append('<li id="projListItem_'+k+'" class="projSeeker"><a>'+parseInt(k+1)+'</a></li>');
+	}
+	$("#projListItem_"+startProj).addClass('active');
 	
 	$('body').scrollspy({target: '.navbar-fixed-top'});
 	/*scrollBody ("#body");*/
@@ -187,6 +194,13 @@ $(document).ready(function(){
 		startProj--;
 		endProj--;
 		loadProjects(startProj,startProj);
+  });
+
+  $(".projSeeker").click(function(){
+  	startProj=parseInt(this.id.split('_')[1]);
+  	//alert(startProj);
+  	endProj=startProj+1;
+  	loadProjects(startProj,startProj);
   });
 
 	
