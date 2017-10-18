@@ -125,11 +125,17 @@ $(document).ready(function(){
 		var viewportWidth = $(window).width();
 		$('.projControl').height($('.projEmbed').height());
 
+		if (viewportWidth <= 992) {
+			$('.projControl').height('50px');
+		} else {
+			$('.projControl').height($('.projEmbed').height());
+		}
+
 		if (viewportWidth < 768) {
 				$("#topbar").removeClass("navbar-fixed-top").addClass("navbar-static-top");
 				$("#navbarMokaB").addClass('needed');
 				$("#navbarMokaB").removeClass('hidden');
-				$('.projControl').height('50px');
+				
 				//$('#prevProj').html ('Previous');
 				//$('#nextProj').html ('Next');
 		}		
@@ -137,7 +143,6 @@ $(document).ready(function(){
 			$("#topbar").addClass("navbar-fixed-top").removeClass("navbar-static-top");
 			$("#navbarMokaB").removeClass('needed');
 			$("#navbarMokaB").addClass('hidden');
-			$('.projControl').height($('.projEmbed').height());
 			//$('#prevProj').html ('<');
 			//$('#nextProj').html ('>');
 		}
