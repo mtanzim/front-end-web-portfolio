@@ -14,8 +14,13 @@ p {
 }
 
 
-#portChildDiv {
+.glyphicon {
+	font-size: 30px;
+}
+
+#projThumb {
 	margin-bottom: 0px;
+	padding-bottom: 0px;
 }
 
 .projControl, .projControl:hover, .projControl:active, .projControl:focus {
@@ -25,7 +30,7 @@ p {
 }
 
 .projEmbed {
-	height:700px;
+	height:568px;
 	width: 100%;
 	border: none;
 }
