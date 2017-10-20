@@ -5,20 +5,20 @@ $(document).ready(function(){
 
 	function loadProjects (startProjID,endProjID) {
 
-		var projects = ["https://mtanzim.github.io/webPortfolio/pomodoro/",
+		var projects = ["https://mtanzim.github.io/webPortfolio/calculator/",
+							"https://mtanzim.github.io/webPortfolio/pomodoro/",
 							"https://mtanzim.github.io/webPortfolio/simon/",
 							"https://mtanzim.github.io/webPortfolio/tictactoe/",
-							"https://mtanzim.github.io/webPortfolio/calculator/",
 							"https://mtanzim.github.io/webPortfolio/localWeather/",
 							"https://mtanzim.github.io/webPortfolio/quoteGen/",
 							"https://mtanzim.github.io/webPortfolio/twitchStatus/",
 							"https://mtanzim.github.io/webPortfolio/wikiView/",
 							"https://mtanzim.github.io/webPortfolio/FrankOcean/"
 							];
-			var projectsNames = ["Pomodoro",
+			var projectsNames = ["Calculator",
+														"Pomodoro",
 														"Simon",
 														"Tic Tac Toe",
-														"Calculator",
 														"Weather Conditions",
 														"Quote Generator",
 														"Twitch Status",
@@ -27,7 +27,7 @@ $(document).ready(function(){
 													];
 			//var numProj=projectsNames.length;
 			var numProj=endProjID-startProjID+1;
-			var colType='col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12 col-lg-offset-3 col-lg-6';
+			var colType='col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12 col-lg-offset-4 col-lg-4';
 
 			var isLoadDefault=true;
 
