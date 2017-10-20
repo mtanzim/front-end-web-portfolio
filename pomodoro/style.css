@@ -90,8 +90,8 @@ button:active, button:hover, button:visited, button:focus, #pomTxtRst {
 /*fonts*/		
 h1{
 	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
-	font-size: 55px !important;
-	line-height: 65px !important;
+	font-size: 45px !important;
+	line-height: 50px !important;
 }
 
 .progressbar-text{
