@@ -69,6 +69,8 @@ $(document).ready(function(){
 	//enable bootstrap tooltips
 	$('[data-toggle="tooltip"]').tooltip();
 
+
+	/*
 	$('#pomTxtRst').tooltip('show');
 	$('#workLength').tooltip('show');
 	$('#breakLength').tooltip('show');
@@ -78,6 +80,7 @@ $(document).ready(function(){
 		$('#workLength').tooltip('hide');
 		$('#breakLength').tooltip('hide');
 	},1500);
+	*/
 
 	//init modal
 	$('#workModal').modal({
