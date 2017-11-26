@@ -5,7 +5,9 @@ $(document).ready(function(){
 
 	function loadProjects (startProjID,endProjID) {
 
-		var projects = ["https://mtanzim.github.io/webPortfolio/calculator/",
+		var projects = ["https://mtanzim.github.io/reactProjects/LyndaBulletin/",
+							"https://mtanzim.github.io/reactProjects/recipeStore/",
+							"https://mtanzim.github.io/webPortfolio/calculator/",
 							"https://mtanzim.github.io/webPortfolio/pomodoro/",
 							"https://mtanzim.github.io/webPortfolio/simon/",
 							"https://mtanzim.github.io/webPortfolio/tictactoe/",
@@ -15,7 +17,9 @@ $(document).ready(function(){
 							"https://mtanzim.github.io/webPortfolio/wikiView/",
 							"https://mtanzim.github.io/webPortfolio/FrankOcean/"
 							];
-			var projectsNames = ["Calculator",
+			var projectsNames = ["Bulletin Board", 
+														"Recipe Holder", 
+							 							"Calculator",
 														"Pomodoro",
 														"Simon",
 														"Tic Tac Toe",
