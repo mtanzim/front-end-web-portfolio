@@ -23,12 +23,12 @@ function toggleButtons(state){
 		$(".ctrlDiv").hide();
 		$("#infoDiv").removeClass('hider');
 		$("#infoDiv").show();
-    	$("#footer").hide();
+  	$("#footer").hide();
 	}
 	else if (state==='stopped'){
 		$("#resetBtn").removeClass('hider');
 		//$("#resetBtn").show();
-    	$("#footer").removeClass('hider');
+  	$("#footer").removeClass('hider');
 		$("#footer").hide();
 		//$("#resetBtn").show();
 		//$(".ctrlDiv").fadeOut("slow");
@@ -48,7 +48,12 @@ function toggleButtons(state){
 		$("#startBtn").fadeIn("slow");
 		$('#pomJumbo').fadeIn("slow");
 		$(".ctrlDiv").fadeIn("slow");
-		$("#footer").fadeIn("slow");
+
+		var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+		if (height>700){
+			$("#footer").fadeIn("slow");
+		}
+		
 
 
 	}
@@ -63,10 +68,24 @@ $(document).ready(function(){
 
 	//enable bootstrap tooltips
 	$('[data-toggle="tooltip"]').tooltip();
+
+
+	/*
+	$('#pomTxtRst').tooltip('show');
+	$('#workLength').tooltip('show');
+	$('#breakLength').tooltip('show');
+
+	setTimeout (function(){
+		$('#pomTxtRst').tooltip('hide');
+		$('#workLength').tooltip('hide');
+		$('#breakLength').tooltip('hide');
+	},1500);
+	*/
+
 	//init modal
 	$('#workModal').modal({
 	  focus: true,
-	  keyboard:true,
+	  keyboard:false,
 	  show: false
 
 	});
@@ -74,6 +93,8 @@ $(document).ready(function(){
 	$('#workModal').on('shown.bs.modal', function () {
     $('#workTimeForm').focus();
 	})
+
+
 
 	function resetTimes(){
 		workMin=parseInt($("#workLength").text());
@@ -390,8 +411,8 @@ $(document).ready(function(){
 		$('#workModal').modal('toggle');
 	});
 
-	$("#workSave").on("click", function(){
-		//alert($(workTimeForm).val());
+
+	function saveWorkForm () {
 		var inputVal=parseInt($('#workTimeForm').val());
 		console.log(inputVal);
 		if (Number.isNaN(inputVal)===false){
@@ -414,7 +435,17 @@ $(document).ready(function(){
 			$("#workFooterMsg").html("<p>Please specify a valid time.</p>");
 			$('#workTimeForm').val('');
 		}
-	})
+	}
+
+	//prevent enter from allowing submit
+	$('form').keypress(function(event) { 
+    return event.keyCode != 13;
+	}); 
+
+	$("#workSave").on("click", function(){
+		saveWorkForm();
+	});
+
 
 	//time buttons
 	if (isDisabled===false){

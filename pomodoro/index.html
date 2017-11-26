@@ -29,48 +29,50 @@
 				</div>
 			</div>
 		</div>
-		<div><br></div>
 		<div class="container-fluid" id="mainBody">
-			<div class="row justify-content-center" id="">
-				<div id="workCtrl" class="col-6 text-center ctrlDiv">
-					<div class="btn-group">
-					 	<button type="button" id="lessWork" class="btn_pom ">&nbsp-&nbsp</button>
+			<div class="row justify-content-center ctrlDiv"><div class="col-10 col-sm-9 col-md-5 col-lg-3"><div class="card bg-light text-center mb-3"><div class="card-body">
+				<div class="row">
+					<div id="workCtrl" class="col text-center ctrlDiv">
+						<div class="btn-group">
+						 	<button type="button" id="lessWork" class="btn btn-danger">&nbsp-&nbsp</button>
+					 	</div>
+					 	<button type="button" class="btnLbl" id="workLength" data-toggle="tooltip" data-placement="top" title="Press to specify time.">25</button>
+				 		<div class="btn-group">
+						 	<button type="button" id="addWork" class="btn btn-danger">&nbsp+&nbsp</button>
+					 	</div>
 				 	</div>
-				 	<button type="button" class="btnLbl" id="workLength" data-toggle="tooltip" data-placement="top" title="Press to specify time.">25</button>
-			 		<div class="btn-group">
-					 	<button type="button" id="addWork" class="btn_pom ">&nbsp+&nbsp</button>
-				 	</div>
-			 	</div>
-			 	<div id="breakCtrl" class="col-6 text-center ctrlDiv">
-					<div class="btn-group">
-					 	<button type="button" id="lessBreak" class="btn_pom ">&nbsp-&nbsp</button>
-				 	</div>
-				 	<button type="button" class="btnLbl" id="breakLength" data-toggle="tooltip" data-placement="top" title="Press to specify time.">05</button>
-			 		<div class="btn-group">
-					 	<button type="button" id="addBreak" class="btn_pom ">&nbsp+&nbsp</button>
-				 	</div>
-		 		</div>
-		 	</div>
-      <div class="row"><br></div>
-		 	<div id="ctrlLabel" class="row justify-content-center ctrlDiv">
-		 		<div class="col-6 text-center">
-		 			<h4 class="">Work Length</h4>
+				 </div>
+		 		<div class="row justify-content-center ctrlDiv">
+			 		<div class="col text-center">
+			 			<h4 class="">Work Length</h4>
+		 			</div>
 	 			</div>
-	 			<div class="col-6 text-center">
+			 	<div class="row">
+				 	<div id="breakCtrl" class="col text-center ctrlDiv">
+						<div class="btn-group">
+						 	<button type="button" id="lessBreak" class="btn btn-danger">&nbsp-&nbsp</button>
+					 	</div>
+					 	<button type="button" class="btnLbl" id="breakLength" data-toggle="tooltip" data-placement="bottom" title="Press to specify time.">05</button>
+				 		<div class="btn-group">
+						 	<button type="button" id="addBreak" class="btn btn-danger">&nbsp+&nbsp</button>
+					 	</div>
+			 		</div>
+			 	</div>
+ 			<div class="row justify-content-center ctrlDiv">
+	 			<div class="col text-center">
 		 			<h4>Break Length</h4>
 	 			</div>
- 			</div>
-      <div class="row"><br><br></div>
- 			<div class="row">
-			 	<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-				 	<button type="button" id="startBtn" class="btn_pom disbled">&nbspStart&nbsp</button>
-			 	</div>
-			 	<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-				 	<button type="button" id="resetBtn" class="btn_pom hider">&nbspReset&nbsp</button>
-			 	</div>
-		 	</div>
+	 		</div>
+    </div></div></div></div>
+ 		<div class="row"><br/></div>	
+	 	<div class="row"><div class="col text-center">
+		 	<button type="button" id="startBtn" class="btn btn-danger disbled">&nbspStart&nbsp</button>
+	 	</div></div>
+	 	<div class="row"><div class="col text-center">
+		 	<button type="button" id="resetBtn" class="btn btn-danger hider">&nbspReset&nbsp</button>
+	 	</div></div>
 			
-		 	<div class="row"><br><br></div>
+		 	<div class="row"><br></div>
 	 		<div id="infoDiv" class="hider">
 
 				<div class="" id="progressCir" style="cursor: pointer" data-toggle="tooltip" data-placement="top" title="Click to stop"></div>
@@ -118,10 +120,10 @@
 			      	<div id="workFooterMsg" class="row"><p></p></div>
 			      	<div class="row justify-content-end">
 			      		<div class="col-4 col-lg-3 align-self-end">
-				        	<button type="button" id="workFormClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        	<a id="workFormClose" class="btn btn-secondary" data-dismiss="modal">Close</a>
 			        	</div>
 			        	<div class="col-4 col-lg-3 align-self-end">
-				        	<button type="button" class="btn btn-primary" id="workSave">Save</button>
+				        	<button type="button" class="btn btn-danger" id="workSave">Save</button>
 				     	 	</div>
 		        </div>
 		      	</div>
