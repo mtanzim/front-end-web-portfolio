@@ -156,7 +156,7 @@ $(document).ready(function(){
 
 	//MAIN FUNCTION
 	//make this smarter
-	const NUM_PROJECTS=9;
+	const NUM_PROJECTS=11;
 
 	var startProj=0;
 	var endProj=startProj+1;
