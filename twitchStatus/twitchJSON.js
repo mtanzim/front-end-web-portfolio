@@ -1,4 +1,4 @@
-var twitchJSON=[
+var twitchJSON = [
   {
     "stream": {
       "mature": false,

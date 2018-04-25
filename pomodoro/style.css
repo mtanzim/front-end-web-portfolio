@@ -1,54 +1,55 @@
 /*overwrite progressbar.js API styles*/
-body { 
-    /*background: url("img/geometry/geometry/geometry.png") repeat 0 0;*/
+
+body {
+  /*background: url("img/geometry/geometry/geometry.png") repeat 0 0;*/
 }
 
-button:active, button:hover, button:visited, button:focus, #pomTxtRst {
-	cursor: pointer;
-	outline: none !important;
+button:active,
+button:hover,
+button:visited,
+button:focus,
+#pomTxtRst {
+  cursor: pointer;
+  outline: none !important;
 }
-
 
 .jumbotron {
-	background-color: rgba(0,0,0,0.0) !important;
+  background-color: rgba(0, 0, 0, 0.0) !important;
 }
 
 .btnLbl {
-
-	background-color: rgba(0,0,0,0.0) !important;
-	border:none !important;
-	outline: none !important;
-	width: 40px;
-	height: 5vw;
-
+  background-color: rgba(0, 0, 0, 0.0) !important;
+  border: none !important;
+  outline: none !important;
+  width: 40px;
+  height: 5vw;
 }
 
-
-
-
 #workSave {
-	/*
+  /*
 	background-color:#d32f2f;
 	border:1px white;
 	border-radius:0% !important;
 	outline: none !important;
 	*/
-	font-family: 'Vollkorn', Georgia, Times, serif !important;
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
 }
 
 #workFormClose {
-	/*
+  /*
 	border-radius:0% !important;
 	outline: none !important;
 	*/
-	font-family: 'Vollkorn', Georgia, Times, serif !important;
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
 }
 
-.btn:active, .btn:hover, .btn:visited, .btn:focus {
-    cursor: pointer;
-    outline: 0 !important;
+.btn:active,
+.btn:hover,
+.btn:visited,
+.btn:focus {
+  cursor: pointer;
+  outline: 0 !important;
 }
-
 
 /*COMMENT OUT AND USE BTN-DANGER INSTEAD
 .btn_pom{
@@ -76,27 +77,28 @@ button:active, button:hover, button:visited, button:focus, #pomTxtRst {
 */
 
 /*progressbar div*/
+
 #progressCir {
   margin: auto;
- 
-  width:35%;
+  width: 35%;
   height: 35%;
- 
 }
 
-.hider{
-   visibility:hidden;
-}
-/*fonts*/		
-h1{
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
-	font-size: 45px !important;
-	line-height: 50px !important;
+.hider {
+  visibility: hidden;
 }
 
-.progressbar-text{
-	font-size:6vw;
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+/*fonts*/
+
+h1 {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+  font-size: 45px !important;
+  line-height: 50px !important;
+}
+
+.progressbar-text {
+  font-size: 6vw;
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -105,48 +107,46 @@ h1{
   transform: translate(-50%, -50%);
 }
 
-h3, h5 {
-	font-family: 'Vollkorn', Georgia, Times, serif !important;
-	font-size: 30px !important;
-	line-height: 25px !important;
+h3,
+h5 {
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
+  font-size: 30px !important;
+  line-height: 25px !important;
 }
+
 /*overite bootstrap btn fonts*/
-p, h4, .btn, .btnLbl {
-	font-family: 'Vollkorn', Georgia, Times, serif !important;
-	font-size: 22px !important;
-	line-height: 28px !important;
+
+p,
+h4,
+.btn,
+.btnLbl {
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
+  font-size: 22px !important;
+  line-height: 28px !important;
 }
-
-
-
-
 
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-	#progressCir {
-	  margin: auto;
-	 
-	  width:70%;
-	  height: 70%;
-	 
-	}
-	/*
+  /* For mobile phones: */
+  #progressCir {
+    margin: auto;
+    width: 70%;
+    height: 70%;
+  }
+  /*
 	p, h4, .btn, .btnLbl{
 		font-size: 28px !important;
 		line-height: 28px !important;
 	}
 	*/
-
-	/*
+  /*
   .btn_pom{
     /*fonts
     font-size: 50px !important;
     line-height: 55px !important;
   }
   */
-
-  .progressbar-text{
-    font-size:15vw;
+  .progressbar-text {
+    font-size: 15vw;
     font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
     position: absolute;
     left: 50%;
@@ -157,18 +157,19 @@ p, h4, .btn, .btnLbl {
   }
 }
 
-
 @media only screen and (max-width: 375px) {
-	p, h4, .btn, .btnLbl{
-		font-size: 20px !important;
-		line-height: 20px !important;
-	}
-	/*
+  p,
+  h4,
+  .btn,
+  .btnLbl {
+    font-size: 20px !important;
+    line-height: 20px !important;
+  }
+  /*
   .btn_pom{
     fonts
     font-size: 32px !important;
     line-height: 40px !important;
   }
   */
-
 }

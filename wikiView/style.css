@@ -1,17 +1,23 @@
-
 body {
-	/*background-image: url("img/circles-and-roundabouts/circles-and-roundabouts.png.png");*/
-	background-image: url("img/exclusive_paper/exclusive_paper.png");
+  /*background-image: url("img/circles-and-roundabouts/circles-and-roundabouts.png.png");*/
+  background-image: url("img/exclusive_paper/exclusive_paper.png");
 }
 
-.jumbotron, .brandFoot {
-	background: rgba(255,255,255,0.0);
+.jumbotron,
+.brandFoot {
+  background: rgba(255, 255, 255, 0.0);
 }
 
-h1, h2, .panel-heading{
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+h1,
+h2,
+.panel-heading {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
 }
 
-h3, p, .matchFont, .btn, #searchInput {
-	font-family: 'Vollkorn', Georgia, Times, serif !important;
+h3,
+p,
+.matchFont,
+.btn,
+#searchInput {
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
 }

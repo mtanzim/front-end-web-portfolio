@@ -1,210 +1,208 @@
-
-
-body { 
-    background: url("img/chalkBoard3Seamless.jpg") repeat 0 0;
-    
+body {
+  background: url("img/chalkBoard3Seamless.jpg") repeat 0 0;
 }
-
 
 /*socialButton Custom*/
+
 /*social buttons*/
+
 .socialbtn a:link {
-	color: white;
+  color: white;
 }
 
-.socialbtn a:hover{
-	color: white;
+.socialbtn a:hover {
+  color: white;
 }
-	
 
 .socialbtn a:visited {
-	color: white;
+  color: white;
 }
 
 /*/
 
 /*default game area*/
+
 #gameArea {
-	padding-left: 33%;
-	padding-right: 33%;
+  padding-left: 33%;
+  padding-right: 33%;
 }
 
 .jumbotron {
-	background-color: rgba(0,0,0,0.0) !important;
-	border-bottom: white solid 3px;
+  background-color: rgba(0, 0, 0, 0.0) !important;
+  border-bottom: white solid 3px;
 }
 
 .chalkFont {
-	font-family: 'Indie Flower', cursive;
-	color: white !important;
-	font-size: 100px;
-	line-height: 160px;
+  font-family: 'Indie Flower', cursive;
+  color: white !important;
+  font-size: 100px;
+  line-height: 160px;
 }
 
 .divBG {
-	background-color: rgba(0,0,0,0.0) !important;
+  background-color: rgba(0, 0, 0, 0.0) !important;
 }
 
 .noPadding {
-	padding: 0 !important;
+  padding: 0 !important;
 }
 
-.btnSelect{
-	cursor: pointer;
-	color: #fff !important;
-	background-color: rgba(0,0,0,0);
-
-	
+.btnSelect {
+  cursor: pointer;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0);
   border: solid white 3px !important;
-  border-radius:0% !important;
-  
-	/*fonts*/
-	font-size: 40px !important;
-	line-height: 40px !important;
+  border-radius: 0% !important;
+  /*fonts*/
+  font-size: 40px !important;
+  line-height: 40px !important;
 }
 
-.btnSelect:active, .btnSelect:hover, .btnSelect:visited, .btnSelect:focus {
-	cursor: pointer;
-	background-color: rgba(255,255,255,0.3) !important;
-	border: solid white 3px !important;
-	border-radius:0% !important;
-	outline: none !important;
+.btnSelect:active,
+.btnSelect:hover,
+.btnSelect:visited,
+.btnSelect:focus {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border: solid white 3px !important;
+  border-radius: 0% !important;
+  outline: none !important;
   /*fonts*/
-	font-size: 40px !important;
-	line-height: 40px !important;
-	
+  font-size: 40px !important;
+  line-height: 40px !important;
 }
 
 .active {
-	background-color: rgba(255,255,255,0.3) !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
   border: solid white 3px !important;
 }
 
-.difSelect{
-	cursor: pointer;
-	color: #fff !important;
-	background-color: rgba(0,0,0,0);
+.difSelect {
+  cursor: pointer;
+  color: #fff !important;
+  background-color: rgba(0, 0, 0, 0);
   border: solid white 3px !important;
-	border-radius:0% !important;
-	outline: none !important;
-	/*fonts*/
-	font-size: 40px !important;
-	line-height: 40px !important;
-}
-
-.difSelect:active, .difSelect:hover, .difSelect:visited, .difSelect:focus {
-	cursor: pointer;
-	background-color: rgba(255,255,255,0.3);
-	border: solid white 3px;
-	border-radius:0% !important;
-	outline: none !important;
+  border-radius: 0% !important;
+  outline: none !important;
   /*fonts*/
-	font-size: 40px !important;
-	line-height: 40px !important;
-	
+  font-size: 40px !important;
+  line-height: 40px !important;
 }
 
-
-
+.difSelect:active,
+.difSelect:hover,
+.difSelect:visited,
+.difSelect:focus {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: solid white 3px;
+  border-radius: 0% !important;
+  outline: none !important;
+  /*fonts*/
+  font-size: 40px !important;
+  line-height: 40px !important;
+}
 
 .ticBtns {
-	cursor: pointer;
-	width: 100%;
-	height: 100%;
-	margin: 0px 0% 0% 0px;
-	padding: 0px 0px 0px 0px;
-	background-color:rgba(0,0,0,0);
-	border: solid white 3px;
-
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  margin: 0px 0% 0% 0px;
+  padding: 0px 0px 0px 0px;
+  background-color: rgba(0, 0, 0, 0);
+  border: solid white 3px;
 }
 
 .ticBtns:disabled {
-	/*fixed for bootstrap4*/
-	cursor: default;
-	color: white;
+  /*fixed for bootstrap4*/
+  cursor: default;
+  color: white;
 }
 
-.ticBtns:active, .ticBtns:hover, .ticBtns:visited, .ticBtns:focus {
-	outline: 0;
+.ticBtns:active,
+.ticBtns:hover,
+.ticBtns:visited,
+.ticBtns:focus {
+  outline: 0;
 }
+
 .winBtn {
-	color: white !important;
+  color: white !important;
 }
 
 .winBtnAlt {
-	color: rgba(1,1,1,0) !important;
+  color: rgba(1, 1, 1, 0) !important;
 }
 
-.hider{
-   visibility:hidden;
+.hider {
+  visibility: hidden;
 }
 
-
-h1, h3, p, h4, #statusArea, .btnSelect, .difSelect, .matchFont {
-	font-family: 'Indie Flower', cursive !important;
-	color: white !important;
+h1,
+h3,
+p,
+h4,
+#statusArea,
+.btnSelect,
+.difSelect,
+.matchFont {
+  font-family: 'Indie Flower', cursive !important;
+  color: white !important;
 }
 
-h1{
-	font-size: 60px !important;
-	line-height: 65px !important;
+h1 {
+  font-size: 60px !important;
+  line-height: 65px !important;
 }
 
 h3 {
-	font-size: 30px;
-	line-height: 25px;
+  font-size: 30px;
+  line-height: 25px;
 }
 
-p, h4, #statusArea {
-	font-size: 25px !important;
-	line-height: 45px;
-
+p,
+h4,
+#statusArea {
+  font-size: 25px !important;
+  line-height: 45px;
 }
-
 
 @media only screen and (min-width: 1440px) {
-
-	#gameArea {
-		padding-left: 37%;
-		padding-right: 37%;
-	}
-
+  #gameArea {
+    padding-left: 37%;
+    padding-right: 37%;
+  }
 }
 
 @media only screen and (min-width: 2560px) {
-
-	#gameArea {
-		padding-left: 40%;
-		padding-right: 40%;
-	}
-
+  #gameArea {
+    padding-left: 40%;
+    padding-right: 40%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-
-	#gameArea {
-		padding-left: 20%;
-		padding-right: 20%;
-	}
-
+  #gameArea {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
 }
 
 @media only screen and (max-width: 425px) {
-
-	#gameArea {
-		padding-left: 10%;
-		padding-right: 10%;
-	}
-  
-	p, h4, #statusArea{
-		font-size: 28px;
-		line-height: 28px;
-	}
-	.chalkFont {
-		font-family: 'Indie Flower', cursive;
-		color: white;
-		font-size: 100px;
-		line-height: 120px;
-	}
-
+  #gameArea {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  p,
+  h4,
+  #statusArea {
+    font-size: 28px;
+    line-height: 28px;
+  }
+  .chalkFont {
+    font-family: 'Indie Flower', cursive;
+    color: white;
+    font-size: 100px;
+    line-height: 120px;
+  }
 }

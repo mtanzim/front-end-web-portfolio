@@ -1,69 +1,75 @@
-
-
 body {
-	/*background-image: url('img/pexels-photo-583842.jpeg');*/
-	background-image: url('img/pexels-photo-583842.jpeg');
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-	background-size: cover;
+  /*background-image: url('img/pexels-photo-583842.jpeg');*/
+  background-image: url('img/pexels-photo-583842.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
   color: white !important;
 }
 
-
-.jumbotron, .well{
-	background: rgba(0,0,0,0.4) !important;
-	border:none!important;
+.jumbotron,
+.well {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border: none !important;
 }
 
 .fa {
-    /*padding: 20px;*/
-    font-size: 50px !important;
-    width: 50px;
-    text-align: center;
-    text-decoration: none;
+  /*padding: 20px;*/
+  font-size: 50px !important;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
 }
 
-h1, h2{
-	font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
+h1,
+h2 {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif !important;
 }
 
-h3, p, .matchFont, .btn {
-	font-family: 'Vollkorn', Georgia, Times, serif !important;
+h3,
+p,
+.matchFont,
+.btn {
+  font-family: 'Vollkorn', Georgia, Times, serif !important;
 }
 
 /*brandfoot customization*/
+
 .brandFoot {
-	/*border-top: 2px solid #f44336;;*/
-	background: rgba(0,0,0,0.4) !important;
-	margin-top: 0px !important;
-	padding-top: 1%;
-	padding-bottom: : 1%;
-	/*padding-top: 2%;*/
+  /*border-top: 2px solid #f44336;;*/
+  background: rgba(0, 0, 0, 0.4) !important;
+  margin-top: 0px !important;
+  padding-top: 1%;
+  padding-bottom: : 1%;
+  /*padding-top: 2%;*/
 }
 
 /*social buttons mod*/
-.socialbtn a:link, {
-	color: white;
-	text-decoration: none;
+
+.socialbtn a:link,
+  {
+  color: white;
+  text-decoration: none;
 }
 
-.socialbtn a:hover{
-	color: white;
-	text-decoration: none;
+.socialbtn a:hover {
+  color: white;
+  text-decoration: none;
 }
-
 
 .socialbtn a:visited {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
-a:link, a:active, a:focus {
-	color: white;
-	text-decoration: none;
-	opacity: 0.6;
+
+a:link,
+a:active,
+a:focus {
+  color: white;
+  text-decoration: none;
+  opacity: 0.6;
 }
 
 a:hover {
-	opacity: 1.0;
+  opacity: 1.0;
 }
-

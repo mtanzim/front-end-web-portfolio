@@ -1,50 +1,58 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title id="titleTime">Tic Tac Toe</title>
-		
-				<!--bootstrap4.0beta-->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-		<!--fonts-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href='https://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
-		<link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Indie+Flower" rel="stylesheet">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="titleTime">Tic Tac Toe</title>
 
-		<link rel="stylesheet" type="text/css" href="../common/footer.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		
-	</head>
-	<body id="body">
+  <!--bootstrap4.0beta-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
 
-		<div id="ticJumbo" class="jumbotron">
-			<div class = "container-fluid">
-				<div class="row justify-content-center text-center">
-					<div class="col-12">
-						<h1 class="" style="display:inline">Tic Tac Toe<h3 style="display:inline"> XO XO</h3></h1>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row justify-content-center">
-				<div class="col-12">
-					<div id="GameSelect">
-						<div class="row justify-content-center">
-							<p>Number of players:</p>
-						</div>
-						<div class="row justify-content-center">
-							<div class="col-3 col-md-1 text-center" ><button id="1player" class="btn btnSelect">1</button></div>
-							<div class="col-3 col-md-1 text-center" id="2player"><button id="player" class="btn btnSelect">2</button></div>
-						</div>
-					</div>
-					<div id="CharSelectP1" class="hider">
-						<!--
+  <!--fonts-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Indie+Flower" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../common/footer.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body id="body">
+
+  <div id="ticJumbo" class="jumbotron">
+    <div class="container-fluid">
+      <div class="row justify-content-center text-center">
+        <div class="col-12">
+          <h1 class="" style="display:inline">Tic Tac Toe
+            <h3 style="display:inline"> XO XO</h3>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div id="GameSelect">
+          <div class="row justify-content-center">
+            <p>Number of players:</p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-3 col-md-1 text-center">
+              <button id="1player" class="btn btnSelect">1</button>
+            </div>
+            <div class="col-3 col-md-1 text-center" id="2player">
+              <button id="player" class="btn btnSelect">2</button>
+            </div>
+          </div>
+        </div>
+        <div id="CharSelectP1" class="hider">
+          <!--
 						<div id="difDiv" class="row justify-content-center hider">
 							<div class="col-12 text-center">
 								<p>Select Difficulty:<br></p>
@@ -58,51 +66,66 @@
               <div class="w-100"><br></div>
 						</div>
 						-->
-						<div class="row justify-content-center">
-							<p>Player 1 Character:</p>
-						</div>
-						<div class="row justify-content-center">
-							<div class="col-3 col-md-1 text-center"><button id="1playerX" class="btn btnSelect">X</button></div>
-							<div class="col-3 col-md-1 text-center"><button id="1playerO" class="btn btnSelect">O</button></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row"><br></div>
-			<div class="row justify-content-center text-center">
-				<div class="col-12">
-					<div class="statArea hider" id="statusArea"></div>
-				</div>
-			</div>
-			<div class="row"><br></div>
-			<div class="row justify-content-center text-center hider" id="gameArea">
-			</div>
-			<div class="row"><br><br></div>
-			<div id="resetDiv" class="row justify-content-center hider">
-				<div class="col-12 text-center">
-					<button id="resetBtn" class="btn btnSelect">Reset</button>
-				</div>
-			</div>
-	 	</div>
+          <div class="row justify-content-center">
+            <p>Player 1 Character:</p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-3 col-md-1 text-center">
+              <button id="1playerX" class="btn btnSelect">X</button>
+            </div>
+            <div class="col-3 col-md-1 text-center">
+              <button id="1playerO" class="btn btnSelect">O</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+    </div>
+    <div class="row justify-content-center text-center">
+      <div class="col-12">
+        <div class="statArea hider" id="statusArea"></div>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+    </div>
+    <div class="row justify-content-center text-center hider" id="gameArea">
+    </div>
+    <div class="row">
+      <br>
+      <br>
+    </div>
+    <div id="resetDiv" class="row justify-content-center hider">
+      <div class="col-12 text-center">
+        <button id="resetBtn" class="btn btnSelect">Reset</button>
+      </div>
+    </div>
+  </div>
 
-	 <div class="fixed-bottom brandFoot matchFont" id="footer">
-		 	<div class="row justify-content-center">
-		 		<p>Designed and Developed by <strong>Tanzim Mokammel</strong></p>
-		 	</div>
-			<div class="row justify-content-center socialbtn">
-				<a href="https://github.com/mtanzim" class="fa fa-github" target="_blank">&nbsp</a>
-				<a href="https://www.instagram.com/tanzim_m/" class="fa fa-instagram " target="_blank">&nbsp</a>  
-				<a href="https://www.linkedin.com/in/tanzim-mokammel-726b7b50/" class="fa fa-linkedin" target="_blank">&nbsp</a>
-			</div>
-	 </div>
+  <div class="fixed-bottom brandFoot matchFont" id="footer">
+    <div class="row justify-content-center">
+      <p>Designed and Developed by
+        <strong>Tanzim Mokammel</strong>
+      </p>
+    </div>
+    <div class="row justify-content-center socialbtn">
+      <a href="https://github.com/mtanzim" class="fa fa-github" target="_blank">&nbsp</a>
+      <a href="https://www.instagram.com/tanzim_m/" class="fa fa-instagram " target="_blank">&nbsp</a>
+      <a href="https://www.linkedin.com/in/tanzim-mokammel-726b7b50/" class="fa fa-linkedin" target="_blank">&nbsp</a>
+    </div>
+  </div>
 
-	 	<!--bootstrap4.0beta-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <!--bootstrap4.0beta-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
 
-		<script type="text/javascript" src="tictactoe.js"></script>
-		
-	</body>
-	
-</html>		
+  <script type="text/javascript" src="tictactoe.js"></script>
+
+</body>
+
+</html>
