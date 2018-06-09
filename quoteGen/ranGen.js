@@ -18,8 +18,8 @@ $(document).ready(function () {
   function getRandomQuote() {
 
     var count_limit = 300;
-    var tweetLimit = 140;
-    console.log($(document).height());
+    var tweetLimit = 280;
+    //console.log($(document).height());
     if ($(document).height() < 568) {
       count_limit = 100;
     }
@@ -33,11 +33,11 @@ $(document).ready(function () {
         $author = data[0]["title"];
         $quote = jQuery($quote).text();
         //$author = jQuery($author).text();
-        console.log($quote.length);
+        //console.log($quote.length);
 
         if ($quote.length + $author.length > tweetLimit) {
           $('#twtBtn').prop('disabled', true);
-          console.log($quote.length + 'is too long for twitter');
+          //console.log($quote.length + 'is too long for twitter');
           toggleTooltip(true, 'Too long for twitter!');
         } else {
           $('#twtBtn').prop('disabled', false);
@@ -45,7 +45,7 @@ $(document).ready(function () {
         }
 
         if (($quote.length) > count_limit) {
-          console.log($quote.length + 'is too long');
+          //console.log($quote.length + 'is too long');
           getRandomQuote();
         } else {
           $("#quote").html($quote);
