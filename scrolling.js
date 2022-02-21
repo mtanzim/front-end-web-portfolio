@@ -3,32 +3,33 @@ $(document).ready(function(){
 	var $ANIMATTION_SPEED = 700;
 	var $FADE_ANIMATTION_SPEED = 150;
 
+	var projects = ["https://mtanzim.github.io/reactProjects/LyndaBulletin/",
+	"https://mtanzim.github.io/reactProjects/recipeStore/",
+	"./calculator/index.html",
+	"./pomodoro/index.html",
+	"./simon/index.html",
+	"./tictactoe/index.html",
+	// "./localWeather/index.html",
+	// "./quoteGen/index.html",
+	// "./twitchStatus/index.html",
+	"./wikiView/index.html",
+	// "./FrankOcean/index.html"
+	];
+var projectsNames = ["Bulletin Board", 
+								"Recipe Holder", 
+								 "Calculator",
+								"Pomodoro",
+								"Simon",
+								"Tic Tac Toe",
+								// "Weather Conditions",
+								// "Quote Generator",
+								// "Twitch Status",
+								"Wikipedia Search",
+								// "Frank Ocean"
+							];
+
 	function loadProjects (startProjID,endProjID) {
 
-		var projects = ["https://mtanzim.github.io/reactProjects/LyndaBulletin/",
-							"https://mtanzim.github.io/reactProjects/recipeStore/",
-							"https://mtanzim.github.io/webPortfolio/calculator/",
-							"https://mtanzim.github.io/webPortfolio/pomodoro/",
-							"https://mtanzim.github.io/webPortfolio/simon/",
-							"https://mtanzim.github.io/webPortfolio/tictactoe/",
-							"https://mtanzim.github.io/webPortfolio/localWeather/",
-							"https://mtanzim.github.io/webPortfolio/quoteGen/",
-							"https://mtanzim.github.io/webPortfolio/twitchStatus/",
-							"https://mtanzim.github.io/webPortfolio/wikiView/",
-							"https://mtanzim.github.io/webPortfolio/FrankOcean/"
-							];
-			var projectsNames = ["Bulletin Board", 
-														"Recipe Holder", 
-							 							"Calculator",
-														"Pomodoro",
-														"Simon",
-														"Tic Tac Toe",
-														"Weather Conditions",
-														"Quote Generator",
-														"Twitch Status",
-														"Wikipedia Search",
-														"Frank Ocean"
-													];
 			//var numProj=projectsNames.length;
 			var numProj=endProjID-startProjID+1;
 			var colType='col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 col-xs-12 col-lg-offset-4 col-lg-4';
@@ -68,21 +69,6 @@ $(document).ready(function(){
 			console.log('number of sets is: '+numSets);
 
 			for (var i=startProjID; i<endProjID+1; i++){
-				//colType='col-md-8'
-				/* for supporting multiple columns per panel
-				if ((i-startProjID)%2===0){
-					
-					if (i===numProj) {
-						colType='col-md-6 col-md-offset-3';	
-					} else {
-						colType='col-md-5 col-md-offset-1';
-					}
-				} else {
-					colType='col-md-5';
-				}
-				*/
-
-
 				$("#portdivChild").append('<div id="divDynamicPortfolio" class="'+colType+'">'+
 				'<div id="projThumb" class="thumbnail">'+
 					'<iframe id="iframeProj'+i+'" class="projEmbed" src=""></iframe>'+
@@ -156,7 +142,7 @@ $(document).ready(function(){
 
 	//MAIN FUNCTION
 	//make this smarter
-	const NUM_PROJECTS=11;
+	const NUM_PROJECTS=projects.length;
 
 	var startProj=0;
 	var endProj=startProj+1;
